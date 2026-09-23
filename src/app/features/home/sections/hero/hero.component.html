@@ -1,0 +1,67 @@
+<section class="hero-bg min-h-[600px] lg:min-h-[680px] text-white flex items-center relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+    <div class="max-w-3xl space-y-6 hero-text hero-rise">
+      <div
+        class="inline-flex flex-wrap items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 text-xs sm:text-sm font-medium"
+      >
+        <span class="bg-amberGold-500 text-slateNavy-950 font-bold px-2.5 py-0.5 rounded-full">
+          Ammaveedu
+        </span>
+        <span class="text-slate-100">
+          <i class="fas fa-location-dot text-emeraldTrust-500 me-1" aria-hidden="true"></i>
+          Thellakom P.O., Kottayam, Kerala
+        </span>
+      </div>
+
+      <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight">
+        A home for boys who had <span class="text-amberGold-400">nowhere else</span> to go
+      </h1>
+
+      <p class="text-base sm:text-lg lg:text-xl text-slate-200 font-light leading-relaxed">
+        <strong>{{ trust.legalName }}</strong> runs Ammaveedu - a residential home for twenty-seven boys from
+        the colonies around Kottayam - along with a free nursery, medical camps, and food and clothing for
+        families who cannot meet the week.
+      </p>
+
+      <blockquote class="border-l-2 border-amberGold-400 ps-4 text-slate-200 italic text-sm sm:text-base">
+        &ldquo;{{ quote.text }}&rdquo;
+      </blockquote>
+
+      <div class="pt-2 flex flex-col sm:flex-row gap-4">
+        <a
+          routerLink="/"
+          fragment="get-involved"
+          class="bg-amberGold-500 hover:bg-amberGold-600 text-slateNavy-950 font-extrabold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 text-center flex items-center justify-center space-x-2"
+        >
+          <span>Support the children</span>
+          <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
+        </a>
+        <a
+          routerLink="/"
+          fragment="programs"
+          class="bg-white/15 hover:bg-white/25 text-white font-semibold px-8 py-4 rounded-xl border border-white/30 backdrop-blur-sm transition text-center flex items-center justify-center space-x-2"
+        >
+          <i class="fas fa-shapes text-emeraldTrust-100" aria-hidden="true"></i>
+          <span>See our work</span>
+        </a>
+      </div>
+
+      <div class="pt-8 grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-white/15 text-slate-300 text-xs sm:text-sm">
+        @for (item of highlights; track item.text; let i = $index) {
+          <div
+            class="flex items-center space-x-2.5"
+            [class]="i === 2 ? 'col-span-2 sm:col-span-1' : ''"
+          >
+            <div
+              class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+              [class]="i === 1 ? 'bg-amberGold-500/20 text-amberGold-400' : 'bg-emeraldTrust-500/20 text-emeraldTrust-500'"
+            >
+              <i class="fas" [class]="item.icon" aria-hidden="true"></i>
+            </div>
+            <span>{{ item.text }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

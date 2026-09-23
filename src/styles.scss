@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  /* Offset anchor scrolling so the sticky header never covers a section heading. */
+  scroll-padding-top: 6rem;
+}
+
+body {
+  @apply font-sans bg-slate-50 text-slate-800 antialiased;
+  @apply selection:bg-emeraldTrust-600 selection:text-white;
+}
+
+/*
+ * The trust's own photograph of the boys of Ammaveedu, kept visible.
+ * The overlay is angled rather than flat: dense on the left where the headline
+ * sits, thinning out to the right so the faces in the photograph come through.
+ */
+.hero-bg {
+  position: relative;
+  isolation: isolate;
+}
+
+/* The photograph, on its own layer so it can be scaled by the GPU. */
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url('../public/images/ammaveedu-boys.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  transform: scale(1.01);
+  animation: heroZoom 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* The overlay, angled so the faces stay visible to the right of the copy. */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    /* keeps the small print along the bottom off the bright patches */
+    linear-gradient(to top, rgba(2, 6, 23, 0.5) 0%, rgba(2, 6, 23, 0) 34%),
+    linear-gradient(
+      105deg,
+      rgba(2, 6, 23, 0.84) 0%,
+      rgba(6, 45, 60, 0.62) 40%,
+      rgba(4, 120, 87, 0.38) 70%,
+      rgba(6, 78, 59, 0.42) 100%
+    );
+}
+
+@keyframes heroZoom {
+  from {
+    transform: scale(1.01);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+/* Keeps hero copy readable now that the overlay behind it is lighter. */
+.hero-text {
+  text-shadow: 0 2px 14px rgba(2, 6, 23, 0.5);
+}
+
+/* ---------------------------------------------------------------------------
+   Motion
+   Every animation here is switched off wholesale by the reduced-motion block
+   at the foot of this file.
+   --------------------------------------------------------------------------- */
+
+/* Scroll reveal, driven by the appReveal directive. */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero copy rises in sequence behind the photograph's slow zoom. */
+.hero-rise > * {
+  opacity: 0;
+  animation: heroRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-rise > *:nth-child(1) { animation-delay: 0.05s; }
+.hero-rise > *:nth-child(2) { animation-delay: 0.16s; }
+.hero-rise > *:nth-child(3) { animation-delay: 0.27s; }
+.hero-rise > *:nth-child(4) { animation-delay: 0.38s; }
+.hero-rise > *:nth-child(5) { animation-delay: 0.49s; }
+.hero-rise > *:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Mobile drawer and tab panels drop in rather than appearing. */
+.drop-in {
+  animation: dropIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Cards lift a little under the cursor. */
+.lift {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+
+.lift:hover {
+  transform: translateY(-6px);
+}
+
+/* Underline that grows out from the centre of an active nav link. */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: #059669;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Section headings get a short emerald rule that draws itself in. */
+.rule-in::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 3px;
+  margin: 1rem auto 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #10b981, #fbbf24);
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+
+.rule-in.is-visible::after,
+.reveal.is-visible .rule-in::after {
+  width: 64px;
+}
+
+/* Left-aligned variant, for headings that are not centred. */
+.rule-in.rule-start::after {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .hero-rise > * {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.modal-enter {
+  @apply animate-modalFadeIn;
+}

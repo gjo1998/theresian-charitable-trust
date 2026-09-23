@@ -1,0 +1,141 @@
+@if (story(); as item) {
+  <article class="bg-white">
+    <!-- Article header -->
+    <header class="bg-slateNavy-900 text-white">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-5">
+        <a
+          routerLink="/"
+          fragment="stories"
+          class="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-amberGold-400 transition"
+        >
+          <i class="fas fa-arrow-left text-[10px]" aria-hidden="true"></i>
+          The Story of Ammaveedu
+        </a>
+
+        <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase tracking-wider">
+          <span class="bg-amberGold-500 text-slateNavy-950 px-2.5 py-0.5 rounded-full">
+            Chapter {{ item.order }}
+          </span>
+          <span class="text-emeraldTrust-500">{{ item.era }}</span>
+        </div>
+
+        <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+          {{ item.title }}
+        </h1>
+        <p class="text-slate-300 text-base sm:text-lg leading-relaxed">{{ item.dek }}</p>
+
+        @if (item.firstPerson) {
+          <p class="text-xs text-slate-400 border-t border-slate-800 pt-4">
+            <i class="fas fa-quote-left me-2 text-emeraldTrust-500" aria-hidden="true"></i>
+            Written by {{ trust.founder }}, condensed from the trust's own account published
+            {{ item.published }}.
+          </p>
+        } @else {
+          <p class="text-xs text-slate-400 border-t border-slate-800 pt-4">
+            From the trust's own account, published {{ item.published }}.
+          </p>
+        }
+      </div>
+    </header>
+
+    <!-- Lead image -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-10 relative z-10">
+      <img
+        [src]="item.image"
+        [alt]="item.imageAlt"
+        class="w-full aspect-[16/9] object-cover rounded-3xl border-4 border-white shadow-2xl"
+      />
+    </div>
+
+    <!-- Body -->
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-5">
+      @for (block of item.body; track $index) {
+        @switch (block.type) {
+          @case ('quote') {
+            <blockquote
+              class="border-s-4 border-amberGold-400 bg-slate-50 rounded-e-2xl py-5 px-6 my-8 font-heading text-lg sm:text-xl text-slateNavy-900 italic leading-relaxed"
+            >
+              &ldquo;{{ block.text }}&rdquo;
+            </blockquote>
+          }
+          @case ('h') {
+            <h2 class="font-heading text-xl sm:text-2xl font-bold text-slateNavy-900 pt-6">
+              {{ block.text }}
+            </h2>
+          }
+          @default {
+            <p class="text-slate-700 text-base sm:text-lg leading-relaxed">{{ block.text }}</p>
+          }
+        }
+      }
+
+      <!-- Support call to action -->
+      <div class="mt-12 p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 space-y-3">
+        <h2 class="font-heading text-xl font-bold text-slateNavy-900">This is still going on</h2>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Ammaveedu has no endowment and no permanent source of income. The boys' schooling, the nursery and
+          the weekly rice are paid for by people who choose to give.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 pt-1">
+          <a
+            routerLink="/"
+            fragment="get-involved"
+            class="text-center bg-gradient-to-r from-emeraldTrust-600 to-emeraldTrust-700 hover:from-emeraldTrust-700 hover:to-emeraldTrust-800 text-white font-bold px-6 py-3 rounded-xl text-sm transition"
+          >
+            Support the children
+          </a>
+          <a
+            routerLink="/"
+            fragment="contact"
+            class="text-center bg-white hover:bg-slate-100 text-slate-800 font-bold px-6 py-3 rounded-xl border border-slate-300 text-sm transition"
+          >
+            Get in touch
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Previous / next -->
+    <nav class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      @if (previous(); as prev) {
+        <a
+          [routerLink]="['/stories', prev.slug]"
+          class="group p-5 rounded-2xl border border-slate-200 hover:border-emeraldTrust-300 hover:bg-emeraldTrust-50/40 transition"
+        >
+          <span class="text-[11px] uppercase tracking-wider text-slate-500 font-bold">
+            <i class="fas fa-arrow-left text-[10px] me-1.5" aria-hidden="true"></i> Previous chapter
+          </span>
+          <p class="font-heading font-bold text-slateNavy-900 mt-1 group-hover:text-emeraldTrust-700">
+            {{ prev.title }}
+          </p>
+        </a>
+      }
+      @if (next(); as nxt) {
+        <a
+          [routerLink]="['/stories', nxt.slug]"
+          class="group p-5 rounded-2xl border border-slate-200 hover:border-emeraldTrust-300 hover:bg-emeraldTrust-50/40 transition sm:text-end sm:col-start-2"
+        >
+          <span class="text-[11px] uppercase tracking-wider text-slate-500 font-bold">
+            Next chapter <i class="fas fa-arrow-right text-[10px] ms-1.5" aria-hidden="true"></i>
+          </span>
+          <p class="font-heading font-bold text-slateNavy-900 mt-1 group-hover:text-emeraldTrust-700">
+            {{ nxt.title }}
+          </p>
+        </a>
+      }
+    </nav>
+  </article>
+} @else {
+  <!-- Unknown slug -->
+  <div class="max-w-3xl mx-auto px-4 py-24 text-center space-y-4">
+    <h1 class="font-heading text-3xl font-extrabold text-slateNavy-900">That chapter isn't here</h1>
+    <p class="text-slate-600 text-sm">The story you are looking for may have been renamed or removed.</p>
+    <a
+      routerLink="/"
+      fragment="stories"
+      class="inline-block bg-emeraldTrust-600 hover:bg-emeraldTrust-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition"
+    >
+      Back to the story
+    </a>
+  </div>
+}

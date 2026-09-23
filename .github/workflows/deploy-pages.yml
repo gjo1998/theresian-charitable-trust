@@ -1,0 +1,65 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish; queue at most one more.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # A project site lives at /<repo>/; a user site (<name>.github.io) at /.
+      - name: Work out the base href
+        id: base
+        run: |
+          repo="${{ github.event.repository.name }}"
+          if [[ "$repo" == *.github.io ]]; then
+            echo "href=/" >> "$GITHUB_OUTPUT"
+          else
+            echo "href=/$repo/" >> "$GITHUB_OUTPUT"
+          fi
+
+      - run: npx ng build --base-href="${{ steps.base.outputs.href }}"
+
+      - name: Add Pages fallbacks
+        run: |
+          out=dist/theresian-trust/browser
+          # GitHub Pages serves 404.html for unknown paths; Angular routes deep
+          # links client-side, so the app itself must answer them.
+          cp "$out/index.html" "$out/404.html"
+          # Stop Pages running the output through Jekyll.
+          touch "$out/.nojekyll"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/theresian-trust/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

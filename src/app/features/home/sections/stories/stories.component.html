@@ -1,0 +1,95 @@
+<section id="stories" class="py-20 bg-white scroll-mt-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div appReveal class="text-center max-w-3xl mx-auto mb-12">
+      <span
+        class="text-emeraldTrust-700 font-semibold uppercase tracking-wider text-xs sm:text-sm bg-emeraldTrust-50 px-3 py-1 rounded-full border border-emeraldTrust-100"
+      >
+        The history
+      </span>
+      <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-slateNavy-900 mt-3 rule-in">
+        The Story of Ammaveedu
+      </h2>
+      <p class="text-slate-600 mt-3 text-sm sm:text-base">
+        How a seminary philosophy course, a man with a banana and an old visiting card became a home for
+        twenty-seven boys - told largely in Fr. Sebastian's own words.
+      </p>
+    </div>
+
+    <!-- Lead story -->
+    <a
+      appReveal
+      [routerLink]="['/stories', lead.slug]"
+      class="lift group block rounded-3xl overflow-hidden border border-slate-200/80 bg-slate-50 hover:shadow-xl mb-8"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="relative h-56 md:h-full min-h-[240px] overflow-hidden">
+          <img
+            [src]="lead.image"
+            [alt]="lead.imageAlt"
+            class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+          />
+          <span
+            class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-bold text-slateNavy-900 shadow"
+          >
+            Chapter 1 &middot; {{ lead.era }}
+          </span>
+        </div>
+
+        <div class="p-6 sm:p-10 flex flex-col justify-center space-y-3">
+          <h3
+            class="font-heading text-2xl sm:text-3xl font-extrabold text-slateNavy-900 group-hover:text-emeraldTrust-700 transition leading-tight"
+          >
+            {{ lead.title }}
+          </h3>
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed">{{ lead.dek }}</p>
+          <span class="text-emeraldTrust-700 font-bold text-sm inline-flex items-center gap-2 pt-1">
+            Read the chapter
+            <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Remaining chapters -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      @for (story of rest; track story.slug; let i = $index) {
+        <a
+          [appReveal]="i * 90"
+          [routerLink]="['/stories', story.slug]"
+          class="lift group flex flex-col bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl"
+        >
+          <div class="relative h-40 overflow-hidden">
+            <img
+              [src]="story.image"
+              [alt]="story.imageAlt"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+            <span
+              class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-slateNavy-900 shadow"
+            >
+              Chapter {{ story.order }}
+            </span>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <p class="text-[11px] uppercase tracking-wider text-emeraldTrust-700 font-bold">
+                {{ story.era }}
+              </p>
+              <h3
+                class="font-heading text-lg font-bold text-slateNavy-900 mt-1.5 leading-snug group-hover:text-emeraldTrust-700 transition"
+              >
+                {{ story.title }}
+              </h3>
+              <p class="text-slate-600 text-xs mt-2 leading-relaxed">{{ story.dek }}</p>
+            </div>
+            <span class="text-emeraldTrust-700 font-bold text-xs inline-flex items-center gap-1.5 mt-4">
+              Read
+              <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition" aria-hidden="true"></i>
+            </span>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>

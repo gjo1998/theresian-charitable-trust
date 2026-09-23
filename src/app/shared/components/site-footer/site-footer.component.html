@@ -1,0 +1,96 @@
+<footer class="bg-slateNavy-950 text-slate-300 border-t border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      <!-- Identity -->
+      <div class="space-y-4">
+        <div class="flex items-center space-x-3">
+          <div
+            class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emeraldTrust-600 to-emeraldTrust-800 flex items-center justify-center text-white text-xl"
+          >
+            <i class="fas fa-hands-holding-child" aria-hidden="true"></i>
+          </div>
+          <span class="font-heading font-extrabold text-xl text-white tracking-tight">Ammaveedu</span>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          {{ trust.legalName }} runs Ammaveedu, a home for boys, and a free nursery at Thellakom P.O.,
+          Kottayam. It has no permanent source of income and depends entirely on donations.
+        </p>
+        <p class="text-xs text-slate-500 italic">
+          Founded by {{ trust.founder }}.
+        </p>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <h2 class="font-heading font-bold text-white text-sm uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+          Quick Links
+        </h2>
+        <ul class="space-y-2 text-xs">
+          @for (link of navLinks; track link.fragment) {
+            <li>
+              <a routerLink="/" [fragment]="link.fragment" class="hover:text-amberGold-400 transition">
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Programmes -->
+      <div>
+        <h2 class="font-heading font-bold text-white text-sm uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+          Our Work
+        </h2>
+        <ul class="space-y-2 text-xs text-slate-400">
+          @for (program of programs; track program.id) {
+            <li>
+              <i class="fas fa-angle-right text-emeraldTrust-500 me-2" aria-hidden="true"></i>{{ program.title }}
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Address -->
+      <div>
+        <h2 class="font-heading font-bold text-white text-sm uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+          Find Us
+        </h2>
+        <address class="not-italic text-xs text-slate-400 space-y-1.5">
+          <p>{{ trust.address.line1 }}</p>
+          <p>{{ trust.address.line2 }}</p>
+          <p>{{ trust.address.line3 }}</p>
+          <p>{{ trust.address.district }} - {{ trust.address.pin }}, {{ trust.address.state }}</p>
+          @if (trust.phoneVerified) {
+            <p class="pt-2">
+              <a [href]="'tel:+' + trust.phoneE164" class="text-amberGold-400 font-bold hover:underline">
+                <i class="fas fa-phone me-2" aria-hidden="true"></i>{{ trust.phone }}
+              </a>
+            </p>
+            <p>
+              <a
+                [href]="whatsappUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-slate-300 hover:text-white"
+              >
+                <i class="fa-brands fa-whatsapp text-[#25D366] me-2" aria-hidden="true"></i>WhatsApp us
+              </a>
+            </p>
+          }
+          <p class="pt-1">
+            <a [href]="'mailto:' + trust.email" class="hover:text-white break-all">
+              <i class="fas fa-envelope me-2" aria-hidden="true"></i>{{ trust.email }}
+            </a>
+          </p>
+        </address>
+      </div>
+    </div>
+
+    <div
+      class="mt-12 pt-8 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4"
+    >
+      <p>&copy; {{ currentYear }} {{ trust.legalName }}. All rights reserved.</p>
+      <p>Photographs by the trust &middot; Thellakom P.O., Ettumanoor, Kottayam, Kerala</p>
+    </div>
+  </div>
+</footer>

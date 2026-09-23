@@ -1,0 +1,60 @@
+<section id="programs" class="py-20 bg-slate-50 border-t border-b border-slate-200/80 scroll-mt-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div appReveal class="text-center max-w-3xl mx-auto mb-16">
+      <span
+        class="text-emeraldTrust-700 font-semibold uppercase tracking-wider text-xs sm:text-sm bg-emeraldTrust-100 px-3 py-1 rounded-full border border-emeraldTrust-200"
+      >
+        What we do
+      </span>
+      <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-slateNavy-900 mt-3 rule-in">
+        Our Work
+      </h2>
+      <p class="text-slate-600 mt-3 text-sm sm:text-base">
+        Four strands of work, all of them run from the same house in Thellakom and all of them paid for by
+        people who choose to give.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      @for (program of programs; track program.id; let i = $index) {
+        <article
+          [appReveal]="i * 90"
+          class="lift bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200/80 flex flex-col group"
+        >
+          <div class="relative h-48 overflow-hidden">
+            <img
+              [src]="program.image"
+              [alt]="program.imageAlt"
+              (error)="onImageError($event, program)"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+            <div
+              class="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold shadow"
+              [class]="program.badgeClass"
+            >
+              {{ program.badge }}
+            </div>
+          </div>
+
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-heading text-xl font-bold text-slate-900 group-hover:text-emeraldTrust-600 transition">
+                {{ program.title }}
+              </h3>
+              <p class="text-slate-600 text-xs sm:text-sm mt-2 leading-relaxed">{{ program.summary }}</p>
+            </div>
+
+            <button
+              type="button"
+              (click)="openProgram(program)"
+              class="mt-6 text-emeraldTrust-700 font-bold text-xs sm:text-sm hover:text-emeraldTrust-900 flex items-center space-x-1 group-hover:translate-x-1 transition self-start"
+            >
+              <span>Read more</span>
+              <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

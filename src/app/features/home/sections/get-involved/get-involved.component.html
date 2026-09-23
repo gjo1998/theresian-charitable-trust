@@ -1,0 +1,259 @@
+<section id="get-involved" class="py-20 bg-slate-50 border-t border-slate-200/80 scroll-mt-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div appReveal class="text-center max-w-3xl mx-auto mb-12">
+      <span
+        class="text-emeraldTrust-700 font-semibold uppercase tracking-wider text-xs sm:text-sm bg-emeraldTrust-50 px-3 py-1 rounded-full border border-emeraldTrust-100"
+      >
+        Take part
+      </span>
+      <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-slateNavy-900 mt-3 rule-in">Ways to Help</h2>
+      <p class="text-slate-600 mt-2 text-sm sm:text-base">
+        The trust has no endowment and no permanent income. Whatever you would like to do, the next step is
+        the same: speak to {{ trust.founder }} directly.
+      </p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="flex justify-center mb-8 border-b border-slate-200">
+      <div class="inline-flex space-x-2 sm:space-x-6">
+        @for (tab of tabs; track tab.id) {
+          <button
+            type="button"
+            (click)="setTab(tab.id)"
+            class="pb-3 px-4 sm:px-6 text-sm sm:text-base border-b-2 transition"
+            [class]="
+              activeTab() === tab.id
+                ? 'font-bold border-emeraldTrust-600 text-emeraldTrust-700'
+                : 'font-semibold border-transparent text-slate-500 hover:text-slate-800'
+            "
+          >
+            <i class="fas me-2" [class]="tab.icon" aria-hidden="true"></i>{{ tab.label }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Give -->
+    @if (activeTab() === 'give') {
+      <div
+        class="fade-in bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+      >
+        <div class="space-y-4">
+          <figure class="space-y-2">
+            <img
+              src="images/rice-recipient.jpg"
+              alt="A woman outside her home holding a vessel of rice from the trust's weekly delivery"
+              class="w-full aspect-[4/3] object-cover rounded-2xl border border-slate-200"
+            />
+            <figcaption class="text-[11px] text-slate-500">
+              A week's rice, delivered to the door. The trust reaches about a hundred families this way.
+            </figcaption>
+          </figure>
+          <h3 class="font-heading text-2xl font-bold text-slateNavy-900">What a gift pays for</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Meals and a bed at Ammaveedu, school books and uniforms, nursery teaching, medicines and camp
+            costs, and the rice and clothing the trust carries out to families nearby.
+          </p>
+          <div class="space-y-2 text-xs sm:text-sm text-slate-700">
+            <p>
+              <i class="fas fa-check text-emeraldTrust-600 me-2" aria-hidden="true"></i>
+              Run by donations alone - no permanent source of income
+            </p>
+            <p>
+              <i class="fas fa-check text-emeraldTrust-600 me-2" aria-hidden="true"></i>
+              Delivered in person, to families the trust knows by name
+            </p>
+            <p>
+              <i class="fas fa-check text-emeraldTrust-600 me-2" aria-hidden="true"></i>
+              Gifts in kind - rice, books, uniforms, clothing - are equally welcome
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+          <h3 class="font-heading text-lg font-bold text-slateNavy-900">Speak to Fr. Sebastian</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            This site does not take payments and does not publish the trust's account details. Write or call,
+            and Fr. Sebastian will tell you how to send a gift and what it is needed for at the moment.
+          </p>
+
+          <div class="space-y-2.5 pt-1">
+            <a
+              [href]="giveMailto()"
+              class="flex items-center gap-3 w-full bg-gradient-to-r from-emeraldTrust-600 to-emeraldTrust-700 hover:from-emeraldTrust-700 hover:to-emeraldTrust-800 text-white font-bold px-5 py-3.5 rounded-xl shadow transition text-sm"
+            >
+              <i class="fas fa-envelope text-base" aria-hidden="true"></i>
+              <span class="flex-1">Email Fr. Sebastian</span>
+              <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+            </a>
+
+            @if (trust.phoneVerified) {
+              <a
+                [href]="giveWhatsapp()"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 w-full bg-[#25D366] hover:bg-[#1eb457] text-white font-bold px-5 py-3.5 rounded-xl transition text-sm"
+              >
+                <i class="fa-brands fa-whatsapp text-lg" aria-hidden="true"></i>
+                <span class="flex-1">Message on WhatsApp</span>
+              </a>
+
+              <a
+                [href]="telLink"
+                class="flex items-center gap-3 w-full bg-slateNavy-900 hover:bg-slateNavy-950 text-white font-bold px-5 py-3.5 rounded-xl transition text-sm"
+              >
+                <i class="fas fa-phone text-sm" aria-hidden="true"></i>
+                <span class="flex-1">Call {{ trust.phone }}</span>
+              </a>
+            }
+          </div>
+
+          <p class="text-[11px] text-slate-500 leading-relaxed pt-1">
+            <i class="fas fa-shield-halved text-emeraldTrust-600 me-1" aria-hidden="true"></i>
+            No bank or UPI details are published here, so nobody can impersonate the trust on this page. Ask
+            for them directly and you will know where they came from.
+          </p>
+        </div>
+      </div>
+    }
+
+    <!-- Volunteer -->
+    @if (activeTab() === 'volunteer') {
+      <div
+        class="fade-in bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8"
+      >
+        <div class="space-y-4">
+          <h3 class="font-heading text-2xl font-bold text-slateNavy-900">Come and help</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Ammaveedu needs people more often than it needs anything else: someone to sit with homework,
+            someone to help at the nursery, hands at a medical camp or on a distribution round.
+          </p>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 space-y-1.5">
+            <p><strong>Hours:</strong> {{ trust.officeHours }}</p>
+            @if (trust.phoneVerified) {
+              <p>
+                <strong>Phone / WhatsApp:</strong>
+                <a [href]="telLink" class="text-emeraldTrust-700 hover:underline">{{ trust.phone }}</a>
+              </p>
+            }
+            <p>
+              <strong>Email:</strong>
+              <a [href]="'mailto:' + trust.email" class="text-emeraldTrust-700 hover:underline break-all">
+                {{ trust.email }}
+              </a>
+            </p>
+            <p>
+              <strong>Where:</strong> {{ trust.address.line3 }}, {{ trust.address.district }} -
+              {{ trust.address.pin }}
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+          <label for="volunteer-role" class="block text-xs font-bold uppercase tracking-wider text-slate-600">
+            What would you like to help with?
+          </label>
+          <select
+            id="volunteer-role"
+            (change)="onRoleChange($event)"
+            class="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-sm text-slate-700 focus:ring-2 focus:ring-emeraldTrust-600 focus:outline-none"
+          >
+            @for (role of roles; track role.value) {
+              <option [value]="role.label">{{ role.label }}</option>
+            }
+          </select>
+
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Choosing here simply writes it into your message - it is sent from your own email or WhatsApp,
+            straight to Fr. Sebastian.
+          </p>
+
+          <div class="space-y-2.5">
+            <a
+              [href]="volunteerMailto()"
+              class="flex items-center gap-3 w-full bg-slateNavy-900 hover:bg-slateNavy-950 text-white font-bold px-5 py-3.5 rounded-xl transition text-sm"
+            >
+              <i class="fas fa-envelope text-base" aria-hidden="true"></i>
+              <span class="flex-1">Email about volunteering</span>
+              <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+            </a>
+
+            @if (trust.phoneVerified) {
+              <a
+                [href]="volunteerWhatsapp()"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 w-full bg-[#25D366] hover:bg-[#1eb457] text-white font-bold px-5 py-3.5 rounded-xl transition text-sm"
+              >
+                <i class="fa-brands fa-whatsapp text-lg" aria-hidden="true"></i>
+                <span class="flex-1">Message on WhatsApp</span>
+              </a>
+
+              <a
+                [href]="telLink"
+                class="flex items-center gap-3 w-full bg-white hover:bg-slate-100 text-slate-800 font-bold px-5 py-3.5 rounded-xl border border-slate-300 transition text-sm"
+              >
+                <i class="fas fa-phone text-sm" aria-hidden="true"></i>
+                <span class="flex-1">Call {{ trust.phone }}</span>
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Partner -->
+    @if (activeTab() === 'partner') {
+      <div class="fade-in bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/80 max-w-4xl mx-auto space-y-6">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <h3 class="font-heading text-2xl font-bold text-slateNavy-900">
+            Institutions, parishes and companies
+          </h3>
+          <p class="text-slate-600 text-sm">
+            A standing commitment - rather than a one-off gift - is what lets the trust plan a school year or
+            a camp schedule instead of improvising.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
+            <div class="text-emeraldTrust-600 text-xl font-bold">
+              <i class="fas fa-handshake" aria-hidden="true"></i> Sponsor a child or a year
+            </div>
+            <p class="text-slate-600 text-xs">
+              Cover one boy's schooling and upkeep at Ammaveedu, a nursery place, or a term of medical camps.
+            </p>
+          </div>
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2">
+            <div class="text-amberGold-600 text-xl font-bold">
+              <i class="fas fa-box-open" aria-hidden="true"></i> Supply in kind
+            </div>
+            <p class="text-slate-600 text-xs">
+              Rice and provisions, books and uniforms, clothing, or medicines - used directly, with no
+              intermediary.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+          <a
+            [href]="partnerMailto()"
+            class="inline-flex items-center justify-center gap-2 bg-emeraldTrust-600 hover:bg-emeraldTrust-700 text-white font-bold px-6 py-3.5 rounded-xl text-sm transition"
+          >
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <span>Email Fr. Sebastian</span>
+          </a>
+          @if (trust.phoneVerified) {
+            <a
+              [href]="telLink"
+              class="inline-flex items-center justify-center gap-2 bg-slateNavy-900 hover:bg-slateNavy-950 text-white font-bold px-6 py-3.5 rounded-xl text-sm transition"
+            >
+              <i class="fas fa-phone text-xs" aria-hidden="true"></i>
+              <span>Call {{ trust.phone }}</span>
+            </a>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</section>

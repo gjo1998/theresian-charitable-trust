@@ -1,0 +1,81 @@
+<header
+  class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b transition-all duration-300"
+  [class]="scrolled() ? 'shadow-lg border-slate-200' : 'shadow-sm border-slate-100'"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div
+      class="flex justify-between items-center transition-all duration-300"
+      [class]="scrolled() ? 'h-16' : 'h-20'"
+    >
+      <!-- Logo -->
+      <a routerLink="/" class="flex items-center space-x-3 group" aria-label="Home">
+        <div
+          class="w-11 h-11 rounded-xl bg-gradient-to-br from-emeraldTrust-600 to-emeraldTrust-800 flex items-center justify-center text-white text-2xl font-bold shadow-md shadow-emeraldTrust-600/20 group-hover:scale-105 transition transform"
+        >
+          <i class="fas fa-hands-holding-child" aria-hidden="true"></i>
+        </div>
+        <div>
+          <span
+            class="block font-heading font-extrabold text-xl sm:text-2xl text-slateNavy-900 tracking-tight leading-none"
+          >
+            Ammaveedu
+          </span>
+          <span
+            class="block font-heading font-semibold text-[11px] sm:text-xs text-emeraldTrust-600 tracking-widest uppercase mt-0.5"
+          >
+            Theresian Charitable Trust
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="hidden lg:flex items-center space-x-7 font-medium text-slate-700 text-sm">
+        @for (link of navLinks; track link.fragment) {
+          <a
+            routerLink="/"
+            [fragment]="link.fragment"
+            class="nav-link py-1 transition-colors duration-200 hover:text-emeraldTrust-600"
+            [class.is-active]="activeFragment() === link.fragment"
+            [class.text-emeraldTrust-700]="activeFragment() === link.fragment"
+            [class.font-semibold]="activeFragment() === link.fragment"
+          >
+            {{ link.label }}
+          </a>
+        }
+      </nav>
+
+      <!-- Mobile toggle -->
+      <div class="flex items-center">
+        <button
+          type="button"
+          (click)="toggleMobileMenu()"
+          class="lg:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-emeraldTrust-600"
+          [attr.aria-expanded]="mobileMenuOpen()"
+          aria-controls="mobileMenu"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas text-xl" [class]="mobileMenuOpen() ? 'fa-times' : 'fa-bars'" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  @if (mobileMenuOpen()) {
+    <div
+      id="mobileMenu"
+      class="drop-in lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-2 shadow-xl"
+    >
+      @for (link of navLinks; track link.fragment) {
+        <a
+          routerLink="/"
+          [fragment]="link.fragment"
+          (click)="closeMobileMenu()"
+          class="block py-2 px-3 rounded-lg text-slate-700 font-medium hover:bg-emeraldTrust-50 hover:text-emeraldTrust-700"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </div>
+  }
+</header>
