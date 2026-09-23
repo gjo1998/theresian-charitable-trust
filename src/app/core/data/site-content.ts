@@ -96,9 +96,9 @@ export const PROGRAMS: Program[] = [
       'A home for boys from the colonies who have no family able to care for them - food, shelter, schooling and someone to answer to.',
     detail:
       'Ammaveedu is the trust\'s first and largest work. It houses 27 boys drawn from colonies where there was no family able to look after them. The home provides meals, a bed, school books and uniforms, toys and time to play, and the ordinary moral formation a household gives. Every boy over the age of six goes to school every day - the point of the home is to break the assumption that the children of the poor stay poor.',
-    image: 'images/ammaveedu-boys.jpg',
-    fallbackImage: 'images/ammaveedu-house.jpg',
-    imageAlt: 'The boys of Ammaveedu with Fr. Sebastian',
+    image: 'images/ammaveedu-today.jpg',
+    fallbackImage: 'images/ammaveedu-boys.jpg',
+    imageAlt: 'Fr. Sebastian with the boys outside the house at Ammaveedu',
   },
   {
     id: 'nursery',

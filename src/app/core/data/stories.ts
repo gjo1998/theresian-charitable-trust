@@ -137,8 +137,8 @@ export const STORIES: Story[] = [
     dek: 'Twenty-seven boys, all from the colonies, all of them in school. What Ammaveedu is for.',
     published: '7 November 2011',
     era: 'Ammaveedu today',
-    image: 'images/ammaveedu-boys.jpg',
-    imageAlt: 'The boys of Ammaveedu',
+    image: 'images/ammaveedu-building.webp',
+    imageAlt: 'The Ammaveedu building at Thellakom, its name painted across the front',
     firstPerson: false,
     body: [
       {

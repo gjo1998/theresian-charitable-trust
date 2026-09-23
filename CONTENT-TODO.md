@@ -74,13 +74,17 @@ descriptions are not time-sensitive in the same way.
 
 ## 6. Photographs — the trust's own, and a safeguarding decision
 
-All five photographs in `public/images/` were taken from the trust's own
-published material and are stored locally (not hotlinked). They date from 2011.
+Seven photographs sit in `public/images/`, all stored locally (not hotlinked).
+**Two are current and high resolution** — supplied directly and used wherever
+Ammaveedu is shown as it is today. The other five come from the trust’s own
+published material and date from 2011.
 
 | File | Shows |
 | --- | --- |
-| `ammaveedu-boys.jpg` | The boys of Ammaveedu with Fr. Sebastian — hero background, Ammaveedu card, Chapter 4 |
-| `ammaveedu-house.jpg` | The house at Thellakom — About section, Chapter 3 |
+| `ammaveedu-today.jpg` | **Current, 953×960.** Fr. Sebastian with the boys — hero background, Ammaveedu card |
+| `ammaveedu-building.webp` | **Current, 1360×1020.** The Ammaveedu building and its sign — About section, Chapter 4 |
+| `ammaveedu-boys.jpg` | The boys of Ammaveedu, 2011 — now a fallback only |
+| `ammaveedu-house.jpg` | The first house, 2011 — Chapter 3, and the fallback elsewhere |
 | `children-meal.jpg` | Children over a meal — Nursery card |
 | `rice-delivery.jpg` | A rice sack being carried in — Food & Clothing card, Give tab, Chapter 5 |
 | `home-visit.jpg` | A home visit to an elderly man — Health card, Chapter 2 |
@@ -150,7 +154,7 @@ mail service) or drop it and leave the direct contact buttons.
 ## Sources used
 
 The trust's own blog is the primary source for the copy, the founder's story, the
-objectives, the figures and all five photographs. Its posts date from
+objectives, the figures and the five older photographs. Its posts date from
 November 2011 — see item 5.
 
 

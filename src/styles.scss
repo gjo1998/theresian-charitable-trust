@@ -14,7 +14,7 @@ body {
 }
 
 /*
- * The trust's own photograph of the boys of Ammaveedu, kept visible.
+ * A current photograph of Fr. Sebastian with the boys, kept visible.
  * The overlay is angled rather than flat: dense on the left where the headline
  * sits, thinning out to the right so the faces in the photograph come through.
  */
@@ -29,9 +29,9 @@ body {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url('../public/images/ammaveedu-boys.jpg');
+  background-image: url('../public/images/ammaveedu-today.jpg');
   background-size: cover;
-  background-position: center 30%;
+  background-position: center 42%;
   transform: scale(1.01);
   animation: heroZoom 30s ease-in-out infinite alternate;
   will-change: transform;

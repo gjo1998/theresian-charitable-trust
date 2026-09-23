@@ -15,6 +15,6 @@ export class AboutComponent {
   readonly pillars = VALUE_PILLARS;
   readonly yearsOfService = new Date().getFullYear() - TRUST.foundedYear;
 
-  /** The trust's own photograph of the house at Thellakom. */
-  readonly houseImage = 'images/ammaveedu-house.jpg';
+  /** The Ammaveedu building at Thellakom as it stands today. */
+  readonly houseImage = 'images/ammaveedu-building.webp';
 }

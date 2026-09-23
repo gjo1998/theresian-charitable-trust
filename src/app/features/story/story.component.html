@@ -85,6 +85,43 @@
         }
       }
 
+      <!-- Straight on to the next chapter, so the history reads in sequence -->
+      @if (next(); as nxt) {
+        <a
+          [routerLink]="['/stories', nxt.slug]"
+          class="group mt-10 flex items-center gap-4 p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-slateNavy-900 to-emeraldTrust-900 text-white hover:shadow-2xl transition"
+        >
+          <span class="flex-1">
+            <span class="block text-[11px] uppercase tracking-wider text-emeraldTrust-400 font-bold">
+              Continue the story &middot; Chapter {{ nxt.order }}
+            </span>
+            <span class="block font-heading text-lg sm:text-xl font-bold mt-1">{{ nxt.title }}</span>
+            <span class="block text-xs text-slate-300 mt-1.5">{{ nxt.dek }}</span>
+          </span>
+          <span
+            class="w-11 h-11 rounded-full bg-white/15 group-hover:bg-white/25 flex items-center justify-center shrink-0 group-hover:translate-x-1 transition"
+          >
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </span>
+        </a>
+      } @else {
+        <a
+          routerLink="/"
+          fragment="stories"
+          class="group mt-10 flex items-center gap-4 p-5 sm:p-6 rounded-3xl bg-slate-50 border border-slate-200 hover:border-emeraldTrust-300 transition"
+        >
+          <span class="flex-1">
+            <span class="block text-[11px] uppercase tracking-wider text-emeraldTrust-700 font-bold">
+              That is the whole story so far
+            </span>
+            <span class="block font-heading text-lg font-bold text-slateNavy-900 mt-1">
+              Back to all five chapters
+            </span>
+          </span>
+          <i class="fas fa-arrow-left text-slate-400 group-hover:text-emeraldTrust-700 transition" aria-hidden="true"></i>
+        </a>
+      }
+
       <!-- Support call to action -->
       <div class="mt-12 p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 space-y-3">
         <h2 class="font-heading text-xl font-bold text-slateNavy-900">This is still going on</h2>
