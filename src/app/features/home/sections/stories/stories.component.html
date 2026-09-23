@@ -23,11 +23,21 @@
     >
       <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="relative h-56 md:h-full min-h-[240px] overflow-hidden">
-          <img
-            [src]="lead.image"
-            [alt]="lead.imageAlt"
-            class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-          />
+          @if (lead.image) {
+            <img
+              [src]="lead.image"
+              [alt]="lead.imageAlt"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+          } @else {
+            <div
+              class="w-full h-full bg-gradient-to-br from-slateNavy-900 via-emeraldTrust-900 to-slateNavy-950 flex items-center p-8"
+            >
+              <p class="font-heading text-white/90 text-lg sm:text-xl italic leading-snug">
+                &ldquo;{{ lead.coverQuote }}&rdquo;
+              </p>
+            </div>
+          }
           <span
             class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-bold text-slateNavy-900 shadow"
           >
@@ -59,11 +69,21 @@
           class="lift group flex flex-col bg-slate-50 rounded-2xl overflow-hidden border border-slate-200/80 hover:shadow-xl"
         >
           <div class="relative h-40 overflow-hidden">
-            <img
-              [src]="story.image"
-              [alt]="story.imageAlt"
-              class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-            />
+            @if (story.image) {
+              <img
+                [src]="story.image"
+                [alt]="story.imageAlt"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+            } @else {
+              <div
+                class="w-full h-full bg-gradient-to-br from-slateNavy-900 via-emeraldTrust-900 to-slateNavy-950 flex items-center p-5"
+              >
+                <p class="font-heading text-white/85 text-xs italic leading-snug line-clamp-4">
+                  &ldquo;{{ story.coverQuote }}&rdquo;
+                </p>
+              </div>
+            }
             <span
               class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-slateNavy-900 shadow"
             >

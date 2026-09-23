@@ -96,9 +96,9 @@ export const PROGRAMS: Program[] = [
       'A home for boys from the colonies who have no family able to care for them - food, shelter, schooling and someone to answer to.',
     detail:
       'Ammaveedu is the trust\'s first and largest work. It houses 27 boys drawn from colonies where there was no family able to look after them. The home provides meals, a bed, school books and uniforms, toys and time to play, and the ordinary moral formation a household gives. Every boy over the age of six goes to school every day - the point of the home is to break the assumption that the children of the poor stay poor.',
-    image: 'images/children-meal.jpg',
+    image: 'images/ammaveedu-boys.jpg',
     fallbackImage: 'images/ammaveedu-house.jpg',
-    imageAlt: 'Children sitting together over a meal, photographed by the trust',
+    imageAlt: 'The boys of Ammaveedu with Fr. Sebastian',
   },
   {
     id: 'nursery',
@@ -109,9 +109,9 @@ export const PROGRAMS: Program[] = [
       'A free pre-school for the youngest boys at Ammaveedu and for children from nearby families who could not otherwise afford one.',
     detail:
       'The trust runs its own nursery, fully funded, for the younger members of Ammaveedu together with six more children from disadvantaged families nearby. The children are taught basic English, Malayalam and mathematics, and the families pay nothing at all. It exists because a child who starts school behind rarely catches up.',
-    image: 'images/colony-children.jpg',
-    fallbackImage: 'images/children-meal.jpg',
-    imageAlt: 'Young children outside their homes in one of the colonies',
+    image: 'images/children-meal.jpg',
+    fallbackImage: 'images/ammaveedu-house.jpg',
+    imageAlt: 'Young children sitting together over a meal',
   },
   {
     id: 'relief',
@@ -123,7 +123,7 @@ export const PROGRAMS: Program[] = [
     detail:
       'It started with the cook. A large donation of rice had arrived, she had fed all the children amply, and she asked whether she could take some of the surplus to a family she knew who had no food and no money to buy any. Word spread: men unable to work through sickness or poor mental health, widowed women, families that had come apart. Three years on it had become an operation of its own - weekly deliveries of 5kg of rice to about 100 families, with clothing handed out alongside it. The trust delivers in person, to families it can name.',
     image: 'images/rice-delivery.jpg',
-    fallbackImage: 'images/rice-recipient.jpg',
+    fallbackImage: 'images/ammaveedu-house.jpg',
     imageAlt: 'A sack of rice being carried in for distribution',
   },
   {
@@ -136,7 +136,7 @@ export const PROGRAMS: Program[] = [
     detail:
       'The trust arranges regular health checks for the children of the colonies. One of its own members is a qualified paediatrician, and it has links with a local chemist - so there is both a doctor who can see the children and medicine that can be issued to them free. Beyond that, the trust\'s health objectives run from prevention to palliative care: awareness programmes and medical camps in the colonies and villages, early detection of disease, home check-ups for people with chronic conditions who cannot travel, pain and palliative care, rehabilitation of people affected by HIV/AIDS, and care for the aged and the differently abled.',
     image: 'images/home-visit.jpg',
-    fallbackImage: 'images/rice-recipient.jpg',
+    fallbackImage: 'images/ammaveedu-house.jpg',
     imageAlt: 'A home visit to an elderly man in one of the villages',
   },
 ];

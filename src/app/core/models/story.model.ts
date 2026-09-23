@@ -14,8 +14,11 @@ export interface Story {
   /** When the trust first published the account this article draws on. */
   published: string;
   era: string;
-  image: string;
-  imageAlt: string;
+  /** Optional: a chapter with no honest photograph gets a typographic cover. */
+  image?: string;
+  imageAlt?: string;
+  /** Shown on the cover when there is no photograph. */
+  coverQuote?: string;
   /** True where the body is Fr. Sebastian writing in the first person. */
   firstPerson: boolean;
   body: StoryBlockContent[];

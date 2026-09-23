@@ -12,12 +12,11 @@ export const STORIES: Story[] = [
   {
     slug: 'the-colony-on-the-canal',
     order: 1,
-    title: 'The colony thirteen kilometres away',
+    title: 'A different world',
     dek: 'A philosophy course called Social Action took a young seminarian to a slum built on the banks of a waste canal. He never got over it.',
     published: '7 November 2011',
     era: 'The 1990s',
-    image: 'images/colony-children.jpg',
-    imageAlt: 'Children in one of the colonies around Kottayam',
+    coverQuote: 'It was only 13km away from the seminary, but to me it looked like a different world.',
     firstPerson: true,
     body: [
       {

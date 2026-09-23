@@ -74,21 +74,25 @@ descriptions are not time-sensitive in the same way.
 
 ## 6. Photographs — the trust's own, and a safeguarding decision
 
-All seven photographs in `public/images/` were taken from the trust's own
+All five photographs in `public/images/` were taken from the trust's own
 published material and are stored locally (not hotlinked). They date from 2011.
 
 | File | Shows |
 | --- | --- |
-| `ammaveedu-boys.jpg` | The boys of Ammaveedu with Fr. Sebastian — hero background, Chapter 4 |
+| `ammaveedu-boys.jpg` | The boys of Ammaveedu with Fr. Sebastian — hero background, Ammaveedu card, Chapter 4 |
 | `ammaveedu-house.jpg` | The house at Thellakom — About section, Chapter 3 |
-| `children-meal.jpg` | Children over a meal — Ammaveedu programme card |
-| `colony-children.jpg` | Young children in a colony — Nursery card, Chapter 1 |
-| `rice-delivery.jpg` | A rice sack being carried in — Food & Clothing card, Chapter 5 |
+| `children-meal.jpg` | Children over a meal — Nursery card |
+| `rice-delivery.jpg` | A rice sack being carried in — Food & Clothing card, Give tab, Chapter 5 |
 | `home-visit.jpg` | A home visit to an elderly man — Health card, Chapter 2 |
-| `rice-recipient.jpg` | A woman with her week's rice — Give tab |
 
-Two further photographs — a tarpaulin shelter and homes along a canal — were
-removed from the About section on request and deleted from the project.
+Four further photographs have been removed on request and deleted from the
+project: a tarpaulin shelter, homes along a canal, children in a colony street,
+and a woman holding her week's rice.
+
+Chapter 1 now carries **no photograph at all**. It describes a colony near Cochin
+in the 1990s, and no photograph of that place exists in the set — so rather than
+pair it with an unrelated image, the chapter leads with its own pull-quote on a
+typographic cover. `image` is optional on a `Story`; set `coverQuote` instead.
 
 ### No photograph from Google Maps
 
@@ -146,7 +150,7 @@ mail service) or drop it and leave the direct contact buttons.
 ## Sources used
 
 The trust's own blog is the primary source for the copy, the founder's story, the
-objectives, the figures and all seven photographs. Its posts date from
+objectives, the figures and all five photographs. Its posts date from
 November 2011 — see item 5.
 
 
