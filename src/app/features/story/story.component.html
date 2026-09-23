@@ -148,31 +148,18 @@
       </div>
     </div>
 
-    <!-- Previous / next -->
-    <nav class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <!-- Back one chapter; the Continue card above carries the way forward -->
+    <nav class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
       @if (previous(); as prev) {
         <a
           [routerLink]="['/stories', prev.slug]"
-          class="group p-5 rounded-2xl border border-slate-200 hover:border-emeraldTrust-300 hover:bg-emeraldTrust-50/40 transition"
+          class="group inline-flex flex-col p-5 rounded-2xl border border-slate-200 hover:border-emeraldTrust-300 hover:bg-emeraldTrust-50/40 transition"
         >
           <span class="text-[11px] uppercase tracking-wider text-slate-500 font-bold">
             <i class="fas fa-arrow-left text-[10px] me-1.5" aria-hidden="true"></i> Previous chapter
           </span>
           <p class="font-heading font-bold text-slateNavy-900 mt-1 group-hover:text-emeraldTrust-700">
             {{ prev.title }}
-          </p>
-        </a>
-      }
-      @if (next(); as nxt) {
-        <a
-          [routerLink]="['/stories', nxt.slug]"
-          class="group p-5 rounded-2xl border border-slate-200 hover:border-emeraldTrust-300 hover:bg-emeraldTrust-50/40 transition sm:text-end sm:col-start-2"
-        >
-          <span class="text-[11px] uppercase tracking-wider text-slate-500 font-bold">
-            Next chapter <i class="fas fa-arrow-right text-[10px] ms-1.5" aria-hidden="true"></i>
-          </span>
-          <p class="font-heading font-bold text-slateNavy-900 mt-1 group-hover:text-emeraldTrust-700">
-            {{ nxt.title }}
           </p>
         </a>
       }
