@@ -4,12 +4,12 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./features/home/home.component').then((m) => m.HomeComponent),
-    title: 'The Theresian Charitable Trust (Ammaveedu) | Thellakom, Kottayam',
+    title: 'Ammaveedu | A family home for boys in Thellakom, Kottayam',
   },
   {
-    path: 'stories/:slug',
+    path: 'stories',
     loadComponent: () => import('./features/story/story.component').then((m) => m.StoryComponent),
-    title: 'The Story of Ammaveedu | Theresian Charitable Trust',
+    title: 'The story of Ammaveedu | Theresian Charitable Trust',
   },
   { path: '**', redirectTo: '' },
 ];

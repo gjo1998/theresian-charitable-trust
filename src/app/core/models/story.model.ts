@@ -1,25 +1,22 @@
-/** A block of article body copy. */
+/** A paragraph or a pull quote inside a chapter. */
 export interface StoryBlockContent {
-  type: 'p' | 'quote' | 'h';
+  type: 'p' | 'quote';
   text: string;
+  /** Attribution, for a pull quote. */
+  by?: string;
 }
 
 export interface Story {
   slug: string;
-  /** Narrative order — the history reads from 1 upwards, not newest first. */
+  /** Narrative order — the story reads from 1 upwards. */
   order: number;
   title: string;
-  /** One-line standfirst shown on the card and under the article title. */
-  dek: string;
-  /** When the trust first published the account this article draws on. */
-  published: string;
+  /** Small label above the heading, e.g. "The 1990s". */
   era: string;
-  /** Optional: a chapter with no honest photograph gets a typographic cover. */
+  /** A photograph, when an honest one exists for this chapter. */
   image?: string;
   imageAlt?: string;
-  /** Shown on the cover when there is no photograph. */
+  /** Shown in a coloured block when there is no photograph. */
   coverQuote?: string;
-  /** True where the body is Fr. Sebastian writing in the first person. */
-  firstPerson: boolean;
   body: StoryBlockContent[];
 }

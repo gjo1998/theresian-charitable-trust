@@ -4,39 +4,39 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        emeraldTrust: {
-          50: '#ecfdf5',
-          100: '#d1fae5',
-          200: '#a7f3d0',
-          500: '#10b981',
-          600: '#059669',
-          700: '#047857',
-          800: '#065f46',
-          900: '#064e3b',
+        leaf: {
+          DEFAULT: '#1F7A4D',
+          deep: '#135437',
+          soft: '#E3F3E9',
         },
-        amberGold: {
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
+        mango: {
+          DEFAULT: '#FFC53D',
+          soft: '#FFF4D1',
         },
-        slateNavy: {
-          800: '#1e293b',
-          900: '#0f172a',
-          950: '#020617',
+        hibiscus: {
+          DEFAULT: '#E8456A',
+          soft: '#FDE4EA',
+        },
+        sky: {
+          DEFAULT: '#3E9FD6',
+          soft: '#E3F3FB',
+        },
+        ink: {
+          DEFAULT: '#1E2A3F',
+          soft: '#4D5A70',
         },
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'sans-serif'],
-        heading: ['Outfit', 'sans-serif'],
+        heading: ['"Baloo Chettan 2"', 'system-ui', 'sans-serif'],
+        sans: ['"Nunito Sans"', 'system-ui', 'sans-serif'],
       },
-      keyframes: {
-        modalFadeIn: {
-          from: { opacity: '0', transform: 'scale(0.95)' },
-          to: { opacity: '1', transform: 'scale(1)' },
-        },
+      borderRadius: {
+        card: '26px',
       },
-      animation: {
-        modalFadeIn: 'modalFadeIn 0.25s ease-out forwards',
+      screens: {
+        // The spec's two collapse points, available as utilities.
+        lap: { max: '980px' },
+        palm: { max: '560px' },
       },
     },
   },

@@ -1,10 +1,11 @@
-# The Theresian Charitable Trust (Ammaveedu)
+# Ammaveedu — The Theresian Charitable Trust
 
-Website for The Theresian Charitable Trust, which runs **Ammaveedu** — a
-residential home for boys — together with a free nursery and relief work at
-Thellakom P.O., Ettumanoor, Kottayam, Kerala.
+Website for **Ammaveedu** (അമ്മവീട്, "mother's house"), a family home in
+Thellakom P.O., Ettumanoor, Kottayam, Kerala, where 27 boys grow up together as
+brothers. Run by The Theresian Charitable Trust.
 
 Built with **Angular 18** (standalone components, signals) and **Tailwind CSS**.
+Deployed to GitHub Pages on every push to `main`.
 
 ## Running it
 
@@ -17,108 +18,85 @@ npm test           # unit tests (Karma + Jasmine)
 
 ## Where the content lives
 
-All site copy is in one typed file:
-
 ```
-src/app/core/data/site-content.ts
+src/app/core/data/site-content.ts   home page copy, contact details, nav
+src/app/core/data/stories.ts        the seven story chapters
 ```
 
-Nothing else needs editing to change text, programmes, statistics, contact
-details or navigation. The shapes are defined in
-`src/app/core/models/content.models.ts`.
+Nothing else needs editing to change wording, photographs or contact details.
+The shapes are in `src/app/core/models/`.
 
-**Read [CONTENT-TODO.md](CONTENT-TODO.md) before launch** — it lists the handful
-of facts (phone number, bank details, registration number) that could not be
-verified from a public source and are currently suppressed in the UI rather than
-guessed at.
+**Read [CONTENT-TODO.md](CONTENT-TODO.md) before launch** — it lists the facts
+that could not be verified from a public source, the photograph provenance, and
+the safeguarding decision the trust needs to make.
 
 ## Structure
 
 ```
 src/app/
   core/
-    data/site-content.ts        all editable copy
-    models/content.models.ts    types for that copy
-    services/ui.service.ts      modals, mobile drawer, toast (signals)
-  shared/components/
-    announcement-bar/           top contact strip
-    site-header/                sticky nav + mobile drawer
-    site-footer/
-    program-modal/              programme detail dialog
-    toast/
+    data/        site-content.ts, stories.ts
+    models/      content.models.ts, story.model.ts
+    services/    ui.service.ts  (the mobile drawer)
+  shared/
+    components/  logo, site-header, site-footer, contact-fab
+    directives/  reveal.directive.ts
   features/
-    home/
-      home.component.ts         composes the page
-      sections/
-        hero/ about/ programs/ stories/ objectives/ impact/
-        get-involved/ contact/
-    story/                      full article page at /stories/:slug
+    home/        hero, welcome, nurture, moments, story-teaser, family, visit
+    story/       the full story at /stories
 ```
 
-## The story section
+The home page is short, warm and photo-led. The full history lives on `/stories`
+for anyone who wants to read it.
 
-`src/app/core/data/stories.ts` holds the history of Ammaveedu as five numbered
-chapters, condensed from the trust's own published account. The home page lists
-them under "Our Story"; each opens a full article at `/stories/<slug>` with
-previous/next navigation. Adding a chapter means adding one entry to that array —
-the list, the article page and the navigation all follow from `order` and `slug`.
+## Design system
 
-Each section is a standalone `OnPush` component that reads from
-`site-content.ts`, so sections can be reordered or dropped from
-`home.component.ts` without touching anything else.
+| | |
+| --- | --- |
+| Leaf | `#1F7A4D`, deep `#135437`, soft `#E3F3E9` |
+| Mango | `#FFC53D`, soft `#FFF4D1` |
+| Hibiscus | `#E8456A`, soft `#FDE4EA` |
+| Sky | `#3E9FD6`, soft `#E3F3FB` |
+| Ink | `#1E2A3F`, soft `#4D5A70` |
+
+Headings use **Baloo Chettan 2**, which carries Malayalam as well as Latin;
+body text uses **Nunito Sans**. Buttons are pills; cards use a 26px radius
+(`rounded-card`) and no heavy borders. Mango with ink text is the primary
+action, leaf with white the secondary, and a white outline for ghost buttons on
+photographs.
 
 ## Motion
 
-Animation is deliberately restrained and entirely CSS-driven; there is no
-animation library.
+All CSS, no animation library.
 
-| Effect | Where it lives |
+| Effect | Where |
 | --- | --- |
-| Scroll reveal (fade up, optional stagger) | `shared/directives/reveal.directive.ts` — put `appReveal` on anything, `[appReveal]="90"` to delay |
-| Counting statistics | `shared/directives/count-up.directive.ts` — animates only the digits, so "~100" and "20+" keep their punctuation |
-| Slow hero zoom | `.hero-bg::before` in `styles.scss`, a GPU `transform: scale()` on its own layer |
-| Staggered hero copy | `.hero-rise` |
-| Card lift on hover | `.lift` |
-| Nav underline + active section | `.nav-link` plus the IntersectionObserver in `site-header.component.ts` |
-| Header shrink and shadow on scroll | `scrolled` signal in the header |
+| Hero slideshow — 7s crossfade, 1.6s fade, Ken Burns 1.02→1.14 over 9s | `hero.component.ts`, `.slide`, `kenBurns` |
+| Hero copy rising in, staggered 0.15s | `.hero-rise` |
+| Welcome photos floating, "27 brothers" badge wobbling | `.float-slow`, `.float-slow-late`, `.wobble` |
+| Nurture photos breathing, each offset | `.breathe`, `.breathe-1`..`-4` |
+| Moments marquee — 60s, duplicated track, pauses on hover/focus | `.marquee`, `.marquee-track` |
+| Scroll reveals | `shared/directives/reveal.directive.ts` |
+| Story hero slow zoom | `.story-zoom` |
 
-Both directives observe with `IntersectionObserver` **outside the Angular zone**,
-so scrolling never triggers change detection, and each unobserves its element
-once it has fired.
+**Every keyframe animation sits inside `@media (prefers-reduced-motion:
+no-preference)`**, so a visitor who has asked for less motion gets a completely
+still page rather than a slowed-down one. The hero slideshow also stops
+advancing. Verified under emulation: every animation reports `none`, hero copy
+sits at opacity 1, and all reveals render visible.
 
-**Reduced motion is honoured.** Both directives check
-`prefers-reduced-motion` and simply apply the finished state, and a media query
-at the foot of `styles.scss` disables every transition and animation site-wide.
-The scroll-spy is the one piece that keeps working either way, since it moves no
-pixels of its own.
+## Accessibility
 
-## Design notes
+- 3px hibiscus focus ring (`#E8456A`) on `:focus-visible`, verified by tabbing
+- Meaningful `alt` on every photograph; decorative hero layers are `aria-hidden`
+- Slideshow dots are real buttons with `aria-label` and `aria-current`; the
+  caption is `aria-live="polite"`
+- Grids collapse at 980px and 560px; buttons go full width on small phones
+- Checked at 1280px and 390px: no horizontal overflow, all images load
 
-The palette and layout follow the reference mock-up: emerald green for the
-trust's identity, amber for calls to action, slate navy for depth. The Tailwind
-theme extends these as `emeraldTrust`, `amberGold` and `slateNavy` in
-`tailwind.config.js`. Headings use Outfit; body text uses Plus Jakarta Sans.
+## Safety rules
 
-Two substantive departures from the mock-up, both deliberate:
-
-1. **No payment feature at all.** The mock-up had a fake checkout that produced a
-   "receipt". For a real charity that invites donors to believe money moved when
-   none did. Every Donate/Support button now scrolls to Get Involved.
-2. **No unverified financial or registration details.** See CONTENT-TODO.md.
-
-## How giving works
-
-There is nothing to host and nothing to process. Get Involved has three tabs —
-Give, Volunteer, Partner — and each one ends at Fr. Sebastian directly:
-
-- **Email** with the subject and opening line already written (`mailto:`)
-- **WhatsApp** with a prefilled message (`wa.me`)
-- **Phone** (`tel:`)
-
-On the Volunteer tab the role picker writes the chosen interest into both the
-email and the WhatsApp message. All of it is built from `phoneE164` and `email`
-in `site-content.ts`, and the phone options only render while `phoneVerified` is
-true.
-
-The contact section at the foot of the page still has a message form with no
-backend — see CONTENT-TODO.md item 8.
+No payment form, no bank or UPI details anywhere on the site. Giving goes
+through Fr. Sebastian directly — email, WhatsApp or phone — so a donor always
+knows where the details came from. The Be-part-of-the-family section says so
+explicitly.

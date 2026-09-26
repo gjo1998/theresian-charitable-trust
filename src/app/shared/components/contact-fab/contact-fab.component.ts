@@ -20,7 +20,7 @@ import { TRUST } from '../../../core/data/site-content';
               target="_blank"
               rel="noopener noreferrer"
               (click)="close()"
-              class="flex items-center gap-3 bg-white hover:bg-slate-50 text-slate-800 ps-4 pe-2 py-2 rounded-full shadow-xl border border-slate-200 transition group"
+              class="flex items-center gap-3 bg-white hover:bg-leaf-soft text-ink ps-4 pe-2 py-2 rounded-full shadow-xl border border-leaf-soft transition group"
             >
               <span class="text-sm font-bold whitespace-nowrap">Chat on WhatsApp</span>
               <span
@@ -33,11 +33,11 @@ import { TRUST } from '../../../core/data/site-content';
             <a
               [href]="'tel:+' + trust.phoneE164"
               (click)="close()"
-              class="flex items-center gap-3 bg-white hover:bg-slate-50 text-slate-800 ps-4 pe-2 py-2 rounded-full shadow-xl border border-slate-200 transition group"
+              class="flex items-center gap-3 bg-white hover:bg-leaf-soft text-ink ps-4 pe-2 py-2 rounded-full shadow-xl border border-leaf-soft transition group"
             >
               <span class="text-sm font-bold whitespace-nowrap">Call {{ trust.phone }}</span>
               <span
-                class="w-10 h-10 rounded-full bg-emeraldTrust-600 text-white flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition"
+                class="w-10 h-10 rounded-full bg-leaf text-white flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition"
               >
                 <i class="fas fa-phone" aria-hidden="true"></i>
               </span>
@@ -48,8 +48,8 @@ import { TRUST } from '../../../core/data/site-content';
         <button
           type="button"
           (click)="toggle()"
-          class="w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emeraldTrust-600/30"
-          [class]="open() ? 'bg-slateNavy-900' : 'bg-[#25D366]'"
+          class="w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-hibiscus/40"
+          [class]="open() ? 'bg-ink' : 'bg-[#25D366]'"
           [attr.aria-expanded]="open()"
           [attr.aria-label]="open() ? 'Close contact options' : 'Contact the trust by WhatsApp or phone'"
         >

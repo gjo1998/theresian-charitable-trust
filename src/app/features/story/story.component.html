@@ -1,181 +1,141 @@
-@if (story(); as item) {
-  <article class="bg-white">
-    <!-- Article header -->
-    <header class="bg-slateNavy-900 text-white">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-5">
-        <a
-          routerLink="/"
-          fragment="stories"
-          class="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-amberGold-400 transition"
-        >
-          <i class="fas fa-arrow-left text-[10px]" aria-hidden="true"></i>
-          The Story of Ammaveedu
-        </a>
+<!-- Hero -->
+<section class="relative min-h-[60vh] sm:min-h-[70vh] flex items-end overflow-hidden isolate">
+  <img
+    src="images/ammaveedu-building.webp"
+    alt="The Ammaveedu building at Thellakom, its name painted across the front"
+    class="story-zoom absolute inset-0 -z-20 w-full h-full object-cover"
+  />
+  <div
+    class="absolute inset-0 -z-10"
+    aria-hidden="true"
+    style="
+      background:
+        linear-gradient(to top, rgba(19, 84, 55, 0.92) 0%, rgba(19, 84, 55, 0.35) 55%, rgba(19, 84, 55, 0.15) 100%);
+    "
+  ></div>
 
-        <div class="flex flex-wrap items-center gap-2 text-[11px] font-bold uppercase tracking-wider">
-          <span class="bg-amberGold-500 text-slateNavy-950 px-2.5 py-0.5 rounded-full">
-            Chapter {{ item.order }}
-          </span>
-          <span class="text-emeraldTrust-500">{{ item.era }}</span>
+  <div class="relative w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-28 text-white">
+    <a
+      routerLink="/"
+      class="inline-flex items-center gap-2 text-sm font-semibold text-white/85 hover:text-mango transition-colors"
+    >
+      &larr; Back to home
+    </a>
+    <h1 class="mt-5 font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.08]">
+      The story of Ammaveedu
+    </h1>
+    <p class="mt-5 text-lg sm:text-xl text-white/90 leading-relaxed max-w-2xl">
+      How one priest's calling, many years of patient hope and a little boy's &ldquo;yes&rdquo; grew into a
+      home full of love.
+    </p>
+  </div>
+</section>
+
+<!-- Chapter jump links -->
+<nav
+  class="sticky top-20 z-30 bg-white/95 backdrop-blur-md border-b border-leaf-soft"
+  aria-label="Jump to a chapter"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ul class="flex gap-2.5 overflow-x-auto py-3.5">
+      @for (chapter of chapters; track chapter.slug) {
+        <li class="shrink-0">
+          <a
+            [href]="'#' + chapter.slug"
+            class="inline-flex items-center rounded-full bg-leaf-soft px-4 py-2 text-[13px] font-heading font-bold text-leaf-deep hover:bg-leaf hover:text-white transition-colors whitespace-nowrap"
+          >
+            {{ chapter.order }}. {{ chapter.title }}
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+</nav>
+
+<!-- Chapters -->
+@for (chapter of chapters; track chapter.slug; let i = $index) {
+  <section
+    [id]="chapter.slug"
+    class="py-16 sm:py-24 scroll-mt-40"
+    [class]="i % 2 === 1 ? 'bg-mango-soft' : 'bg-white'"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
+        <!-- Visual: photograph, or the chapter's own words -->
+        <div appReveal [class]="i % 2 === 1 ? 'lg:order-2' : ''">
+          @if (chapter.image) {
+            <img
+              [src]="chapter.image"
+              [alt]="chapter.imageAlt"
+              class="w-full aspect-[4/3] object-cover rounded-card shadow-xl"
+              loading="lazy"
+            />
+          } @else {
+            <div
+              class="rounded-card bg-leaf text-white shadow-xl px-8 py-16 sm:px-12 sm:py-20 flex items-center justify-center text-center"
+            >
+              <p class="font-heading font-bold text-2xl sm:text-3xl leading-snug">
+                &ldquo;{{ chapter.coverQuote }}&rdquo;
+              </p>
+            </div>
+          }
         </div>
 
-        <h1 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
-          {{ item.title }}
-        </h1>
-        <p class="text-slate-300 text-base sm:text-lg leading-relaxed">{{ item.dek }}</p>
-
-        @if (item.firstPerson) {
-          <p class="text-xs text-slate-400 border-t border-slate-800 pt-4">
-            <i class="fas fa-quote-left me-2 text-emeraldTrust-500" aria-hidden="true"></i>
-            Written by {{ trust.founder }}, condensed from the trust's own account published
-            {{ item.published }}.
+        <!-- Words -->
+        <div [appReveal]="120" [class]="i % 2 === 1 ? 'lg:order-1' : ''">
+          <p class="inline-flex items-center rounded-full bg-hibiscus-soft px-4 py-1.5 text-[13px] font-heading font-bold text-hibiscus">
+            Chapter {{ chapter.order }} &middot; {{ chapter.era }}
           </p>
-        } @else {
-          <p class="text-xs text-slate-400 border-t border-slate-800 pt-4">
-            From the trust's own account, published {{ item.published }}.
-          </p>
-        }
-      </div>
-    </header>
 
-    <!-- Lead image -->
-    @if (item.image) {
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-10 relative z-10">
-        <img
-          [src]="item.image"
-          [alt]="item.imageAlt"
-          class="w-full aspect-[16/9] object-cover rounded-3xl border-4 border-white shadow-2xl"
-        />
-      </div>
-    } @else if (item.coverQuote) {
-      <!-- No honest photograph exists for this chapter, so its own words carry it. -->
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-10 relative z-10">
-        <blockquote
-          class="bg-gradient-to-br from-slateNavy-900 via-emeraldTrust-900 to-slateNavy-950 rounded-3xl border-4 border-white shadow-2xl px-8 py-12 sm:px-14 sm:py-16 text-center"
-        >
-          <p class="font-heading text-xl sm:text-3xl text-white/95 italic leading-snug">
-            &ldquo;{{ item.coverQuote }}&rdquo;
-          </p>
-          <footer class="not-italic text-xs text-emeraldTrust-500 mt-5 uppercase tracking-wider font-bold">
-            {{ trust.founder }}
-          </footer>
-        </blockquote>
-      </div>
-    }
+          <h2 class="mt-4 font-heading font-extrabold text-3xl sm:text-4xl text-ink leading-tight">
+            {{ chapter.title }}
+          </h2>
 
-    <!-- Body -->
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-5">
-      @for (block of item.body; track $index) {
-        @switch (block.type) {
-          @case ('quote') {
-            <blockquote
-              class="border-s-4 border-amberGold-400 bg-slate-50 rounded-e-2xl py-5 px-6 my-8 font-heading text-lg sm:text-xl text-slateNavy-900 italic leading-relaxed"
-            >
-              &ldquo;{{ block.text }}&rdquo;
-            </blockquote>
-          }
-          @case ('h') {
-            <h2 class="font-heading text-xl sm:text-2xl font-bold text-slateNavy-900 pt-6">
-              {{ block.text }}
-            </h2>
-          }
-          @default {
-            <p class="text-slate-700 text-base sm:text-lg leading-relaxed">{{ block.text }}</p>
-          }
-        }
-      }
-
-      <!-- Straight on to the next chapter, so the history reads in sequence -->
-      @if (next(); as nxt) {
-        <a
-          [routerLink]="['/stories', nxt.slug]"
-          class="group mt-10 flex items-center gap-4 p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-slateNavy-900 to-emeraldTrust-900 text-white hover:shadow-2xl transition"
-        >
-          <span class="flex-1">
-            <span class="block text-[11px] uppercase tracking-wider text-emeraldTrust-400 font-bold">
-              Continue the story &middot; Chapter {{ nxt.order }}
-            </span>
-            <span class="block font-heading text-lg sm:text-xl font-bold mt-1">{{ nxt.title }}</span>
-            <span class="block text-xs text-slate-300 mt-1.5">{{ nxt.dek }}</span>
-          </span>
-          <span
-            class="w-11 h-11 rounded-full bg-white/15 group-hover:bg-white/25 flex items-center justify-center shrink-0 group-hover:translate-x-1 transition"
-          >
-            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </span>
-        </a>
-      } @else {
-        <a
-          routerLink="/"
-          fragment="stories"
-          class="group mt-10 flex items-center gap-4 p-5 sm:p-6 rounded-3xl bg-slate-50 border border-slate-200 hover:border-emeraldTrust-300 transition"
-        >
-          <span class="flex-1">
-            <span class="block text-[11px] uppercase tracking-wider text-emeraldTrust-700 font-bold">
-              That is the whole story so far
-            </span>
-            <span class="block font-heading text-lg font-bold text-slateNavy-900 mt-1">
-              Back to all five chapters
-            </span>
-          </span>
-          <i class="fas fa-arrow-left text-slate-400 group-hover:text-emeraldTrust-700 transition" aria-hidden="true"></i>
-        </a>
-      }
-
-      <!-- Support call to action -->
-      <div class="mt-12 p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200 space-y-3">
-        <h2 class="font-heading text-xl font-bold text-slateNavy-900">This is still going on</h2>
-        <p class="text-sm text-slate-600 leading-relaxed">
-          Ammaveedu has no endowment and no permanent source of income. The boys' schooling, the nursery and
-          the weekly rice are paid for by people who choose to give.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-3 pt-1">
-          <a
-            routerLink="/"
-            fragment="get-involved"
-            class="text-center bg-gradient-to-r from-emeraldTrust-600 to-emeraldTrust-700 hover:from-emeraldTrust-700 hover:to-emeraldTrust-800 text-white font-bold px-6 py-3 rounded-xl text-sm transition"
-          >
-            Support the children
-          </a>
-          <a
-            routerLink="/"
-            fragment="contact"
-            class="text-center bg-white hover:bg-slate-100 text-slate-800 font-bold px-6 py-3 rounded-xl border border-slate-300 text-sm transition"
-          >
-            Get in touch
-          </a>
+          <div class="mt-5 space-y-4">
+            @for (block of chapter.body; track $index) {
+              @if (block.type === 'quote') {
+                <blockquote class="border-l-4 border-mango ps-5 py-1">
+                  <p class="font-heading font-bold text-xl sm:text-2xl text-ink leading-snug">
+                    &ldquo;{{ block.text }}&rdquo;
+                  </p>
+                  @if (block.by) {
+                    <footer class="mt-2 text-sm font-semibold text-ink-soft">{{ block.by }}</footer>
+                  }
+                </blockquote>
+              } @else {
+                <p class="text-base sm:text-lg text-ink-soft leading-relaxed">{{ block.text }}</p>
+              }
+            }
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- Back one chapter; the Continue card above carries the way forward -->
-    <nav class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-      @if (previous(); as prev) {
-        <a
-          [routerLink]="['/stories', prev.slug]"
-          class="group inline-flex flex-col p-5 rounded-2xl border border-slate-200 hover:border-emeraldTrust-300 hover:bg-emeraldTrust-50/40 transition"
-        >
-          <span class="text-[11px] uppercase tracking-wider text-slate-500 font-bold">
-            <i class="fas fa-arrow-left text-[10px] me-1.5" aria-hidden="true"></i> Previous chapter
-          </span>
-          <p class="font-heading font-bold text-slateNavy-900 mt-1 group-hover:text-emeraldTrust-700">
-            {{ prev.title }}
-          </p>
-        </a>
-      }
-    </nav>
-  </article>
-} @else {
-  <!-- Unknown slug -->
-  <div class="max-w-3xl mx-auto px-4 py-24 text-center space-y-4">
-    <h1 class="font-heading text-3xl font-extrabold text-slateNavy-900">That chapter isn't here</h1>
-    <p class="text-slate-600 text-sm">The story you are looking for may have been renamed or removed.</p>
-    <a
-      routerLink="/"
-      fragment="stories"
-      class="inline-block bg-emeraldTrust-600 hover:bg-emeraldTrust-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition"
-    >
-      Back to the story
-    </a>
-  </div>
+  </section>
 }
+
+<!-- Closing -->
+<section class="py-20 sm:py-28 bg-leaf text-white">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight">
+      Be part of the next chapter
+    </h2>
+    <p class="mt-5 text-lg text-white/90 leading-relaxed">
+      Everything here is made possible by friends of the home. There is a place for you in the story.
+    </p>
+    <div class="mt-9 flex flex-col palm:w-full sm:flex-row gap-4 justify-center">
+      <a
+        routerLink="/"
+        fragment="family"
+        class="inline-flex items-center justify-center rounded-full bg-mango px-8 py-4 font-heading font-bold text-ink text-lg hover:brightness-95 transition"
+      >
+        Be part of the family
+      </a>
+      <a
+        routerLink="/"
+        class="inline-flex items-center justify-center rounded-full border-2 border-white/80 px-8 py-4 font-heading font-bold text-white text-lg hover:bg-white/15 transition"
+      >
+        Back to home
+      </a>
+    </div>
+  </div>
+</section>

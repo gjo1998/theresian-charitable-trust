@@ -1,12 +1,13 @@
 /**
  * Shape of every piece of editable content on the site.
- * The trust's staff should only ever need to touch `core/data/site-content.ts`.
+ * Staff should only ever need to touch `core/data/site-content.ts`.
  */
 
 export interface TrustProfile {
   legalName: string;
   shortName: string;
   alsoKnownAs: string;
+  malayalamName: string;
   tagline: string;
   foundedYear: number;
   founder: string;
@@ -31,56 +32,45 @@ export interface TrustProfile {
   mapsQuery: string;
 }
 
-export interface Program {
+/** One of the four things the home gives a child. */
+export interface NurturePillar {
   id: string;
   badge: string;
-  badgeClass: string;
+  /** Tailwind classes for the card's top border and badge colour. */
+  accentBorder: string;
+  accentBadge: string;
   title: string;
-  summary: string;
-  detail: string;
+  body: string;
   image: string;
-  fallbackImage: string;
   imageAlt: string;
+  breatheClass: string;
 }
 
-export interface Stat {
-  id: string;
-  icon: string;
-  iconClass: string;
-  value: string;
-  label: string;
-  note: string;
+/** A photograph in the scrolling strip. */
+export interface Moment {
+  image: string;
+  alt: string;
+  caption: string;
+  /** Alternating heights keep the strip playful. */
+  tall: boolean;
 }
 
-export interface Objective {
-  icon: string;
-  text: string;
-}
-
-export interface StoryBlock {
-  heading: string;
-  paragraphs: string[];
-}
-
-export interface ValuePillar {
-  icon: string;
-  iconClass: string;
-  title: string;
-  body: string;
-}
-
-export interface VolunteerRole {
-  value: string;
-  label: string;
-}
-
-export interface SupportRoute {
+/** One of the three ways to join in. */
+export interface FamilyWay {
   id: string;
   icon: string;
   title: string;
   body: string;
-  /** Subject line used when this route opens an email to the trust. */
-  emailSubject: string;
-  /** First line of the prefilled email body. */
-  emailIntro: string;
+  ctaLabel: string;
+  /** 'email' | 'whatsapp' | 'phone' — the component builds the link. */
+  ctaKind: 'email' | 'whatsapp' | 'phone';
+  cardClass: string;
+}
+
+export interface NavLink {
+  label: string;
+  /** Same-page anchor, when the link scrolls to a section. */
+  fragment?: string;
+  /** Router path, when the link leaves the home page. */
+  path?: string;
 }

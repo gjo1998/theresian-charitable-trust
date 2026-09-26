@@ -1,67 +1,80 @@
-<section class="hero-bg min-h-[600px] lg:min-h-[680px] text-white flex items-center relative overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-    <div class="max-w-3xl space-y-6 hero-text hero-rise">
-      <div
-        class="inline-flex flex-wrap items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 text-xs sm:text-sm font-medium"
-      >
-        <span class="bg-amberGold-500 text-slateNavy-950 font-bold px-2.5 py-0.5 rounded-full">
-          Ammaveedu
-        </span>
-        <span class="text-slate-100">
-          <i class="fas fa-location-dot text-emeraldTrust-500 me-1" aria-hidden="true"></i>
-          Thellakom P.O., Kottayam, Kerala
-        </span>
-      </div>
+<section class="relative min-h-[88vh] lg:min-h-[92vh] flex items-center overflow-hidden isolate">
+  <!-- Photo layers -->
+  @for (slide of slides; track slide.image; let i = $index) {
+    <div class="slide absolute inset-0 -z-20" [class.is-active]="active() === i" aria-hidden="true">
+      <img
+        [src]="slide.image"
+        alt=""
+        class="slide-photo w-full h-full object-cover"
+        [attr.loading]="i === 0 ? 'eager' : 'lazy'"
+      />
+    </div>
+  }
 
-      <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight">
-        Where Every Boy Finds a <span class="text-amberGold-400">Place to Belong</span>
-      </h1>
+  <!-- Gradient from the left and the bottom, so white copy stays readable -->
+  <div
+    class="absolute inset-0 -z-10"
+    aria-hidden="true"
+    style="
+      background:
+        linear-gradient(to top, rgba(19, 84, 55, 0.85) 0%, rgba(19, 84, 55, 0) 45%),
+        linear-gradient(100deg, rgba(19, 84, 55, 0.92) 0%, rgba(19, 84, 55, 0.65) 42%, rgba(31, 122, 77, 0.25) 75%);
+    "
+  ></div>
 
-      <p class="text-base sm:text-lg lg:text-xl text-slate-200 font-light leading-relaxed">
-        <strong>{{ trust.legalName }}</strong> runs Ammaveedu - a residential home for twenty-seven boys from
-        the colonies around Kottayam - along with a free nursery, medical camps, and food and clothing for
-        families who cannot meet the week.
+  <!-- Copy -->
+  <div class="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="hero-rise max-w-2xl text-white">
+      <p class="font-heading font-bold text-mango text-base sm:text-lg mb-4">
+        {{ trust.malayalamName }} &middot; mother's house
       </p>
 
-      <blockquote class="border-l-2 border-amberGold-400 ps-4 text-slate-200 italic text-sm sm:text-base">
-        &ldquo;{{ quote.text }}&rdquo;
-      </blockquote>
+      <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.08] mb-6">
+        Nurturing boys to grow up loved.
+      </h1>
 
-      <div class="pt-2 flex flex-col sm:flex-row gap-4">
+      <p class="text-lg sm:text-xl text-white/95 leading-relaxed max-w-xl mb-9">
+        Ammaveedu is a family home in Thellakom, Kottayam, where boys are cared for, cheered on and helped to
+        become everything they can be.
+      </p>
+
+      <div class="flex flex-col palm:w-full sm:flex-row gap-4">
         <a
           routerLink="/"
-          fragment="get-involved"
-          class="bg-amberGold-500 hover:bg-amberGold-600 text-slateNavy-950 font-extrabold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 text-center flex items-center justify-center space-x-2"
+          fragment="family"
+          class="inline-flex items-center justify-center rounded-full bg-mango px-8 py-4 font-heading font-bold text-ink text-lg hover:brightness-95 transition"
         >
-          <span>Support the children</span>
-          <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
+          Be part of the family
         </a>
         <a
-          routerLink="/"
-          fragment="programs"
-          class="bg-white/15 hover:bg-white/25 text-white font-semibold px-8 py-4 rounded-xl border border-white/30 backdrop-blur-sm transition text-center flex items-center justify-center space-x-2"
+          routerLink="/stories"
+          class="inline-flex items-center justify-center rounded-full border-2 border-white/80 px-8 py-4 font-heading font-bold text-white text-lg hover:bg-white/15 transition"
         >
-          <i class="fas fa-shapes text-emeraldTrust-100" aria-hidden="true"></i>
-          <span>See our work</span>
+          Discover our story
         </a>
-      </div>
-
-      <div class="pt-8 grid grid-cols-2 sm:grid-cols-3 gap-4 border-t border-white/15 text-slate-300 text-xs sm:text-sm">
-        @for (item of highlights; track item.text; let i = $index) {
-          <div
-            class="flex items-center space-x-2.5"
-            [class]="i === 2 ? 'col-span-2 sm:col-span-1' : ''"
-          >
-            <div
-              class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-              [class]="i === 1 ? 'bg-amberGold-500/20 text-amberGold-400' : 'bg-emeraldTrust-500/20 text-emeraldTrust-500'"
-            >
-              <i class="fas" [class]="item.icon" aria-hidden="true"></i>
-            </div>
-            <span>{{ item.text }}</span>
-          </div>
-        }
       </div>
     </div>
   </div>
+
+  <!-- Dots -->
+  <div class="absolute bottom-7 left-4 sm:left-6 lg:left-8 z-10 flex gap-3">
+    @for (slide of slides; track slide.caption; let i = $index) {
+      <button
+        type="button"
+        (click)="show(i)"
+        class="h-3 rounded-full transition-all duration-300"
+        [class]="active() === i ? 'w-10 bg-mango' : 'w-3 bg-white/60 hover:bg-white'"
+        [attr.aria-label]="'Show photo ' + (i + 1) + ': ' + slide.caption"
+        [attr.aria-current]="active() === i"
+      ></button>
+    }
+  </div>
+
+  <!-- Caption -->
+  <p
+    class="absolute bottom-24 right-4 sm:right-6 lg:right-8 z-10 rounded-full bg-black/40 backdrop-blur-sm px-4 py-2 text-xs sm:text-sm text-white/95"
+    aria-live="polite"
+  >
+    {{ slides[active()].caption }}
+  </p>
 </section>

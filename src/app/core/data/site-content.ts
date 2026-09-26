@@ -1,34 +1,25 @@
-import {
-  Objective,
-  Program,
-  Stat,
-  StoryBlock,
-  TrustProfile,
-  ValuePillar,
-  VolunteerRole,
-} from '../models/content.models';
+import { FamilyWay, Moment, NavLink, NurturePillar, TrustProfile } from '../models/content.models';
 
 /**
  * Single source of truth for the site's copy.
  *
- * Every fact here was taken from the trust's own published material
- * (the Theresian Trust / Ammaveedu blog and public NGO directory listings).
- * Anything the trust still has to confirm is marked in CONTENT-TODO.md and
- * carries a `verified` flag so the UI can hide it until then.
+ * Facts come from the trust's own published material. Anything still needing
+ * confirmation is listed in CONTENT-TODO.md.
  */
 
 export const TRUST: TrustProfile = {
   legalName: 'The Theresian Charitable Trust',
-  shortName: 'Theresian Trust',
+  shortName: 'Theresian Charitable Trust',
   alsoKnownAs: 'Ammaveedu',
-  tagline: 'A home, a school and a helping hand in Thellakom, Kottayam',
+  malayalamName: 'അമ്മവീട്',
+  tagline: 'A family home in Thellakom, Kottayam',
   foundedYear: 2006,
   founder: 'Fr. Sebastian Mannapathuparambil',
   email: 'theresiantrust@yahoo.co.in',
   phone: '+91 94466 81395',
   phoneE164: '919446681395',
   phoneVerified: true,
-  whatsappMessage: 'Hello, I found the Ammaveedu website and would like to get in touch.',
+  whatsappMessage: 'Hello Fr. Sebastian, I found the Ammaveedu website and would love to get in touch.',
   address: {
     line1: 'Ammaveedu',
     line2: 'House No. 84 A, Ward No. XV',
@@ -44,176 +35,116 @@ export const TRUST: TrustProfile = {
 
 export const PHILOSOPHY_QUOTE = {
   text: 'The love of humanity is a gift from God, but with it is given to us a responsibility.',
-  attribution: 'The Theresian Trust',
+  attribution: 'The Theresian Charitable Trust',
 };
 
-export const HERO_HIGHLIGHTS = [
-  { icon: 'fa-house-chimney-user', text: 'A family home, not an institution' },
-  { icon: 'fa-calendar-check', text: `Serving since ${TRUST.foundedYear}` },
-  { icon: 'fa-location-dot', text: 'Rooted in Thellakom, Kottayam' },
-];
-
-export const ABOUT_STORY: StoryBlock[] = [
+/** The two photographs behind the hero, with their captions. */
+export const HERO_SLIDES = [
   {
-    heading: 'How Ammaveedu began',
-    paragraphs: [
-      `The Theresian Charitable Trust grew out of one priest's decision to live alongside the people he had been taught to serve. While studying Social Action at St Joseph's Pontifical Seminary, ${TRUST.founder} spent time in a nearby colony and could not reconcile what he saw there with the life waiting for him in a parish. He spent his seminary vacations working on plantations so that he would understand poverty from the inside rather than from a distance.`,
-      'Ordained in 1997, he asked for permission to leave his diocese and work full-time among families in the colonies. That permission took thirteen years of asking. It came in 2006, and he began with Rs. 4,000 to his name.',
-      'The first child was a boy named Rajeev, who had no one. A chance meeting with Mathew Kuravilla produced a house in Kottayam, and that house became Ammaveedu - "mother\'s house". Boys who had been sleeping wherever they could came to it one by one.',
-    ],
-  },
-  {
-    heading: 'What the trust does today',
-    paragraphs: [
-      'The trust works from Thellakom P.O. near Ettumanoor, in Kottayam district. It runs a residential home for boys, a free nursery, and a rolling programme of food, clothing and medical support for families in the surrounding colonies.',
-      'It has no endowment and no permanent source of income. Everything it does is paid for by donations and by the members of the trust.',
-    ],
-  },
-];
-
-export const VALUE_PILLARS: ValuePillar[] = [
-  {
-    icon: 'fa-eye',
-    iconClass: 'bg-emeraldTrust-100 text-emeraldTrust-700',
-    title: 'Our Vision',
-    body: 'That the accident of a child\'s birth should not decide the whole of their life - that a boy from a colony has the same claim on school, health and dignity as anyone else.',
-  },
-  {
-    icon: 'fa-bullseye',
-    iconClass: 'bg-amberGold-500/10 text-amberGold-600',
-    title: 'Our Mission',
-    body: 'To provide life-improving aid - food, education, clothing and healthcare - to the people of the colonies and villages around Kottayam, through direct personal relationships rather than at arm\'s length.',
-  },
-];
-
-export const PROGRAMS: Program[] = [
-  {
-    id: 'ammaveedu',
-    badge: 'Children',
-    badgeClass: 'text-emeraldTrust-800',
-    title: 'Ammaveedu Residential Home',
-    summary:
-      'A home for boys from the colonies who have no family able to care for them - food, shelter, schooling and someone to answer to.',
-    detail:
-      'Ammaveedu is the trust\'s first and largest work. It houses 27 boys drawn from colonies where there was no family able to look after them. The home provides meals, a bed, school books and uniforms, toys and time to play, and the ordinary moral formation a household gives. Every boy over the age of six goes to school every day - the point of the home is to break the assumption that the children of the poor stay poor.',
     image: 'images/ammaveedu-today.jpg',
-    fallbackImage: 'images/ammaveedu-boys.jpg',
-    imageAlt: 'Fr. Sebastian with the boys outside the house at Ammaveedu',
+    alt: 'Fr. Sebastian greeting the boys outside the house at Ammaveedu',
+    caption: 'Fr. Sebastian with the boys',
   },
   {
-    id: 'nursery',
-    badge: 'Education',
-    badgeClass: 'text-emeraldTrust-700',
-    title: 'Theresian Trust Nursery',
-    summary:
-      'A free pre-school for the youngest boys at Ammaveedu and for children from nearby families who could not otherwise afford one.',
-    detail:
-      'The trust runs its own nursery, fully funded, for the younger members of Ammaveedu together with six more children from disadvantaged families nearby. The children are taught basic English, Malayalam and mathematics, and the families pay nothing at all. It exists because a child who starts school behind rarely catches up.',
+    image: 'images/ammaveedu-building.webp',
+    alt: 'The Ammaveedu building at Thellakom, its name painted across the front',
+    caption: 'Our home in Thellakom',
+  },
+];
+
+export const NURTURE_PILLARS: NurturePillar[] = [
+  {
+    id: 'belonging',
+    badge: 'Belonging',
+    accentBorder: 'border-t-hibiscus',
+    accentBadge: 'bg-hibiscus text-white',
+    title: 'A place to belong',
+    body: 'A bed of his own, brothers beside him and grown-ups who are there for him. Feeling at home comes first.',
+    image: 'images/ammaveedu-boys.jpg',
+    imageAlt: 'Boys of Ammaveedu together',
+    breatheClass: 'breathe-1',
+  },
+  {
+    id: 'learning',
+    badge: 'Learning',
+    accentBorder: 'border-t-mango',
+    accentBadge: 'bg-mango text-ink',
+    title: 'A love of learning',
+    body: 'Our free nursery gives little ones a happy start, and every boy over six goes to school every day.',
     image: 'images/children-meal.jpg',
-    fallbackImage: 'images/ammaveedu-house.jpg',
-    imageAlt: 'Young children sitting together over a meal',
+    imageAlt: 'Young children sitting together at Ammaveedu',
+    breatheClass: 'breathe-2',
   },
   {
-    id: 'relief',
-    badge: 'Relief',
-    badgeClass: 'text-amberGold-600',
-    title: 'Food & Clothing Distribution',
-    summary:
-      'Rice, provisions and clothes taken directly to households that cannot meet the week - sick workers, widows and broken families.',
-    detail:
-      'It started with the cook. A large donation of rice had arrived, she had fed all the children amply, and she asked whether she could take some of the surplus to a family she knew who had no food and no money to buy any. Word spread: men unable to work through sickness or poor mental health, widowed women, families that had come apart. Three years on it had become an operation of its own - weekly deliveries of 5kg of rice to about 100 families, with clothing handed out alongside it. The trust delivers in person, to families it can name.',
+    id: 'nourishment',
+    badge: 'Nourishment',
+    accentBorder: 'border-t-leaf',
+    accentBadge: 'bg-leaf text-white',
+    title: 'Good food, shared',
+    body: 'Warm meals around the table, and a weekly rice round that shares our blessings with around a hundred neighbouring families.',
     image: 'images/rice-delivery.jpg',
-    fallbackImage: 'images/ammaveedu-house.jpg',
-    imageAlt: 'A sack of rice being carried in for distribution',
+    imageAlt: 'Rice being carried in for the weekly round',
+    breatheClass: 'breathe-3',
   },
   {
-    id: 'health',
-    badge: 'Health',
-    badgeClass: 'text-emeraldTrust-700',
-    title: 'Health, Palliative & Rehabilitation Work',
-    summary:
-      'Medical camps, home visits for the chronically ill, pain and palliative care, and rehabilitation for the elderly and differently abled.',
-    detail:
-      'The trust arranges regular health checks for the children of the colonies. One of its own members is a qualified paediatrician, and it has links with a local chemist - so there is both a doctor who can see the children and medicine that can be issued to them free. Beyond that, the trust\'s health objectives run from prevention to palliative care: awareness programmes and medical camps in the colonies and villages, early detection of disease, home check-ups for people with chronic conditions who cannot travel, pain and palliative care, rehabilitation of people affected by HIV/AIDS, and care for the aged and the differently abled.',
+    id: 'wellbeing',
+    badge: 'Wellbeing',
+    accentBorder: 'border-t-sky',
+    accentBadge: 'bg-sky text-white',
+    title: 'Healthy and cared for',
+    body: 'A paediatrician on our team keeps an eye on every child, and we visit neighbours who need care at home.',
     image: 'images/home-visit.jpg',
-    fallbackImage: 'images/ammaveedu-house.jpg',
-    imageAlt: 'A home visit to an elderly man in one of the villages',
+    imageAlt: 'A home visit to a neighbour',
+    breatheClass: 'breathe-4',
   },
 ];
 
-/** The trust's stated objectives, as published in its own aims and objects. */
-export const OBJECTIVES: Objective[] = [
-  { icon: 'fa-graduation-cap', text: 'Render education facilities, both academic and job oriented, to students in and of the slums and colonies.' },
-  { icon: 'fa-bed', text: 'Render boarding facilities for students of the colonies who live in utter poverty.' },
-  { icon: 'fa-baby', text: 'Extend all possible care for infants who are discarded and abandoned.' },
-  { icon: 'fa-wheelchair', text: 'Provide community-based and institutional rehabilitation of the aged and the differently abled.' },
-  { icon: 'fa-heart-pulse', text: 'Create awareness of health issues and conduct medical camps in slums and villages.' },
-  { icon: 'fa-stethoscope', text: 'Establish services for the early detection of disease.' },
-  { icon: 'fa-house-medical', text: 'Conduct home medical check-ups for people with chronic conditions.' },
-  { icon: 'fa-hand-holding-medical', text: 'Establish pain and palliative care centres.' },
-  { icon: 'fa-ribbon', text: 'Rehabilitate persons affected by HIV/AIDS.' },
-  { icon: 'fa-screwdriver-wrench', text: 'Deliver skills training towards self-employment.' },
-  { icon: 'fa-comments', text: 'Establish counselling centres.' },
-  { icon: 'fa-people-roof', text: 'Undertake general community development activities.' },
+export const MOMENTS: Moment[] = [
+  { image: 'images/ammaveedu-today.jpg', alt: 'Fr. Sebastian with the boys outside the house', caption: 'Together', tall: false },
+  { image: 'images/children-meal.jpg', alt: 'Young children sharing a meal', caption: 'Lunch buddies', tall: true },
+  { image: 'images/ammaveedu-building.webp', alt: 'The Ammaveedu building at Thellakom', caption: 'Home sweet home', tall: false },
+  { image: 'images/ammaveedu-boys.jpg', alt: 'The boys of Ammaveedu together', caption: 'Brothers', tall: true },
+  { image: 'images/home-visit.jpg', alt: 'Visiting a neighbour at home', caption: 'Caring for neighbours', tall: false },
+  { image: 'images/rice-delivery.jpg', alt: 'Rice arriving for the weekly round', caption: 'Sharing the table', tall: true },
+  { image: 'images/ammaveedu-house.jpg', alt: 'The first house that became Ammaveedu', caption: 'Where it began', tall: false },
 ];
 
-export const STATS: Stat[] = [
+export const FAMILY_WAYS: FamilyWay[] = [
   {
-    id: 'years',
-    icon: 'fa-calendar-alt',
-    iconClass: 'bg-emeraldTrust-500/20 text-emeraldTrust-500',
-    value: `${new Date().getFullYear() - TRUST.foundedYear}+`,
-    label: 'Years of service',
-    note: `Working in Kottayam district since ${TRUST.foundedYear}.`,
+    id: 'give',
+    icon: '🎁',
+    title: 'Help a child grow',
+    body: "Support a boy's schooling, a month of meals or our nursery. Fr. Sebastian will reply personally with how to give and where your gift will go.",
+    ctaLabel: 'Email Fr. Sebastian',
+    ctaKind: 'email',
+    cardClass: 'bg-mango-soft',
   },
   {
-    id: 'boys',
-    icon: 'fa-children',
-    iconClass: 'bg-amberGold-500/20 text-amberGold-400',
-    value: '27',
-    label: 'Boys living at Ammaveedu',
-    note: 'Each one from a colony with no family able to care for him.',
+    id: 'time',
+    icon: '🤝',
+    title: 'Share your time',
+    body: 'Help with homework, play with the boys, teach a skill you love, or join the weekly rice round. Every hour spent with them matters.',
+    ctaLabel: 'WhatsApp us',
+    ctaKind: 'whatsapp',
+    cardClass: 'bg-leaf-soft',
   },
   {
-    id: 'rice',
-    icon: 'fa-bowl-rice',
-    iconClass: 'bg-sky-500/20 text-sky-400',
-    value: '~100',
-    label: 'Families given rice weekly',
-    note: '5kg each week, with clothing handed out alongside it.',
-  },
-  {
-    id: 'objectives',
-    icon: 'fa-list-check',
-    iconClass: 'bg-purple-500/20 text-purple-400',
-    value: '12',
-    label: 'Stated objectives',
-    note: 'From education and shelter to palliative and community care.',
+    id: 'celebrate',
+    icon: '🎂',
+    title: 'Celebrate with us',
+    body: 'Spend a birthday or special day with the boys. Share a meal, bring some games and make a memory together.',
+    ctaLabel: `Call ${TRUST.phone}`,
+    ctaKind: 'phone',
+    cardClass: 'bg-sky-soft',
   },
 ];
 
-export const VOLUNTEER_ROLES: VolunteerRole[] = [
-  { value: 'tutoring', label: 'Tutoring and homework help' },
-  { value: 'nursery', label: 'Nursery and early-years support' },
-  { value: 'medical', label: 'Medical camps and home visits' },
-  { value: 'distribution', label: 'Food and clothing distribution' },
-  { value: 'admin', label: 'Admin, fundraising and events' },
-];
+export const GIVING_NOTE =
+  'We never take payments on this website. Please give only using details Fr. Sebastian shares with you directly, so you always know your gift reaches the children.';
 
-export const INQUIRY_SUBJECTS = [
-  { value: 'general', label: 'General inquiry' },
-  { value: 'donation', label: 'Donation or receipt' },
-  { value: 'volunteer', label: 'Volunteering' },
-  { value: 'support', label: 'Request help for a family or child' },
-  { value: 'partnership', label: 'Institutional or CSR partnership' },
-];
-
-export const NAV_LINKS = [
-  { fragment: 'about', label: 'About Us' },
-  { fragment: 'programs', label: 'Our Work' },
-  { fragment: 'stories', label: 'Our Story' },
-  { fragment: 'objectives', label: 'Objectives' },
-  { fragment: 'impact', label: 'Impact' },
-  { fragment: 'get-involved', label: 'Get Involved' },
-  { fragment: 'contact', label: 'Contact' },
+export const NAV_LINKS: NavLink[] = [
+  { label: 'How we nurture', fragment: 'nurture' },
+  { label: 'Moments', fragment: 'moments' },
+  { label: 'Our story', path: '/stories' },
+  { label: 'Visit us', fragment: 'visit' },
 ];
