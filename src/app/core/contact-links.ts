@@ -20,6 +20,9 @@ export function phoneLink(): string {
   return `tel:+${TRUST.phoneE164}`;
 }
 
+/** A Google Maps search for the home, built from the address itself. */
 export function mapsLink(): string {
-  return `https://www.google.com/maps/search/?api=1&query=${TRUST.mapsQuery}`;
+  const { line1, line3, district, state, country } = TRUST.address;
+  const query = [line1, line3, district, state, country].join(', ');
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 }

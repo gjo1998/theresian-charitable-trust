@@ -36,7 +36,6 @@ export interface TrustProfile {
     country: string;
   };
   officeHours: string;
-  mapsQuery: string;
 }
 
 /** A photograph from public/images, with its words. */
@@ -224,4 +223,18 @@ export interface ShellLabels {
   fabClose: string;
   fabWhatsapp: string;
   fabCall: string;
+}
+
+/** Title and description for a route. */
+export interface PageMeta {
+  title: string;
+  description: string;
+}
+
+export interface NotFoundContent {
+  title: string;
+  body: string;
+  homeLabel: string;
+  storyLabel: string;
+  meta: PageMeta;
 }

@@ -12,6 +12,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { emailLink, whatsappLink } from '../../core/contact-links';
 import { STORIES, STORY_PAGE } from '../../core/data/stories';
+import { SeoService } from '../../core/services/seo.service';
 import { PhotoDirective } from '../../shared/directives/photo.directive';
 import { RevealDirective } from '../../shared/directives/reveal.directive';
 import { ChapterVisualComponent } from './chapter-visual/chapter-visual.component';
@@ -51,31 +52,52 @@ export class StoryComponent implements AfterViewInit, OnDestroy {
   readonly active = signal<string | null>(null);
 
   private readonly chipRow = viewChild<ElementRef<HTMLUListElement>>('chipRow');
-  private observer?: IntersectionObserver;
+  private stopWatching?: () => void;
+
+  constructor() {
+    inject(SeoService).update({ ...STORY_PAGE.meta, path: 'stories', image: STORY_PAGE.hero.image });
+  }
 
   ngAfterViewInit(): void {
-    if (typeof IntersectionObserver === 'undefined') return;
+    if (typeof window === 'undefined') return;
+    const chapters = Array.from(this.host.nativeElement.querySelectorAll('[data-chapter]')) as HTMLElement[];
+
+    // The chapter being read is the last one whose top has passed the middle
+    // of the screen; above the first chapter, none is. Checked at most once a
+    // frame while scrolling, outside Angular, so a long jump (the Home key, a
+    // chip) is never missed and scrolling never triggers change detection.
+    const update = () => {
+      const middle = window.innerHeight / 2;
+      const reading = chapters.filter((chapter) => chapter.getBoundingClientRect().top <= middle).pop();
+      const id = reading?.id ?? null;
+      if (id !== this.active()) {
+        this.zone.run(() => this.active.set(id));
+        if (id) this.bringChipIntoView(id);
+      }
+    };
+
     this.zone.runOutsideAngular(() => {
-      // A thin band across the middle of the screen: whichever chapter
-      // crosses it is the one being read.
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          const current = entries.find((entry) => entry.isIntersecting);
-          if (current && current.target.id !== this.active()) {
-            this.zone.run(() => this.active.set(current.target.id));
-            this.bringChipIntoView(current.target.id);
-          }
-        },
-        { rootMargin: '-45% 0px -50% 0px' },
-      );
-      this.host.nativeElement
-        .querySelectorAll('[data-chapter]')
-        .forEach((chapter: Element) => this.observer!.observe(chapter));
+      let frame = 0;
+      const onScroll = () => {
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+          frame = 0;
+          update();
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      this.stopWatching = () => {
+        cancelAnimationFrame(frame);
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onScroll);
+      };
+      update();
     });
   }
 
   ngOnDestroy(): void {
-    this.observer?.disconnect();
+    this.stopWatching?.();
   }
 
   /** On a narrow screen the index scrolls sideways; keep the active chip showing. */

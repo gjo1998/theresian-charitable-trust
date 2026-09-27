@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { NOT_FOUND } from '../../core/data/site-content';
 import { STORIES } from '../../core/data/stories';
 import { ChapterComponent } from './chapter/chapter.component';
 import { StoryComponent } from './story.component';
@@ -56,6 +57,17 @@ describe('ChapterComponent', () => {
     return fixture.nativeElement;
   }
 
+  it('links only forward from the first chapter', async () => {
+    const element = await render('a-seed-is-planted');
+    const hrefs = Array.from(element.querySelectorAll('nav a')).map((a) => a.getAttribute('href'));
+    expect(hrefs).toEqual(['/stories/love-that-shares']);
+  });
+
+  it('shows "Chapter X of 7"', async () => {
+    const element = await render('mothers-house');
+    expect(element.textContent).toContain(`Chapter 5 of ${STORIES.length}`);
+  });
+
   it('links to the chapters either side', async () => {
     const element = await render('one-boy-said-yes');
     const hrefs = Array.from(element.querySelectorAll('nav a')).map((a) => a.getAttribute('href'));
@@ -68,8 +80,8 @@ describe('ChapterComponent', () => {
     expect(hrefs).toEqual(['/stories/love-overflows', '/stories#next-chapter']);
   });
 
-  it('says so when a chapter does not exist', async () => {
+  it('shows the not-found content when a chapter does not exist', async () => {
     const element = await render('no-such-chapter');
-    expect(element.querySelector('h1')!.textContent).toContain('could not find');
+    expect(element.querySelector('h1')!.textContent).toContain(NOT_FOUND.title);
   });
 });

@@ -118,3 +118,28 @@ These appear only once the trust supplies the content behind them.
 | Needs, WhatsApp message | I'd like to help with: *item* |
 | Updates | Latest from Ammaveedu |
 | Footer | Follow Ammaveedu · Registrations · Trust registration · 12A registration · 80G registration · Child care institution registration (Juvenile Justice Act) |
+
+## Part 3 — pages and search
+
+### The "page not found" page
+
+A new page for addresses the site doesn't have. It replaces the old
+chapter-only message, so an unknown chapter shows the same page.
+
+| Old (unknown chapter only) | New (any unknown address) |
+| --- | --- |
+| We could not find that chapter | We couldn't find that page |
+| It may have moved. The whole story is on one page. | It may have moved, or the link may have a typo. Everything else is just a click away. |
+| All seven chapters (button) | Back to home · Read our story (buttons) |
+
+### What search engines and link previews show
+
+These are not visible on the page, but appear in Google results and when a
+link is shared on WhatsApp.
+
+| Page | Title | Description |
+| --- | --- | --- |
+| Home | Ammaveedu \| A family home for boys in Thellakom, Kottayam (unchanged) | Ammaveedu is a family home in Thellakom, Kottayam, where 27 boys grow up together as brothers — cared for, cheered on and helped to become everything they can be. (unchanged, except " - " became " — ") |
+| Story | The story of Ammaveedu \| Theresian Charitable Trust (unchanged) | How one priest, one boy and the gift of a house grew into Ammaveedu — told in seven short chapters. (the story page's own lead) |
+| Each chapter (new) | *Chapter title* \| The story of Ammaveedu | The chapter's first sentence, unchanged |
+| Not found (new) | Page not found \| Ammaveedu | The page you were looking for is not on the Ammaveedu website. |

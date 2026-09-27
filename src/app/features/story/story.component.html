@@ -47,7 +47,7 @@
             [fragment]="chapter.slug"
             [attr.data-chip]="chapter.slug"
             [attr.aria-current]="active() === chapter.slug ? 'location' : null"
-            class="inline-flex items-center gap-2 min-h-[44px] rounded-full px-4 text-[14px] sm:text-[15px] font-bold whitespace-nowrap transition-colors"
+            class="inline-flex items-center gap-1.5 min-h-[44px] rounded-full px-3.5 text-[14px] font-bold whitespace-nowrap transition-colors"
             [class]="active() === chapter.slug ? 'bg-sage text-white' : 'bg-sage-soft text-sage hover:bg-sage hover:text-white'"
           >
             <span class="font-extrabold">{{ chapter.order }}</span>

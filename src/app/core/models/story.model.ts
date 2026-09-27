@@ -1,4 +1,4 @@
-import { Cta } from './content.models';
+import { Cta, PageMeta } from './content.models';
 
 /** A paragraph or a pull quote inside a chapter. */
 export interface StoryBlockContent {
@@ -67,7 +67,8 @@ export interface StoryPageContent {
     endTitle: string;
     endBody: string;
     endCta: Cta;
-    notFoundTitle: string;
-    notFoundBody: string;
   };
+  meta: PageMeta;
+  /** Added after a chapter's title in the browser tab and link previews. */
+  chapterTitleSuffix: string;
 }

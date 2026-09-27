@@ -177,12 +177,14 @@ export function storyBySlug(slug: string): Story | undefined {
   return STORIES.find((story) => story.slug === slug);
 }
 
+const STORY_LEAD = `How one priest, one boy and the gift of a house grew into ${TRUST.alsoKnownAs} — told in seven short chapters.`;
+
 /** Copy for the story page and the single-chapter pages. */
 export const STORY_PAGE: StoryPageContent = {
   hero: {
     eyebrow: `Our history · ${TRUST.foundedYear} to today`,
     title: 'From one seed, a whole tree.',
-    lead: `How one priest, one boy and the gift of a house grew into ${TRUST.alsoKnownAs} — told in seven short chapters.`,
+    lead: STORY_LEAD,
     image: 'images/ammaveedu-building.webp',
     imageAlt: 'The Ammaveedu building at Thellakom, its name painted across the front',
   },
@@ -224,7 +226,10 @@ export const STORY_PAGE: StoryPageContent = {
     endTitle: 'That is the story so far',
     endBody: 'The next chapter is still being written.',
     endCta: { label: 'Be part of the next chapter', path: '/stories', fragment: 'next-chapter' },
-    notFoundTitle: 'We could not find that chapter',
-    notFoundBody: 'It may have moved. The whole story is on one page.',
   },
+  meta: {
+    title: `The story of ${TRUST.alsoKnownAs} | ${TRUST.shortName}`,
+    description: STORY_LEAD,
+  },
+  chapterTitleSuffix: ` | The story of ${TRUST.alsoKnownAs}`,
 };

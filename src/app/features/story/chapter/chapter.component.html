@@ -71,13 +71,5 @@
     </div>
   </article>
 } @else {
-  <section class="bg-cream">
-    <div class="container-page py-24 text-center max-w-2xl">
-      <h1 class="section-title">{{ page.article.notFoundTitle }}</h1>
-      <p class="mt-5 text-[18px] text-ink-muted">{{ page.article.notFoundBody }}</p>
-      <div class="btn-row mt-8 sm:justify-center">
-        <a routerLink="/stories" class="btn btn-sage min-h-[44px]">{{ page.article.allChaptersLabel }}</a>
-      </div>
-    </div>
-  </section>
+  <app-not-found-content />
 }

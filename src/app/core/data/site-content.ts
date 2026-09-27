@@ -8,7 +8,9 @@ import {
   HomeHero,
   NavLink,
   Need,
+  NotFoundContent,
   NurturePillar,
+  PageMeta,
   Registrations,
   SectionIntro,
   ShellLabels,
@@ -55,7 +57,6 @@ export const TRUST: TrustProfile = {
     country: 'India',
   },
   officeHours: 'Monday to Saturday, 9:30 AM - 6:30 PM',
-  mapsQuery: 'Ammaveedu+Thellakom+Ettumanoor+Kottayam+Kerala',
 };
 
 export const PHILOSOPHY_QUOTE = {
@@ -326,4 +327,23 @@ export const SHELL: ShellLabels = {
   fabClose: 'Close contact options',
   fabWhatsapp: 'Chat on WhatsApp',
   fabCall: `Call ${TRUST.phone}`,
+};
+
+/** The photo used in link previews when a page has none of its own. */
+export const DEFAULT_SHARE_IMAGE = 'images/ammaveedu-building.webp';
+
+export const HOME_META: PageMeta = {
+  title: `${TRUST.alsoKnownAs} | A family home for boys in ${TRUST.place}`,
+  description: `${TRUST.alsoKnownAs} is a family home in ${TRUST.place}, where ${TRUST.boysAtHome} boys grow up together as brothers — cared for, cheered on and helped to become everything they can be.`,
+};
+
+export const NOT_FOUND: NotFoundContent = {
+  title: "We couldn't find that page",
+  body: 'It may have moved, or the link may have a typo. Everything else is just a click away.',
+  homeLabel: 'Back to home',
+  storyLabel: 'Read our story',
+  meta: {
+    title: `Page not found | ${TRUST.alsoKnownAs}`,
+    description: `The page you were looking for is not on the ${TRUST.alsoKnownAs} website.`,
+  },
 };

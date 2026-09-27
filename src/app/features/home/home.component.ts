@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { HOME_META } from '../../core/data/site-content';
+import { SeoService } from '../../core/services/seo.service';
 import { AlumniComponent } from './sections/alumni/alumni.component';
 import { FamilyComponent } from './sections/family/family.component';
 import { GrowthComponent } from './sections/growth/growth.component';
@@ -33,4 +35,8 @@ import { UpdatesComponent } from './sections/updates/updates.component';
     <app-family />
   `,
 })
-export class HomeComponent {}
+export class HomeComponent {
+  constructor() {
+    inject(SeoService).update({ ...HOME_META, path: '' });
+  }
+}
