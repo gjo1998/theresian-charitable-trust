@@ -1,80 +1,114 @@
-<section class="relative min-h-[88vh] lg:min-h-[92vh] flex items-center overflow-hidden isolate">
-  <!-- Photo layers -->
-  @for (slide of slides; track slide.image; let i = $index) {
-    <div class="slide absolute inset-0 -z-20" [class.is-active]="active() === i" aria-hidden="true">
-      <img
-        [src]="slide.image"
-        alt=""
-        class="slide-photo w-full h-full object-cover"
-        [attr.loading]="i === 0 ? 'eager' : 'lazy'"
-      />
-    </div>
-  }
+<section class="relative overflow-hidden bg-cream">
+  <div class="container-page pt-8 pb-16 sm:pt-12 lg:pt-16 lg:pb-24">
+    <div class="grid items-center gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
+      <!-- Copy -->
+      <div class="hero-rise order-2 lg:order-1">
+        <p class="eyebrow">{{ hero.eyebrow }}</p>
 
-  <!-- Gradient from the left and the bottom, so white copy stays readable -->
-  <div
-    class="absolute inset-0 -z-10"
-    aria-hidden="true"
-    style="
-      background:
-        linear-gradient(to top, rgba(19, 84, 55, 0.85) 0%, rgba(19, 84, 55, 0) 45%),
-        linear-gradient(100deg, rgba(19, 84, 55, 0.92) 0%, rgba(19, 84, 55, 0.65) 42%, rgba(31, 122, 77, 0.25) 75%);
-    "
-  ></div>
+        <h1 class="mt-4 font-heading text-[40px] sm:text-[56px] lg:text-[64px] xl:text-[76px] leading-[1.05] text-sage">
+          {{ hero.title }}
+        </h1>
 
-  <!-- Copy -->
-  <div class="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-    <div class="hero-rise max-w-2xl text-white">
-      <p class="font-heading font-bold text-mango text-base sm:text-lg mb-4">
-        {{ trust.malayalamName }} &middot; mother's house
-      </p>
+        <p class="mt-6 text-[18px] sm:text-[20px] text-ink-muted leading-relaxed max-w-xl">
+          {{ hero.body }}
+        </p>
 
-      <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.08] mb-6">
-        Nurturing boys to grow up loved.
-      </h1>
+        <div class="btn-row mt-9">
+          <a
+            [routerLink]="hero.primaryCta.path"
+            [fragment]="hero.primaryCta.fragment"
+            class="btn btn-sage text-[17px] !px-8 !py-4"
+          >
+            {{ hero.primaryCta.label }}
+          </a>
+          <a [routerLink]="hero.secondaryCta.path" class="btn btn-outline text-[17px] !px-8 !py-4">
+            {{ hero.secondaryCta.label }}
+          </a>
+        </div>
+      </div>
 
-      <p class="text-lg sm:text-xl text-white/95 leading-relaxed max-w-xl mb-9">
-        Ammaveedu is a family home in Thellakom, Kottayam, where boys are cared for, cheered on and helped to
-        become everything they can be.
-      </p>
-
-      <div class="flex flex-col palm:w-full sm:flex-row gap-4">
-        <a
-          routerLink="/"
-          fragment="family"
-          class="inline-flex items-center justify-center rounded-full bg-mango px-8 py-4 font-heading font-bold text-ink text-lg hover:brightness-95 transition"
+      <!-- The growing tree -->
+      <div class="relative order-1 lg:order-2 mx-auto w-full max-w-[340px] sm:max-w-[460px] lg:max-w-none">
+        <svg
+          viewBox="0 0 520 480"
+          class="w-full h-auto"
+          role="img"
+          [attr.aria-label]="hero.illustrationLabel"
+          focusable="false"
         >
-          Be part of the family
-        </a>
-        <a
-          routerLink="/stories"
-          class="inline-flex items-center justify-center rounded-full border-2 border-white/80 px-8 py-4 font-heading font-bold text-white text-lg hover:bg-white/15 transition"
-        >
-          Discover our story
-        </a>
+          <!-- Sun -->
+          <g class="svg-part sun-pulse">
+            <circle cx="438" cy="78" r="54" fill="#FFF1C9" />
+            <circle cx="438" cy="78" r="34" fill="#FBD46B" />
+          </g>
+
+          <!-- Ground -->
+          <ellipse cx="260" cy="440" rx="220" ry="28" fill="#E6DCC4" />
+          <ellipse cx="150" cy="436" rx="26" ry="7" fill="#9FD0AD" />
+          <ellipse cx="376" cy="438" rx="32" ry="8" fill="#9FD0AD" />
+
+          <!-- Tree: sways about the foot of its trunk -->
+          <g class="tree-sway">
+            <path d="M236 442c7-50 9-100 5-156h30c-4 56-2 106 5 156Z" fill="#8A5A3B" />
+            <path
+              d="M250 340c-18-18-40-30-66-48M262 322c20-18 44-30 74-44M256 300c-2-20 0-38 4-56"
+              stroke="#8A5A3B"
+              stroke-width="11"
+              stroke-linecap="round"
+              fill="none"
+            />
+
+            <!-- Crown -->
+            <circle cx="256" cy="186" r="118" fill="#4F8A62" />
+            <circle cx="160" cy="232" r="78" fill="#6AA37A" />
+            <circle cx="352" cy="226" r="80" fill="#6AA37A" />
+            <circle cx="206" cy="124" r="76" fill="#7FB38C" />
+            <circle cx="310" cy="122" r="74" fill="#7FB38C" />
+            <circle cx="258" cy="88" r="58" fill="#9FD0AD" />
+            <circle cx="126" cy="190" r="44" fill="#7FB38C" />
+            <circle cx="392" cy="176" r="46" fill="#9FD0AD" />
+            <circle cx="256" cy="262" r="62" fill="#6AA37A" />
+
+            <!-- Fruit -->
+            <circle cx="186" cy="200" r="10" fill="#F4A77C" />
+            <circle cx="300" cy="170" r="10" fill="#FBD46B" />
+            <circle cx="236" cy="120" r="9" fill="#F4A77C" />
+            <circle cx="360" cy="244" r="10" fill="#F4A77C" />
+            <circle cx="140" cy="248" r="9" fill="#FBD46B" />
+            <circle cx="268" cy="248" r="9" fill="#FBD46B" />
+            <circle cx="330" cy="98" r="8" fill="#F4A77C" />
+          </g>
+
+          <!-- Three leaves drifting down -->
+          <path class="svg-part leaf-fall leaf-fall-1" d="M150 290c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#6AA37A" />
+          <path class="svg-part leaf-fall leaf-fall-2" d="M338 300c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#9FD0AD" />
+          <path class="svg-part leaf-fall leaf-fall-3" d="M246 318c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#7FB38C" />
+
+          <!-- A bird on its way across -->
+          <g transform="translate(70 70)">
+            <g class="bird-fly">
+              <path class="bird-wing" d="M0 10c6-10 14-12 20-2" stroke="#2F5D46" stroke-width="3.5" stroke-linecap="round" fill="none" />
+              <path class="bird-wing" d="M20 8c6-10 14-8 20 2" stroke="#2F5D46" stroke-width="3.5" stroke-linecap="round" fill="none" />
+            </g>
+          </g>
+        </svg>
+
+        <!-- Floating badges -->
+        @for (badge of hero.badges; track badge.strong; let i = $index) {
+          <div
+            class="float absolute flex items-center gap-2.5 rounded-full bg-white shadow-soft ps-2 pe-4 py-2 text-[14px] sm:text-[15px] text-ink"
+            [class]="i === 0 ? 'float-1 top-[6%] left-0 sm:-left-2' : 'float-3 bottom-[4%] right-0 sm:-right-2'"
+          >
+            <span
+              class="w-9 h-9 rounded-full flex items-center justify-center"
+              [class]="i === 0 ? 'bg-peach-soft text-clay' : 'bg-sage-soft text-sage'"
+            >
+              <app-icon [name]="i === 0 ? 'heart' : 'sprout'" [size]="18" />
+            </span>
+            <span><strong class="font-extrabold">{{ badge.strong }}</strong> {{ badge.rest }}</span>
+          </div>
+        }
       </div>
     </div>
   </div>
-
-  <!-- Dots -->
-  <div class="absolute bottom-7 left-4 sm:left-6 lg:left-8 z-10 flex gap-3">
-    @for (slide of slides; track slide.caption; let i = $index) {
-      <button
-        type="button"
-        (click)="show(i)"
-        class="h-3 rounded-full transition-all duration-300"
-        [class]="active() === i ? 'w-10 bg-mango' : 'w-3 bg-white/60 hover:bg-white'"
-        [attr.aria-label]="'Show photo ' + (i + 1) + ': ' + slide.caption"
-        [attr.aria-current]="active() === i"
-      ></button>
-    }
-  </div>
-
-  <!-- Caption -->
-  <p
-    class="absolute bottom-24 right-4 sm:right-6 lg:right-8 z-10 rounded-full bg-black/40 backdrop-blur-sm px-4 py-2 text-xs sm:text-sm text-white/95"
-    aria-live="polite"
-  >
-    {{ slides[active()].caption }}
-  </p>
 </section>

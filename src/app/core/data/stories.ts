@@ -1,4 +1,5 @@
-import { Story } from '../models/story.model';
+import { Story, StoryPageContent } from '../models/story.model';
+import { TRUST } from './site-content';
 
 /**
  * The story of Ammaveedu, told warmly.
@@ -16,6 +17,8 @@ export const STORIES: Story[] = [
     title: 'A seed is planted',
     era: 'The 1990s',
     coverQuote: 'A seed of love, planted in a young heart.',
+    coverSprout: true,
+    coverTone: 'sage',
     body: [
       {
         type: 'p',
@@ -58,7 +61,11 @@ export const STORIES: Story[] = [
     order: 3,
     title: 'Years of patient hope',
     era: '1999 to 2006',
-    coverQuote: 'Yes, you should leave in two weeks.',
+    coverQuote:
+      'I had but Rs. 4,000, nowhere to go and no idea what I was going to do, but I was pleased and excited all the same.',
+    coverQuoteBy: 'Fr. Sebastian',
+    coverTag: '18 March 2006',
+    coverTone: 'peach',
     body: [
       {
         type: 'p',
@@ -66,12 +73,7 @@ export const STORIES: Story[] = [
       },
       {
         type: 'p',
-        text: 'On 18 March 2006, the answer came back yes. He had Rs. 4,000 to his name and a heart full of hope.',
-      },
-      {
-        type: 'quote',
-        text: 'I had but Rs. 4,000, nowhere to go and no idea what I was going to do, but I was pleased and excited all the same.',
-        by: 'Fr. Sebastian',
+        text: 'On 18 March 2006, the answer came back: “Yes, you should leave in two weeks.” He had Rs. 4,000 to his name and a heart full of hope.',
       },
     ],
   },
@@ -130,6 +132,8 @@ export const STORIES: Story[] = [
     era: 'Sharing what arrives',
     image: 'images/rice-delivery.jpg',
     imageAlt: 'A sack of rice arriving for the weekly round',
+    secondImage: 'images/children-meal.jpg',
+    secondImageAlt: 'Young children sharing a meal at Ammaveedu',
     body: [
       {
         type: 'p',
@@ -172,3 +176,54 @@ export const STORIES: Story[] = [
 export function storyBySlug(slug: string): Story | undefined {
   return STORIES.find((story) => story.slug === slug);
 }
+
+/** Copy for the story page and the single-chapter pages. */
+export const STORY_PAGE: StoryPageContent = {
+  hero: {
+    eyebrow: `Our history · ${TRUST.foundedYear} to today`,
+    title: 'From one seed, a whole tree.',
+    lead: `How one priest, one boy and one borrowed house grew into ${TRUST.alsoKnownAs} — told in seven short chapters.`,
+    image: 'images/ammaveedu-building.webp',
+    imageAlt: 'The Ammaveedu building at Thellakom, its name painted across the front',
+  },
+  chipsLabel: 'Jump to a chapter',
+  chapterLabel: 'Chapter',
+  readChapterLabel: 'Read this chapter on its own',
+  thenAndNow: {
+    title: 'Then & now',
+    items: [
+      {
+        image: 'images/ammaveedu-house.jpg',
+        alt: 'The first house in Kottayam that became Ammaveedu',
+        when: `${TRUST.foundedYear}`,
+        caption: 'The seed: one house, one boy',
+      },
+      {
+        image: 'images/ammaveedu-building.webp',
+        alt: 'The Ammaveedu building at Thellakom today',
+        when: 'Today',
+        caption: `The tree: a home for ${TRUST.boysAtHome} brothers`,
+      },
+    ],
+  },
+  closing: {
+    title: "The next chapter is one we'd love to write with you.",
+    body: `There is no endowment behind ${TRUST.alsoKnownAs} — everything here comes from the love of friends. Write to Fr. Sebastian and he will reply to you personally.`,
+    emailLabel: 'Email Fr. Sebastian',
+    emailSubject: 'I would like to be part of the next chapter at Ammaveedu',
+    emailBody:
+      'Dear Fr. Sebastian,\n\nI read the story of Ammaveedu and would love to help write the next chapter. Please let me know how I can be part of it.\n\n\n---\nMy name:\nMy phone:\n',
+    whatsappLabel: 'WhatsApp',
+    homeLabel: 'Back to home',
+  },
+  article: {
+    allChaptersLabel: 'All seven chapters',
+    previousLabel: 'Previous chapter',
+    nextLabel: 'Next chapter',
+    endTitle: 'That is the story so far',
+    endBody: 'The next chapter is still being written.',
+    endCta: { label: 'Be part of the next chapter', path: '/stories', fragment: 'next-chapter' },
+    notFoundTitle: 'We could not find that chapter',
+    notFoundBody: 'It may have moved. The whole story is on one page.',
+  },
+};

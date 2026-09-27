@@ -25,4 +25,9 @@ describe('AppComponent', () => {
     expect(element.querySelector('app-site-header')).toBeTruthy();
     expect(element.querySelector('app-site-footer')).toBeTruthy();
   });
+
+  it('gives the footer the Visit anchor', () => {
+    const element: HTMLElement = fixture.nativeElement;
+    expect(element.querySelector('footer#visit')).toBeTruthy();
+  });
 });

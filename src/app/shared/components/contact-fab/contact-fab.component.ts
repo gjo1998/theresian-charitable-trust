@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener, signal } from '@angular/core';
-import { TRUST } from '../../../core/data/site-content';
+import { phoneLink, whatsappLink } from '../../../core/contact-links';
+import { SHELL, TRUST } from '../../../core/data/site-content';
+import { IconComponent } from '../icon/icon.component';
 
 /**
  * Floating contact toggle. Collapsed it is a single button; expanded it offers
@@ -9,37 +11,34 @@ import { TRUST } from '../../../core/data/site-content';
 @Component({
   selector: 'app-contact-fab',
   standalone: true,
+  imports: [IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (trust.phoneVerified) {
       <div class="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
         @if (open()) {
-          <div class="flex flex-col items-end gap-2.5 modal-enter origin-bottom-right">
+          <div class="flex flex-col items-end gap-2.5">
             <a
               [href]="whatsappUrl"
               target="_blank"
               rel="noopener noreferrer"
               (click)="close()"
-              class="flex items-center gap-3 bg-white hover:bg-leaf-soft text-ink ps-4 pe-2 py-2 rounded-full shadow-xl border border-leaf-soft transition group"
+              class="flex items-center gap-3 bg-white hover:bg-sage-soft text-ink ps-4 pe-2 py-2 rounded-full shadow-soft transition-colors"
             >
-              <span class="text-sm font-bold whitespace-nowrap">Chat on WhatsApp</span>
-              <span
-                class="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition"
-              >
-                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+              <span class="text-sm font-bold whitespace-nowrap">{{ labels.fabWhatsapp }}</span>
+              <span class="w-10 h-10 rounded-full bg-sage text-white flex items-center justify-center">
+                <app-icon name="whatsapp" />
               </span>
             </a>
 
             <a
-              [href]="'tel:+' + trust.phoneE164"
+              [href]="phoneUrl"
               (click)="close()"
-              class="flex items-center gap-3 bg-white hover:bg-leaf-soft text-ink ps-4 pe-2 py-2 rounded-full shadow-xl border border-leaf-soft transition group"
+              class="flex items-center gap-3 bg-white hover:bg-sage-soft text-ink ps-4 pe-2 py-2 rounded-full shadow-soft transition-colors"
             >
-              <span class="text-sm font-bold whitespace-nowrap">Call {{ trust.phone }}</span>
-              <span
-                class="w-10 h-10 rounded-full bg-leaf text-white flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition"
-              >
-                <i class="fas fa-phone" aria-hidden="true"></i>
+              <span class="text-sm font-bold whitespace-nowrap">{{ labels.fabCall }}</span>
+              <span class="w-10 h-10 rounded-full bg-peach text-ink flex items-center justify-center">
+                <app-icon name="phone" />
               </span>
             </a>
           </div>
@@ -48,16 +47,12 @@ import { TRUST } from '../../../core/data/site-content';
         <button
           type="button"
           (click)="toggle()"
-          class="w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl text-white transition transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-hibiscus/40"
-          [class]="open() ? 'bg-ink' : 'bg-[#25D366]'"
+          class="w-14 h-14 rounded-full shadow-soft flex items-center justify-center transition-colors"
+          [class]="open() ? 'bg-ink text-white' : 'bg-sage text-white hover:bg-sage-dark'"
           [attr.aria-expanded]="open()"
-          [attr.aria-label]="open() ? 'Close contact options' : 'Contact the trust by WhatsApp or phone'"
+          [attr.aria-label]="open() ? labels.fabClose : labels.fabOpen"
         >
-          <i
-            class="transition"
-            [class]="open() ? 'fas fa-times' : 'fa-brands fa-whatsapp'"
-            aria-hidden="true"
-          ></i>
+          <app-icon [name]="open() ? 'close' : 'chat'" [size]="26" />
         </button>
       </div>
     }
@@ -65,11 +60,11 @@ import { TRUST } from '../../../core/data/site-content';
 })
 export class ContactFabComponent {
   readonly trust = TRUST;
+  readonly labels = SHELL;
   readonly open = signal(false);
 
-  get whatsappUrl(): string {
-    return `https://wa.me/${this.trust.phoneE164}?text=${encodeURIComponent(this.trust.whatsappMessage)}`;
-  }
+  readonly whatsappUrl = whatsappLink();
+  readonly phoneUrl = phoneLink();
 
   toggle(): void {
     this.open.update((value) => !value);

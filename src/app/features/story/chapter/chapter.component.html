@@ -1,0 +1,78 @@
+@if (story(); as item) {
+  <article class="bg-cream">
+    <div class="container-page pt-8 pb-20 sm:pt-12 sm:pb-28">
+      <div class="max-w-3xl mx-auto">
+        <a
+          routerLink="/stories"
+          [fragment]="item.slug"
+          class="inline-flex items-center gap-2 font-bold text-sage hover:underline underline-offset-4"
+        >
+          <app-icon name="arrow-left" [size]="18" />
+          {{ page.article.allChaptersLabel }}
+        </a>
+
+        <p class="eyebrow mt-8">{{ page.chapterLabel }} {{ item.order }} &middot; {{ item.era }}</p>
+        <h1 class="mt-3 font-heading text-[40px] sm:text-[56px] leading-[1.05] text-sage">{{ item.title }}</h1>
+      </div>
+
+      <div class="mt-10 sm:mt-14" [class.pb-6]="item.secondImage">
+        <app-chapter-visual [chapter]="item" [index]="position()" />
+      </div>
+
+      <div class="max-w-3xl mx-auto mt-12 sm:mt-16">
+        <app-story-body [blocks]="item.body" />
+
+        <!-- Straight on through the story -->
+        <nav class="mt-14 grid gap-4 sm:grid-cols-2" [attr.aria-label]="page.chipsLabel">
+          @if (previous(); as prev) {
+            <a
+              [routerLink]="['/stories', prev.slug]"
+              class="group flex flex-col rounded-card bg-white p-6 shadow-soft hover:bg-sage-soft transition-colors"
+            >
+              <span class="inline-flex items-center gap-2 text-[14px] font-bold uppercase tracking-[2px] text-clay group-hover:text-sage">
+                <app-icon name="arrow-left" [size]="16" />
+                {{ page.article.previousLabel }}
+              </span>
+              <span class="mt-2 font-heading text-[22px] leading-tight text-sage">{{ prev.title }}</span>
+            </a>
+          } @else {
+            <span class="hidden sm:block" aria-hidden="true"></span>
+          }
+
+          @if (next(); as nxt) {
+            <a
+              [routerLink]="['/stories', nxt.slug]"
+              class="group flex flex-col items-end text-right rounded-card bg-sage p-6 text-cream hover:bg-sage-dark transition-colors"
+            >
+              <span class="inline-flex items-center gap-2 text-[14px] font-bold uppercase tracking-[2px] text-sun">
+                {{ page.article.nextLabel }}
+                <app-icon name="arrow-right" [size]="16" />
+              </span>
+              <span class="mt-2 font-heading text-[22px] leading-tight">{{ nxt.title }}</span>
+            </a>
+          } @else {
+            <a
+              [routerLink]="page.article.endCta.path"
+              [fragment]="page.article.endCta.fragment"
+              class="flex flex-col items-end text-right rounded-card bg-peach p-6 text-ink hover:bg-[#EE9464] transition-colors"
+            >
+              <span class="text-[14px] font-bold uppercase tracking-[2px]">{{ page.article.endTitle }}</span>
+              <span class="mt-2 font-heading text-[22px] leading-tight">{{ page.article.endCta.label }}</span>
+              <span class="mt-1 text-[15px]">{{ page.article.endBody }}</span>
+            </a>
+          }
+        </nav>
+      </div>
+    </div>
+  </article>
+} @else {
+  <section class="bg-cream">
+    <div class="container-page py-24 text-center max-w-2xl">
+      <h1 class="section-title">{{ page.article.notFoundTitle }}</h1>
+      <p class="mt-5 text-[18px] text-ink-muted">{{ page.article.notFoundBody }}</p>
+      <div class="btn-row mt-8 sm:justify-center">
+        <a routerLink="/stories" class="btn btn-sage">{{ page.article.allChaptersLabel }}</a>
+      </div>
+    </div>
+  </section>
+}

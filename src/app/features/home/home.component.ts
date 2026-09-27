@@ -1,33 +1,21 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FamilyComponent } from './sections/family/family.component';
+import { GrowthComponent } from './sections/growth/growth.component';
 import { HeroComponent } from './sections/hero/hero.component';
-import { MomentsComponent } from './sections/moments/moments.component';
 import { NurtureComponent } from './sections/nurture/nurture.component';
 import { StoryTeaserComponent } from './sections/story-teaser/story-teaser.component';
-import { VisitComponent } from './sections/visit/visit.component';
-import { WelcomeComponent } from './sections/welcome/welcome.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    HeroComponent,
-    WelcomeComponent,
-    NurtureComponent,
-    MomentsComponent,
-    StoryTeaserComponent,
-    FamilyComponent,
-    VisitComponent,
-  ],
+  imports: [HeroComponent, NurtureComponent, GrowthComponent, StoryTeaserComponent, FamilyComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-hero />
-    <app-welcome />
     <app-nurture />
-    <app-moments />
+    <app-growth />
     <app-story-teaser />
     <app-family />
-    <app-visit />
   `,
 })
 export class HomeComponent {}

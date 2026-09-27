@@ -1,6 +1,7 @@
 /**
  * Shape of every piece of editable content on the site.
- * Staff should only ever need to touch `core/data/site-content.ts`.
+ * Staff should only ever need to touch `core/data/site-content.ts` and
+ * `core/data/stories.ts`.
  */
 
 export interface TrustProfile {
@@ -10,6 +11,8 @@ export interface TrustProfile {
   malayalamName: string;
   tagline: string;
   foundedYear: number;
+  /** How many boys live at the home today. Shown in the hero badge. */
+  boysAtHome: number;
   founder: string;
   email: string;
   /** Display form, e.g. "+91 94466 81395". */
@@ -32,39 +35,91 @@ export interface TrustProfile {
   mapsQuery: string;
 }
 
+/** The soft colours a card or ring can take. Components map these to classes. */
+export type Tone = 'peach' | 'sun' | 'sage' | 'mint' | 'sky';
+
+/** Plants drawn in the growth stages and the chapter cards. */
+export type PlantKind = 'sprout' | 'sapling' | 'young-tree' | 'branching';
+
+export interface Cta {
+  label: string;
+  /** Router path, when the button leaves the page. */
+  path?: string;
+  /** Same-page anchor. */
+  fragment?: string;
+}
+
+export interface HomeHero {
+  eyebrow: string;
+  title: string;
+  body: string;
+  primaryCta: Cta;
+  secondaryCta: Cta;
+  /** Short lines on the white badges floating over the tree. */
+  badges: { strong: string; rest: string }[];
+  /** Describes the illustration for screen readers. */
+  illustrationLabel: string;
+}
+
+export interface SectionIntro {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+}
+
 /** One of the four things the home gives a child. */
 export interface NurturePillar {
   id: string;
   badge: string;
-  /** Tailwind classes for the card's top border and badge colour. */
-  accentBorder: string;
-  accentBadge: string;
+  /** Colour of the ring around the photograph. */
+  ring: Tone;
   title: string;
   body: string;
   image: string;
   imageAlt: string;
-  breatheClass: string;
 }
 
-/** A photograph in the scrolling strip. */
-export interface Moment {
-  image: string;
-  alt: string;
-  caption: string;
-  /** Alternating heights keep the strip playful. */
-  tall: boolean;
+/** One stage of growing up, from nursery to young man. */
+export interface GrowthStage {
+  id: string;
+  name: string;
+  label: string;
+  body: string;
+  plant: PlantKind;
+  /** The last card is peach; the rest are white. */
+  highlight: boolean;
+}
+
+export interface StoryTeaser {
+  eyebrow: string;
+  title: string;
+  body: string;
+  cta: Cta;
+  photos: { image: string; alt: string }[];
 }
 
 /** One of the three ways to join in. */
 export interface FamilyWay {
   id: string;
-  icon: string;
   title: string;
   body: string;
   ctaLabel: string;
   /** 'email' | 'whatsapp' | 'phone' — the component builds the link. */
   ctaKind: 'email' | 'whatsapp' | 'phone';
-  cardClass: string;
+  tone: Tone;
+  /** Email subject, when the card opens an email. */
+  subject?: string;
+  /** Prefilled email body or WhatsApp message. */
+  message?: string;
+}
+
+export interface FooterContent {
+  visitHeading: string;
+  helloHeading: string;
+  hoursLabel: string;
+  mapsLabel: string;
+  storyLabel: string;
+  photoCredit: string;
 }
 
 export interface NavLink {
@@ -73,4 +128,18 @@ export interface NavLink {
   fragment?: string;
   /** Router path, when the link leaves the home page. */
   path?: string;
+}
+
+/** Small labels used by the shell: header, drawer and floating button. */
+export interface ShellLabels {
+  homeAriaLabel: string;
+  openMenu: string;
+  closeMenu: string;
+  backToHome: string;
+  backToHomeShort: string;
+  storyCta: Cta;
+  fabOpen: string;
+  fabClose: string;
+  fabWhatsapp: string;
+  fabCall: string;
 }

@@ -1,141 +1,167 @@
 <!-- Hero -->
-<section class="relative min-h-[60vh] sm:min-h-[70vh] flex items-end overflow-hidden isolate">
-  <img
-    src="images/ammaveedu-building.webp"
-    alt="The Ammaveedu building at Thellakom, its name painted across the front"
-    class="story-zoom absolute inset-0 -z-20 w-full h-full object-cover"
-  />
-  <div
-    class="absolute inset-0 -z-10"
-    aria-hidden="true"
-    style="
-      background:
-        linear-gradient(to top, rgba(19, 84, 55, 0.92) 0%, rgba(19, 84, 55, 0.35) 55%, rgba(19, 84, 55, 0.15) 100%);
-    "
-  ></div>
+<section class="relative overflow-hidden bg-cream">
+  <div class="container-page pt-8 pb-14 sm:pt-12 lg:pt-16 lg:pb-20">
+    <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+      <div class="hero-rise">
+        <p class="eyebrow">{{ page.hero.eyebrow }}</p>
+        <h1 class="mt-4 font-heading text-[40px] sm:text-[56px] lg:text-[64px] xl:text-[76px] leading-[1.05] text-sage">
+          {{ page.hero.title }}
+        </h1>
+        <p class="mt-6 text-[18px] sm:text-[20px] text-ink-muted leading-relaxed max-w-xl">{{ page.hero.lead }}</p>
+      </div>
 
-  <div class="relative w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-28 text-white">
-    <a
-      routerLink="/"
-      class="inline-flex items-center gap-2 text-sm font-semibold text-white/85 hover:text-mango transition-colors"
-    >
-      &larr; Back to home
-    </a>
-    <h1 class="mt-5 font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-[1.08]">
-      The story of Ammaveedu
-    </h1>
-    <p class="mt-5 text-lg sm:text-xl text-white/90 leading-relaxed max-w-2xl">
-      How one priest's calling, many years of patient hope and a little boy's &ldquo;yes&rdquo; grew into a
-      home full of love.
-    </p>
+      <div class="relative mx-auto w-full max-w-[320px] sm:max-w-[400px]">
+        <div class="absolute -top-6 -right-6 w-40 h-40 rounded-full bg-sun-soft" aria-hidden="true"></div>
+        <div class="photo-frame relative rounded-arch aspect-[4/5]">
+          <img
+            [src]="page.hero.image"
+            [alt]="page.hero.imageAlt"
+            class="ken-burns w-full h-full object-cover"
+          />
+        </div>
+        <svg class="leaf-drift absolute -left-8 top-1/4 w-10 h-10" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <path d="M4 20c10-14 26-14 32 0-6 14-22 14-32 0Z" fill="#6AA37A" />
+        </svg>
+        <svg class="leaf-drift leaf-drift-late absolute -right-5 bottom-10 w-8 h-8" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <path d="M4 20c10-14 26-14 32 0-6 14-22 14-32 0Z" fill="#9FD0AD" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Chapter chips -->
+    <nav class="mt-12 lg:mt-16" [attr.aria-label]="page.chipsLabel">
+      <ul class="flex flex-wrap gap-2.5">
+        @for (chapter of chapters; track chapter.slug) {
+          <li>
+            <a
+              routerLink="/stories"
+              [fragment]="chapter.slug"
+              class="inline-flex items-center gap-2 rounded-full bg-sage-soft px-4 py-2 text-[15px] font-bold text-sage hover:bg-sage hover:text-white transition-colors"
+            >
+              <span class="font-extrabold">{{ chapter.order }}</span>
+              {{ chapter.title }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
   </div>
 </section>
 
-<!-- Chapter jump links -->
-<nav
-  class="sticky top-20 z-30 bg-white/95 backdrop-blur-md border-b border-leaf-soft"
-  aria-label="Jump to a chapter"
->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <ul class="flex gap-2.5 overflow-x-auto py-3.5">
-      @for (chapter of chapters; track chapter.slug) {
-        <li class="shrink-0">
-          <a
-            [href]="'#' + chapter.slug"
-            class="inline-flex items-center rounded-full bg-leaf-soft px-4 py-2 text-[13px] font-heading font-bold text-leaf-deep hover:bg-leaf hover:text-white transition-colors whitespace-nowrap"
+<!-- Timeline: a branch runs down the middle; each chapter sprouts a leaf -->
+<section class="bg-cream pb-16 sm:pb-24">
+  <div class="container-page">
+    <div class="relative">
+      <svg
+        class="absolute inset-y-0 left-[22px] lg:left-1/2 -translate-x-1/2 w-10 h-full"
+        viewBox="0 0 40 1000"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          [attr.d]="branch"
+          stroke="#8A5A3B"
+          stroke-width="6"
+          stroke-linecap="round"
+          fill="none"
+          vector-effect="non-scaling-stroke"
+        />
+      </svg>
+
+      <ol class="relative">
+        @for (chapter of chapters; track chapter.slug; let i = $index; let odd = $odd) {
+          <li
+            [id]="chapter.slug"
+            appReveal
+            class="relative grid gap-8 pl-14 py-10 lg:grid-cols-2 lg:gap-28 lg:pl-0 lg:py-16 lg:items-center scroll-mt-28"
           >
-            {{ chapter.order }}. {{ chapter.title }}
-          </a>
-        </li>
-      }
-    </ul>
-  </div>
-</nav>
-
-<!-- Chapters -->
-@for (chapter of chapters; track chapter.slug; let i = $index) {
-  <section
-    [id]="chapter.slug"
-    class="py-16 sm:py-24 scroll-mt-40"
-    [class]="i % 2 === 1 ? 'bg-mango-soft' : 'bg-white'"
-  >
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
-        <!-- Visual: photograph, or the chapter's own words -->
-        <div appReveal [class]="i % 2 === 1 ? 'lg:order-2' : ''">
-          @if (chapter.image) {
-            <img
-              [src]="chapter.image"
-              [alt]="chapter.imageAlt"
-              class="w-full aspect-[4/3] object-cover rounded-card shadow-xl"
-              loading="lazy"
-            />
-          } @else {
-            <div
-              class="rounded-card bg-leaf text-white shadow-xl px-8 py-16 sm:px-12 sm:py-20 flex items-center justify-center text-center"
+            <!-- Node and leaf on the branch -->
+            <span
+              class="absolute left-[22px] lg:left-1/2 top-[3.25rem] lg:top-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-bark ring-4 ring-cream"
+              aria-hidden="true"
+            ></span>
+            <span
+              class="absolute left-[30px] top-[2.6rem] lg:top-[calc(50%-12px)] w-11 h-6 origin-left"
+              [class]="odd ? 'lg:left-[calc(50%+8px)]' : 'lg:left-[calc(50%-8px)] lg:-scale-x-100'"
+              aria-hidden="true"
             >
-              <p class="font-heading font-bold text-2xl sm:text-3xl leading-snug">
-                &ldquo;{{ chapter.coverQuote }}&rdquo;
-              </p>
+              <span class="leaf-sprout block w-full h-full origin-left">
+                <svg viewBox="0 0 44 24" class="w-full h-full" focusable="false">
+                  <path d="M2 12c10-12 30-13 40 0-10 13-30 12-40 0Z" fill="#6AA37A" />
+                  <path d="M4 12h30" stroke="#4F8A62" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+              </span>
+            </span>
+
+            <!-- Words -->
+            <div class="rounded-card bg-white p-6 sm:p-9 shadow-soft" [class]="odd ? 'lg:order-2' : ''">
+              <p class="eyebrow">{{ page.chapterLabel }} {{ chapter.order }} &middot; {{ chapter.era }}</p>
+              <h2 class="mt-3 font-heading text-[30px] sm:text-[38px] leading-[1.1] text-sage">{{ chapter.title }}</h2>
+              <app-story-body class="mt-5" [blocks]="chapter.body" />
+              <a
+                [routerLink]="['/stories', chapter.slug]"
+                class="mt-6 inline-flex items-center gap-2 font-extrabold text-sage underline decoration-peach decoration-[3px] underline-offset-[6px] hover:decoration-sage"
+              >
+                {{ page.readChapterLabel }}
+                <span class="sr-only">: {{ chapter.title }}</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
             </div>
-          }
-        </div>
 
-        <!-- Words -->
-        <div [appReveal]="120" [class]="i % 2 === 1 ? 'lg:order-1' : ''">
-          <p class="inline-flex items-center rounded-full bg-hibiscus-soft px-4 py-1.5 text-[13px] font-heading font-bold text-hibiscus">
-            Chapter {{ chapter.order }} &middot; {{ chapter.era }}
-          </p>
-
-          <h2 class="mt-4 font-heading font-extrabold text-3xl sm:text-4xl text-ink leading-tight">
-            {{ chapter.title }}
-          </h2>
-
-          <div class="mt-5 space-y-4">
-            @for (block of chapter.body; track $index) {
-              @if (block.type === 'quote') {
-                <blockquote class="border-l-4 border-mango ps-5 py-1">
-                  <p class="font-heading font-bold text-xl sm:text-2xl text-ink leading-snug">
-                    &ldquo;{{ block.text }}&rdquo;
-                  </p>
-                  @if (block.by) {
-                    <footer class="mt-2 text-sm font-semibold text-ink-soft">{{ block.by }}</footer>
-                  }
-                </blockquote>
-              } @else {
-                <p class="text-base sm:text-lg text-ink-soft leading-relaxed">{{ block.text }}</p>
-              }
-            }
-          </div>
-        </div>
-      </div>
+            <!-- Picture -->
+            <div [class]="(odd ? 'lg:order-1' : '') + (chapter.secondImage ? ' pb-6' : '')">
+              <app-chapter-visual [chapter]="chapter" [index]="i" />
+            </div>
+          </li>
+        }
+      </ol>
     </div>
-  </section>
-}
+  </div>
+</section>
+
+<!-- Then & now -->
+<section class="bg-sage-soft py-20 sm:py-28">
+  <div class="container-page">
+    <h2 appReveal class="section-title text-center">{{ page.thenAndNow.title }}</h2>
+    <div class="mt-12 grid gap-12 md:grid-cols-2 md:gap-8">
+      @for (item of page.thenAndNow.items; track item.image; let i = $index) {
+        <figure [appReveal]="i * 120" class="flex flex-col items-center">
+          <img
+            [src]="item.image"
+            [alt]="item.alt"
+            class="w-full aspect-[4/3] object-cover rounded-card-lg shadow-soft"
+            loading="lazy"
+          />
+          <figcaption
+            class="-mt-6 relative rounded-full bg-white px-5 py-2.5 text-center text-[15px] sm:text-[16px] text-ink shadow-soft"
+          >
+            <strong class="font-extrabold text-clay">{{ item.when }}</strong>
+            &middot; {{ item.caption }}
+          </figcaption>
+        </figure>
+      }
+    </div>
+  </div>
+</section>
 
 <!-- Closing -->
-<section class="py-20 sm:py-28 bg-leaf text-white">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight">
-      Be part of the next chapter
-    </h2>
-    <p class="mt-5 text-lg text-white/90 leading-relaxed">
-      Everything here is made possible by friends of the home. There is a place for you in the story.
-    </p>
-    <div class="mt-9 flex flex-col palm:w-full sm:flex-row gap-4 justify-center">
-      <a
-        routerLink="/"
-        fragment="family"
-        class="inline-flex items-center justify-center rounded-full bg-mango px-8 py-4 font-heading font-bold text-ink text-lg hover:brightness-95 transition"
-      >
-        Be part of the family
-      </a>
-      <a
-        routerLink="/"
-        class="inline-flex items-center justify-center rounded-full border-2 border-white/80 px-8 py-4 font-heading font-bold text-white text-lg hover:bg-white/15 transition"
-      >
-        Back to home
-      </a>
+<section class="bg-cream py-20 sm:py-28">
+  <div class="container-page">
+    <div
+      id="next-chapter"
+      appReveal
+      class="on-dark scroll-mt-28 rounded-card-lg bg-sage text-mist px-6 py-14 sm:px-12 sm:py-20 text-center"
+    >
+      <h2 class="section-title max-w-3xl mx-auto">{{ page.closing.title }}</h2>
+      <p class="mt-6 text-[18px] sm:text-[20px] leading-relaxed max-w-2xl mx-auto">{{ page.closing.body }}</p>
+      <div class="btn-row mt-10 sm:justify-center">
+        <a [href]="emailUrl" class="btn btn-peach">{{ page.closing.emailLabel }}</a>
+        <a [href]="whatsappUrl" target="_blank" rel="noopener noreferrer" class="btn btn-cream">
+          {{ page.closing.whatsappLabel }}
+        </a>
+        <a routerLink="/" class="btn btn-outline">{{ page.closing.homeLabel }}</a>
+      </div>
     </div>
   </div>
 </section>

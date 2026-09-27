@@ -4,39 +4,52 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        cream: '#FBF7EE',
+        sage: {
+          DEFAULT: '#2F5D46',
+          dark: '#1D3E2E',
+          soft: '#DDEBDF',
+        },
+        // Leaf tones, for illustrations only - not for text.
         leaf: {
-          DEFAULT: '#1F7A4D',
-          deep: '#135437',
-          soft: '#E3F3E9',
+          600: '#4F8A62',
+          500: '#6AA37A',
+          400: '#7FB38C',
+          300: '#9FD0AD',
         },
-        mango: {
-          DEFAULT: '#FFC53D',
-          soft: '#FFF4D1',
+        peach: {
+          DEFAULT: '#F4A77C',
+          soft: '#FBE6D6',
         },
-        hibiscus: {
-          DEFAULT: '#E8456A',
-          soft: '#FDE4EA',
+        sun: {
+          DEFAULT: '#FBD46B',
+          soft: '#FFF1C9',
         },
-        sky: {
-          DEFAULT: '#3E9FD6',
-          soft: '#E3F3FB',
-        },
+        bark: '#8A5A3B',
+        ground: '#E6DCC4',
+        // Light blue, used only for one decorative photo ring.
+        sky: '#A9D4EA',
         ink: {
-          DEFAULT: '#1E2A3F',
-          soft: '#4D5A70',
+          DEFAULT: '#23302A',
+          muted: '#52605A',
         },
+        // Light text on sage.
+        mist: '#CFE2D5',
+        // Eyebrow labels. Passes 4.5:1 on cream and white only.
+        clay: '#B4572A',
       },
       fontFamily: {
-        heading: ['"Baloo Chettan 2"', 'system-ui', 'sans-serif'],
+        heading: ['"Young Serif"', 'Georgia', 'serif'],
         sans: ['"Nunito Sans"', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
-        card: '26px',
+        card: '32px',
+        'card-lg': '40px',
+        arch: '50% 50% 32px 32px',
+        'leaf-corner': '32px 120px 32px 32px',
       },
-      screens: {
-        // The spec's two collapse points, available as utilities.
-        lap: { max: '980px' },
-        palm: { max: '560px' },
+      boxShadow: {
+        soft: '0 18px 40px -18px rgba(35, 48, 42, 0.28)',
       },
     },
   },

@@ -10,8 +10,8 @@ and [`src/app/core/data/stories.ts`](src/app/core/data/stories.ts).
 ## 1. Phone number — supplied directly, now live
 
 `TRUST.phone` is **+91 94466 81395**, provided for the site rather than found
-online. `phoneVerified` is `true`, so it appears in the Visit section, the
-Celebrate-with-us card, the footer and the floating contact button.
+online. `phoneVerified` is `true`, so it appears on the Celebrate-with-us card,
+in the footer (which is now the Visit section) and on the floating contact button.
 
 Everything is built from `phoneE164` (`919446681395`): `tel:+919446681395`,
 `https://wa.me/919446681395`, and the prefilled text in `whatsappMessage`.
@@ -48,8 +48,10 @@ The site uses 2006. Confirm which the trust wants to lead with.
 The trust's published account dates from **November 2011**. The redesign dropped
 the statistics block, but two numbers from it still appear as fact:
 
-- **27 boys** — the hero paragraph, the Welcome section, chapter 5
-- **around a hundred families** receiving rice — the nurture cards, chapter 6
+- **27 boys** — `TRUST.boysAtHome`: the hero badge ("27 brothers under one
+  roof"), the "Today" caption in Then & now, and chapter 5 (written out in
+  `stories.ts`)
+- **around a hundred families** receiving rice — the Nourishment pillar, chapter 6
 
 Also from 2011: the free nursery taking six children from neighbouring families.
 Confirm all three and update `site-content.ts` and `stories.ts`.
@@ -61,13 +63,13 @@ are current and high resolution; the rest date from 2011.
 
 | File | Shows | Used in |
 | --- | --- | --- |
-| `ammaveedu-today.jpg` | **Current, 953×960.** Fr. Sebastian with the boys | Hero slide 1, Moments, chapter 5 |
-| `ammaveedu-building.webp` | **Current, 1360×1020.** The building and its sign | Hero slide 2, Moments, story hero, chapter 7 |
-| `ammaveedu-boys.jpg` | The boys, 2011 | Welcome, Belonging card, Moments |
-| `children-meal.jpg` | Children at a meal, 2011 | Welcome, Learning card, Moments |
-| `rice-delivery.jpg` | Rice arriving, 2011 | Nourishment card, Moments, chapter 6 |
-| `home-visit.jpg` | Visiting a neighbour, 2011 | Wellbeing card, Moments, chapter 2 |
-| `ammaveedu-house.jpg` | The first house, 2011 | Story teaser, Moments, chapter 4 |
+| `ammaveedu-today.jpg` | **Current, 953×960.** Fr. Sebastian with the boys | Chapter 5 |
+| `ammaveedu-building.webp` | **Current, 1360×1020.** The building and its sign | Home story teaser, story hero, chapter 7, Then & now |
+| `ammaveedu-boys.jpg` | The boys, 2011 | Belonging pillar |
+| `children-meal.jpg` | Children at a meal, 2011 | Learning pillar, chapter 6 (second photo) |
+| `rice-delivery.jpg` | Rice arriving, 2011 | Nourishment pillar, chapter 6 |
+| `home-visit.jpg` | Visiting a neighbour, 2011 | Wellbeing pillar, chapter 2 |
+| `ammaveedu-house.jpg` | The first house, 2011 | Home story teaser, chapter 4, Then & now |
 
 **Safeguarding.** Several photographs show identifiable children in the trust's
 care, and the site is public and search-indexable. They are already public on
@@ -76,8 +78,8 @@ decision and the trust should make it deliberately. Any photograph can be
 swapped or dropped by editing `site-content.ts`; chapters accept a `coverQuote`
 instead of an `image`, and chapters 1 and 3 already use one.
 
-**Resolution.** The five 2011 files are around 500px wide. They hold up at card
-and marquee size, but more current photographs would let them be retired.
+**Resolution.** The five 2011 files are around 500px wide. They hold up in the
+150px pillar circles and the chapter frames, but more current photographs would let them be retired.
 
 ## 7. The story chapters — check the retelling
 
@@ -96,5 +98,28 @@ with both the retelling and those names.
 ## 8. Address — two PIN codes
 
 The site uses **686016** for Thellakom P.O., taken from the trust's own blog.
-The Google Maps listing embedded in the Visit section shows **686630** for the
-same place. Worth checking which is correct for post.
+The Google Maps listing (now linked from the footer, rather than embedded)
+shows **686630** for the same place. Worth checking which is correct for post.
+
+## 9. New wording from the "Growing Tree" redesign
+
+The redesign added some short copy. Most of it restates facts already above,
+but these points are new and need Fr. Sebastian's confirmation:
+
+- **Homework help.** The Sapling stage says every boy at school gets "a helping
+  hand at homework time". Earlier copy only offered homework help as something
+  volunteers could do.
+- **Skills training "for life after 18".** The Branching out stage presents
+  this as a dream, not something that exists yet. The trust's account mentions
+  skills training for young people but not the age of 18. Confirm the wording,
+  and whether boys stay on after 18 today.
+- **"Friends, games, confidence among brothers"** (the Growing strong stage) is
+  general, but check it sounds right.
+- **Chapter 3.** The cover card now shows Fr. Sebastian's own quote ("I had but
+  Rs. 4,000…") under an "18 March 2006" pill. The Bishop's reply, "Yes, you
+  should leave in two weeks", moved into the paragraph about that date. Both
+  are the trust's own words, but confirm the reply is quoted accurately.
+- **The story teaser** says "a friend gave a house" (Mathew Kuravilla, chapter
+  4), and the story page calls it "one borrowed house". Confirm whether the
+  house was given outright or lent.
+- **"Growing since 2006"** on the hero badge uses `foundedYear` (see section 4).

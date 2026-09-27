@@ -11,5 +11,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/story/story.component').then((m) => m.StoryComponent),
     title: 'The story of Ammaveedu | Theresian Charitable Trust',
   },
+  {
+    path: 'stories/:slug',
+    loadComponent: () => import('./features/story/chapter/chapter.component').then((m) => m.ChapterComponent),
+    title: 'The story of Ammaveedu | Theresian Charitable Trust',
+  },
   { path: '**', redirectTo: '' },
 ];

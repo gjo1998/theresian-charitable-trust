@@ -1,61 +1,75 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FAMILY_WAYS, GIVING_NOTE, TRUST } from '../../../../core/data/site-content';
-import { FamilyWay } from '../../../../core/models/content.models';
+import { emailLink, phoneLink, whatsappLink } from '../../../../core/contact-links';
+import { FAMILY_INTRO, FAMILY_WAYS, GIVING_NOTE } from '../../../../core/data/site-content';
+import { FamilyWay, Tone } from '../../../../core/models/content.models';
+import { IconComponent, IconName } from '../../../../shared/components/icon/icon.component';
 import { RevealDirective } from '../../../../shared/directives/reveal.directive';
+
+const CARD: Record<Tone, string> = {
+  peach: 'bg-peach-soft',
+  sage: 'bg-sage-soft',
+  sun: 'bg-sun-soft',
+  mint: 'bg-sage-soft',
+  sky: 'bg-sage-soft',
+};
+
+const ICON: Record<FamilyWay['ctaKind'], IconName> = {
+  email: 'mail',
+  whatsapp: 'chat',
+  phone: 'phone',
+};
 
 @Component({
   selector: 'app-family',
   standalone: true,
-  imports: [RevealDirective],
+  imports: [RevealDirective, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section id="family" class="py-20 sm:py-28 bg-white scroll-mt-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="family" class="bg-cream py-20 sm:py-28 scroll-mt-20">
+      <div class="container-page">
         <div appReveal class="max-w-3xl mx-auto text-center">
-          <h2 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-ink leading-tight">
-            Be part of the family
-          </h2>
-          <p class="mt-5 text-lg text-ink-soft leading-relaxed">
-            Every meal, school book and birthday cake here is made possible by friends. There's a place for
-            you too.
+          <p class="eyebrow">{{ intro.eyebrow }}</p>
+          <h2 class="section-title mt-3">{{ intro.title }}</h2>
+          <p class="mt-5 text-[18px] sm:text-[20px] text-ink-muted leading-relaxed">{{ intro.lead }}</p>
+          <p
+            class="mt-7 inline-flex items-start gap-3 text-left rounded-card bg-white shadow-soft px-5 py-4 text-[15px] sm:text-[16px] text-ink leading-relaxed"
+          >
+            <app-icon name="shield" [size]="22" class="mt-0.5 text-sage" />
+            <span>{{ note }}</span>
           </p>
         </div>
 
-        <div class="mt-14 grid gap-7 md:grid-cols-3">
+        <ul class="mt-14 grid gap-6 md:grid-cols-3">
           @for (way of ways; track way.id; let i = $index) {
-            <article
-              [appReveal]="i * 110"
-              class="rounded-card p-8 flex flex-col shadow-sm hover:shadow-xl transition-shadow duration-300"
-              [class]="way.cardClass"
-            >
-              <span class="text-4xl" aria-hidden="true">{{ way.icon }}</span>
-              <h3 class="mt-4 font-heading font-bold text-2xl text-ink">{{ way.title }}</h3>
-              <p class="mt-3 text-[15px] text-ink-soft leading-relaxed flex-1">{{ way.body }}</p>
-
+            <li [appReveal]="i * 110" class="flex">
               <a
                 [href]="linkFor(way)"
                 [attr.target]="way.ctaKind === 'whatsapp' ? '_blank' : null"
                 [attr.rel]="way.ctaKind === 'whatsapp' ? 'noopener noreferrer' : null"
-                class="mt-7 inline-flex items-center justify-center w-full rounded-full bg-ink px-6 py-3.5 font-heading font-bold text-white hover:bg-ink-soft transition"
+                class="group flex flex-col w-full rounded-card p-7 sm:p-8 transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft"
+                [class]="cardFor(way.tone)"
               >
-                {{ way.ctaLabel }}
+                <span class="w-14 h-14 rounded-full bg-white text-sage flex items-center justify-center">
+                  <app-icon [name]="iconFor(way)" [size]="26" />
+                </span>
+                <span class="mt-6 font-heading text-[26px] leading-tight text-sage">{{ way.title }}</span>
+                <span class="mt-3 text-[16px] text-ink-muted leading-relaxed flex-1">{{ way.body }}</span>
+                <span
+                  class="mt-7 inline-flex items-center justify-center gap-2 self-start rounded-full bg-sage px-6 py-3 font-extrabold text-white group-hover:bg-sage-dark transition-colors"
+                >
+                  {{ way.ctaLabel }}
+                  <app-icon name="arrow-right" [size]="18" />
+                </span>
               </a>
-            </article>
+            </li>
           }
-        </div>
-
-        <p
-          appReveal
-          class="mt-12 mx-auto max-w-2xl text-center text-sm text-ink-soft bg-leaf-soft rounded-card px-6 py-5"
-        >
-          {{ note }}
-        </p>
+        </ul>
       </div>
     </section>
   `,
 })
 export class FamilyComponent {
-  readonly trust = TRUST;
+  readonly intro = FAMILY_INTRO;
   readonly ways = FAMILY_WAYS;
   readonly note = GIVING_NOTE;
 
@@ -63,18 +77,19 @@ export class FamilyComponent {
   linkFor(way: FamilyWay): string {
     switch (way.ctaKind) {
       case 'whatsapp':
-        return `https://wa.me/${this.trust.phoneE164}?text=${encodeURIComponent(
-          'Hello Fr. Sebastian, I would love to share some time with the boys at Ammaveedu.',
-        )}`;
+        return whatsappLink(way.message);
       case 'phone':
-        return `tel:+${this.trust.phoneE164}`;
-      default: {
-        const subject = encodeURIComponent('I would like to help a child at Ammaveedu');
-        const body = encodeURIComponent(
-          'Dear Fr. Sebastian,\n\nI came across the Ammaveedu website and would like to help. Please let me know how best to give and where it would be most useful.\n\n\n---\nMy name:\nMy phone:\n',
-        );
-        return `mailto:${this.trust.email}?subject=${subject}&body=${body}`;
-      }
+        return phoneLink();
+      default:
+        return emailLink(way.subject, way.message);
     }
+  }
+
+  cardFor(tone: Tone): string {
+    return CARD[tone];
+  }
+
+  iconFor(way: FamilyWay): IconName {
+    return ICON[way.ctaKind];
   }
 }

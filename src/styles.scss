@@ -9,44 +9,104 @@ html {
 }
 
 body {
-  @apply font-sans bg-white text-ink antialiased;
-  @apply selection:bg-mango selection:text-ink;
+  @apply font-sans bg-cream text-ink antialiased;
+  @apply selection:bg-sun selection:text-ink;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  @apply font-heading;
+  @apply font-heading font-normal;
+}
+
+/* ---------------------------------------------------------------------------
+   Building blocks
+   --------------------------------------------------------------------------- */
+@layer components {
+  .container-page {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply text-[15px] font-bold uppercase text-clay;
+    letter-spacing: 2px;
+  }
+
+  /* On sage, the clay accent is too dark to read; sun takes its place. */
+  .on-dark .eyebrow {
+    @apply text-sun;
+  }
+
+  .section-title {
+    @apply font-heading text-[34px] sm:text-[44px] lg:text-[54px] leading-[1.1] text-sage;
+  }
+
+  .on-dark .section-title {
+    @apply text-cream;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-extrabold text-[16px] leading-tight transition-colors duration-200;
+  }
+
+  .btn-sage {
+    @apply bg-sage text-white hover:bg-sage-dark;
+  }
+
+  .btn-peach {
+    @apply bg-peach text-ink hover:bg-[#EE9464];
+  }
+
+  .btn-cream {
+    @apply bg-cream text-sage hover:bg-white;
+  }
+
+  .btn-outline {
+    @apply border-2 border-sage text-sage hover:bg-sage-soft;
+  }
+
+  .on-dark .btn-outline {
+    @apply border-cream text-cream hover:bg-sage-dark;
+  }
+
+  /* Buttons stack and go full width on phones. */
+  .btn-row {
+    @apply flex flex-col sm:flex-row sm:flex-wrap gap-3;
+  }
+
+  .btn-row > * {
+    @apply w-full sm:w-auto;
+  }
+
+  /* A photo in a soft frame. */
+  .photo-frame {
+    @apply overflow-hidden border-[6px] sm:border-8 border-white shadow-soft bg-white;
+  }
 }
 
 /* ---------------------------------------------------------------------------
    Focus
    A single, always-visible focus ring. Keyboard users must never lose track of
-   where they are.
+   where they are. On sage, the ring turns sun yellow so it still stands out.
    --------------------------------------------------------------------------- */
 :focus-visible {
-  outline: 3px solid theme('colors.hibiscus.DEFAULT');
+  outline: 3px solid theme('colors.clay');
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 6px;
+}
+
+.on-dark :focus-visible {
+  outline-color: theme('colors.sun.DEFAULT');
 }
 
 /* ---------------------------------------------------------------------------
    Motion
    Every animation below sits inside `prefers-reduced-motion: no-preference`,
    so a visitor who has asked their system for less motion gets a completely
-   still page - not a slowed-down one.
+   still page - not a slowed-down one. Nothing here starts hidden outside that
+   block, so a still page is also a fully visible one.
    --------------------------------------------------------------------------- */
-
-/* Hero slideshow: layers crossfade; the active one drifts slowly inwards. */
-.slide {
-  opacity: 0;
-  transition: opacity 1.6s ease-in-out;
-}
-
-.slide.is-active {
-  opacity: 1;
-}
 
 /* Scroll reveal, driven by the appReveal directive. */
 .reveal {
@@ -62,22 +122,14 @@ h4 {
   transform: none;
 }
 
+/* SVG parts that move about their own centre or a set point. */
+.svg-part {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  /* 1. Ken Burns on the active hero photo. */
-  .slide.is-active .slide-photo {
-    animation: kenBurns 9s ease-out forwards;
-  }
-
-  @keyframes kenBurns {
-    from {
-      transform: scale(1.02);
-    }
-    to {
-      transform: scale(1.14);
-    }
-  }
-
-  /* 2. Hero copy rises in, staggered. */
+  /* 1. Hero copy rises in, staggered. */
   .hero-rise > * {
     opacity: 0;
     animation: riseIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -87,7 +139,6 @@ h4 {
   .hero-rise > *:nth-child(2) { animation-delay: 0.25s; }
   .hero-rise > *:nth-child(3) { animation-delay: 0.40s; }
   .hero-rise > *:nth-child(4) { animation-delay: 0.55s; }
-  .hero-rise > *:nth-child(5) { animation-delay: 0.70s; }
 
   @keyframes riseIn {
     from {
@@ -100,51 +151,29 @@ h4 {
     }
   }
 
-  /* 3. Welcome photos drift; the badge gives a little wobble. */
-  .float-slow {
-    animation: floatY 7s ease-in-out infinite;
+  /* 2. The hero tree sways about the foot of its trunk. */
+  .tree-sway {
+    transform-box: view-box;
+    transform-origin: 256px 436px;
+    animation: sway 6s ease-in-out infinite;
   }
 
-  .float-slow-late {
-    animation: floatY 7s ease-in-out infinite;
-    animation-delay: -3.5s;
-  }
-
-  @keyframes floatY {
+  @keyframes sway {
     0%,
     100% {
-      transform: translateY(0);
+      transform: rotate(-1.8deg);
     }
     50% {
-      transform: translateY(-12px);
+      transform: rotate(1.8deg);
     }
   }
 
-  .wobble {
-    animation: wobble 6s ease-in-out infinite;
+  /* 3. The sun gently pulses. */
+  .sun-pulse {
+    animation: pulse 5s ease-in-out infinite;
   }
 
-  @keyframes wobble {
-    0%,
-    100% {
-      transform: rotate(-4deg);
-    }
-    50% {
-      transform: rotate(4deg);
-    }
-  }
-
-  /* 4. Nurture photos breathe, each on its own offset. */
-  .breathe {
-    animation: breathe 12s ease-in-out infinite;
-  }
-
-  .breathe-1 { animation-delay: 0s; }
-  .breathe-2 { animation-delay: -3s; }
-  .breathe-3 { animation-delay: -6s; }
-  .breathe-4 { animation-delay: -9s; }
-
-  @keyframes breathe {
+  @keyframes pulse {
     0%,
     100% {
       transform: scale(1);
@@ -154,37 +183,168 @@ h4 {
     }
   }
 
-  /* 5. Moments marquee. The track holds the photos twice, so translating by
-     exactly half its width loops without a seam. */
-  .marquee-track {
-    animation: marquee 60s linear infinite;
+  /* 4. Leaves drift down and fade, each on its own clock. */
+  .leaf-fall {
+    animation: leafFall 10s ease-in infinite;
   }
 
-  .marquee:hover .marquee-track,
-  .marquee:focus-within .marquee-track {
-    animation-play-state: paused;
+  .leaf-fall-1 { animation-duration: 9s; animation-delay: -1s; }
+  .leaf-fall-2 { animation-duration: 10s; animation-delay: -4.5s; }
+  .leaf-fall-3 { animation-duration: 11s; animation-delay: -8s; }
+
+  @keyframes leafFall {
+    0% {
+      opacity: 0;
+      transform: translate(0, 0) rotate(0deg);
+    }
+    12% {
+      opacity: 1;
+    }
+    40% {
+      transform: translate(18px, 90px) rotate(70deg);
+    }
+    70% {
+      opacity: 0.9;
+      transform: translate(-14px, 170px) rotate(150deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(10px, 240px) rotate(230deg);
+    }
   }
 
-  @keyframes marquee {
+  /* 5. A bird flies across, flapping. */
+  .bird-fly {
+    animation: birdFly 16s linear infinite;
+    animation-delay: -3s;
+  }
+
+  @keyframes birdFly {
+    0% {
+      opacity: 0;
+      transform: translate(-150px, 30px);
+    }
+    8% {
+      opacity: 1;
+    }
+    50% {
+      transform: translate(200px, -10px);
+    }
+    92% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(560px, 20px);
+    }
+  }
+
+  .bird-wing {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: flap 0.6s ease-in-out infinite alternate;
+  }
+
+  @keyframes flap {
     from {
-      transform: translateX(0);
+      transform: scaleY(1);
     }
     to {
-      transform: translateX(-50%);
+      transform: scaleY(-0.35);
     }
   }
 
-  /* 6. Story hero drifts in slowly. */
-  .story-zoom {
-    animation: kenBurnsSlow 18s ease-out forwards;
+  /* 6. Gentle float for badges and photographs, with offsets. */
+  .float {
+    animation: floatY 7s ease-in-out infinite;
   }
 
-  @keyframes kenBurnsSlow {
+  .float-1 { animation-delay: 0s; }
+  .float-2 { animation-delay: -1.75s; }
+  .float-3 { animation-delay: -3.5s; }
+  .float-4 { animation-delay: -5.25s; }
+
+  @keyframes floatY {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* 7. Growth-stage plants spring up from the soil once revealed. */
+  .reveal:not(.is-visible) .plant-grow {
+    transform: scale(0);
+  }
+
+  .reveal.is-visible .plant-grow {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: growIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
+  }
+
+  @keyframes growIn {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  /* 8. Timeline leaves sprout from the branch, then sway. */
+  .reveal:not(.is-visible) .leaf-sprout {
+    transform: scale(0);
+  }
+
+  .reveal.is-visible .leaf-sprout {
+    animation:
+      growIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both,
+      leafSway 4s ease-in-out 1s infinite;
+  }
+
+  @keyframes leafSway {
+    0%,
+    100% {
+      transform: rotate(-8deg);
+    }
+    50% {
+      transform: rotate(8deg);
+    }
+  }
+
+  /* 9. Story hero: a slow Ken Burns zoom. */
+  .ken-burns {
+    animation: kenBurns 18s ease-in-out infinite alternate;
+  }
+
+  @keyframes kenBurns {
     from {
       transform: scale(1.02);
     }
     to {
-      transform: scale(1.12);
+      transform: scale(1.14);
+    }
+  }
+
+  /* 10. Leaves drifting beside the story hero photo. */
+  .leaf-drift {
+    animation: leafDrift 9s ease-in-out infinite;
+  }
+
+  .leaf-drift-late {
+    animation-delay: -4.5s;
+  }
+
+  @keyframes leafDrift {
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(-10deg);
+    }
+    50% {
+      transform: translate(12px, 22px) rotate(18deg);
     }
   }
 }

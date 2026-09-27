@@ -1,36 +1,72 @@
-<footer class="bg-ink text-white/80">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-    <div class="grid gap-10 md:grid-cols-2 items-start">
+<footer id="visit" class="on-dark bg-sage text-mist scroll-mt-24">
+  <div class="container-page py-16 sm:py-20">
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr]">
+      <!-- Who we are -->
       <div class="space-y-5">
         <app-logo [onDark]="true" />
-        <p class="text-sm leading-relaxed max-w-md">
-          {{ trust.legalName }} &middot; {{ trust.address.line3 }}, {{ trust.address.district }} -
-          {{ trust.address.pin }}, {{ trust.address.state }}
+        <p class="leading-relaxed">
+          {{ trust.legalName }}
+          <span class="block text-cream mt-1" lang="ml">{{ trust.malayalamName }}</span>
         </p>
-        <p class="text-sm">
-          <a [href]="'mailto:' + trust.email" class="hover:text-mango transition-colors break-all">
-            {{ trust.email }}
-          </a>
-          <span class="mx-2 text-white/30">|</span>
-          <a [href]="'tel:+' + trust.phoneE164" class="hover:text-mango transition-colors">{{ trust.phone }}</a>
-        </p>
-      </div>
-
-      <div class="space-y-5 md:text-right">
-        <blockquote class="font-heading text-lg sm:text-xl text-white/95 leading-snug">
+        <blockquote class="font-heading text-[20px] text-cream leading-snug max-w-sm">
           &ldquo;{{ quote.text }}&rdquo;
         </blockquote>
+        <a routerLink="/stories" class="btn btn-outline !py-2.5 !px-5 text-[15px]">{{ footer.storyLabel }}</a>
+      </div>
+
+      <!-- Where to find us -->
+      <div>
+        <h2 class="font-heading text-[24px] text-cream">{{ footer.visitHeading }}</h2>
+        <address class="mt-4 not-italic leading-relaxed flex gap-3">
+          <app-icon name="pin" class="mt-1 text-sun" />
+          <span>
+            {{ trust.address.line1 }}, {{ trust.address.line2 }}<br />
+            {{ trust.address.line3 }}<br />
+            {{ trust.address.district }} - {{ trust.address.pin }}<br />
+            {{ trust.address.state }}, {{ trust.address.country }}
+          </span>
+        </address>
         <a
-          routerLink="/stories"
-          class="inline-flex items-center gap-2 rounded-full bg-mango px-6 py-3 font-heading font-bold text-ink hover:brightness-95 transition"
+          [href]="mapsUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-4 inline-block font-bold text-cream underline underline-offset-4 decoration-sun hover:text-sun"
         >
-          Read our story
+          {{ footer.mapsLabel }}
         </a>
+      </div>
+
+      <!-- Say hello -->
+      <div>
+        <h2 class="font-heading text-[24px] text-cream">{{ footer.helloHeading }}</h2>
+        <ul class="mt-4 space-y-3">
+          @if (trust.phoneVerified) {
+            <li>
+              <a [href]="phoneUrl" class="inline-flex items-center gap-3 hover:text-sun transition-colors">
+                <app-icon name="phone" class="text-sun" />
+                {{ trust.phone }}
+              </a>
+            </li>
+          }
+          <li>
+            <a [href]="emailUrl" class="inline-flex items-center gap-3 hover:text-sun transition-colors break-all">
+              <app-icon name="mail" class="text-sun" />
+              {{ trust.email }}
+            </a>
+          </li>
+          <li class="flex gap-3">
+            <app-icon name="clock" class="mt-0.5 text-sun" />
+            <span>
+              <span class="sr-only">{{ footer.hoursLabel }}: </span>
+              {{ trust.officeHours }}
+            </span>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <p class="mt-12 pt-6 border-t border-white/10 text-xs text-white/50">
-      &copy; {{ currentYear }} {{ trust.legalName }}. Photographs by the trust.
+    <p class="mt-14 pt-6 border-t border-cream/15 text-sm">
+      &copy; {{ currentYear }} {{ trust.legalName }}. {{ footer.photoCredit }}
     </p>
   </div>
 </footer>

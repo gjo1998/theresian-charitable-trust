@@ -1,67 +1,85 @@
 <header
-  class="sticky top-0 z-40 bg-white/95 backdrop-blur-md transition-shadow duration-300"
-  [class]="scrolled() ? 'shadow-lg' : 'shadow-sm'"
+  class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md transition-shadow duration-300"
+  [class.shadow-soft]="scrolled()"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-20 gap-4">
-      <a routerLink="/" (click)="closeMenu()" aria-label="Ammaveedu, home">
-        <app-logo />
-      </a>
-
-      <!-- Desktop navigation -->
-      <nav class="hidden lg:flex items-center gap-8 text-[15px] font-semibold text-ink-soft">
-        @for (link of navLinks; track link.label) {
-          @if (link.path) {
-            <a [routerLink]="link.path" class="hover:text-leaf transition-colors">{{ link.label }}</a>
-          } @else {
-            <a routerLink="/" [fragment]="link.fragment" class="hover:text-leaf transition-colors">
-              {{ link.label }}
-            </a>
-          }
-        }
-      </nav>
-
-      <div class="flex items-center gap-2">
+  <div class="container-page">
+    @if (onStory()) {
+      <!-- Story pages: back, logo in the centre, one call to action -->
+      <div class="grid grid-cols-[1fr_auto_1fr] items-center h-20 gap-3">
         <a
           routerLink="/"
-          fragment="family"
-          (click)="closeMenu()"
-          class="hidden sm:inline-flex items-center rounded-full bg-mango px-6 py-3 font-heading font-bold text-ink hover:brightness-95 transition"
+          class="justify-self-start inline-flex items-center gap-2 rounded-full px-3 py-2 -ms-3 font-bold text-sage hover:bg-sage-soft transition-colors"
         >
-          Be family
+          <app-icon name="arrow-left" />
+          <span class="hidden sm:inline">{{ labels.backToHome }}</span>
+          <span class="sm:hidden">{{ labels.backToHomeShort }}</span>
         </a>
 
-        <button
-          type="button"
-          (click)="toggleMenu()"
-          class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full bg-leaf-soft text-leaf-deep"
-          [attr.aria-expanded]="menuOpen()"
-          aria-controls="mobileNav"
-          [attr.aria-label]="menuOpen() ? 'Close menu' : 'Open menu'"
+        <a routerLink="/" [attr.aria-label]="labels.homeAriaLabel">
+          <app-logo />
+        </a>
+
+        <a
+          [routerLink]="labels.storyCta.path"
+          [fragment]="labels.storyCta.fragment"
+          class="justify-self-end btn btn-peach !hidden md:!inline-flex !py-3 !px-6"
         >
-          @if (menuOpen()) {
-            <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true">
-              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" />
-            </svg>
-          } @else {
-            <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true">
-              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none" />
-            </svg>
-          }
-        </button>
+          {{ labels.storyCta.label }}
+        </a>
       </div>
-    </div>
+    } @else {
+      <div class="flex items-center justify-between h-20 gap-4">
+        <a routerLink="/" (click)="closeMenu()" [attr.aria-label]="labels.homeAriaLabel">
+          <app-logo />
+        </a>
+
+        <!-- Desktop navigation -->
+        <nav class="hidden lg:flex items-center gap-9 text-[16px] font-bold text-ink">
+          @for (link of navLinks; track link.label) {
+            @if (link.path) {
+              <a [routerLink]="link.path" class="hover:text-sage transition-colors">{{ link.label }}</a>
+            } @else {
+              <a routerLink="/" [fragment]="link.fragment" class="hover:text-sage transition-colors">
+                {{ link.label }}
+              </a>
+            }
+          }
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <a
+            [routerLink]="cta.path"
+            [fragment]="cta.fragment"
+            (click)="closeMenu()"
+            class="btn btn-peach !hidden sm:!inline-flex !py-3 !px-6"
+          >
+            {{ cta.label }}
+          </a>
+
+          <button
+            type="button"
+            (click)="toggleMenu()"
+            class="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full bg-sage-soft text-sage"
+            [attr.aria-expanded]="menuOpen()"
+            aria-controls="mobileNav"
+            [attr.aria-label]="menuOpen() ? labels.closeMenu : labels.openMenu"
+          >
+            <app-icon [name]="menuOpen() ? 'close' : 'menu'" [size]="24" />
+          </button>
+        </div>
+      </div>
+    }
   </div>
 
-  <!-- Mobile menu -->
-  @if (menuOpen()) {
-    <nav id="mobileNav" class="lg:hidden bg-white border-t border-leaf-soft px-4 py-4 space-y-1 shadow-xl">
+  <!-- Mobile drawer -->
+  @if (menuOpen() && !onStory()) {
+    <nav id="mobileNav" class="lg:hidden bg-cream border-t border-sage-soft px-4 py-4 space-y-1 shadow-soft">
       @for (link of navLinks; track link.label) {
         @if (link.path) {
           <a
             [routerLink]="link.path"
             (click)="closeMenu()"
-            class="block rounded-2xl px-4 py-3 font-semibold text-ink hover:bg-leaf-soft"
+            class="block rounded-2xl px-4 py-3 font-bold text-ink hover:bg-sage-soft"
           >
             {{ link.label }}
           </a>
@@ -70,19 +88,19 @@
             routerLink="/"
             [fragment]="link.fragment"
             (click)="closeMenu()"
-            class="block rounded-2xl px-4 py-3 font-semibold text-ink hover:bg-leaf-soft"
+            class="block rounded-2xl px-4 py-3 font-bold text-ink hover:bg-sage-soft"
           >
             {{ link.label }}
           </a>
         }
       }
       <a
-        routerLink="/"
-        fragment="family"
+        [routerLink]="cta.path"
+        [fragment]="cta.fragment"
         (click)="closeMenu()"
-        class="block text-center rounded-full bg-mango px-6 py-3 font-heading font-bold text-ink"
+        class="btn btn-peach w-full mt-2"
       >
-        Be family
+        {{ cta.label }}
       </a>
     </nav>
   }

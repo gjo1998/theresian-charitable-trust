@@ -1,6 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { NURTURE_PILLARS } from '../../../../core/data/site-content';
+import { NURTURE_INTRO, NURTURE_PILLARS } from '../../../../core/data/site-content';
+import { Tone } from '../../../../core/models/content.models';
 import { RevealDirective } from '../../../../shared/directives/reveal.directive';
+
+const RING: Record<Tone, string> = {
+  peach: 'border-peach',
+  sun: 'border-sun',
+  mint: 'border-leaf-300',
+  sky: 'border-sky',
+  sage: 'border-sage-soft',
+};
 
 @Component({
   selector: 'app-nurture',
@@ -8,51 +17,45 @@ import { RevealDirective } from '../../../../shared/directives/reveal.directive'
   imports: [RevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section id="nurture" class="py-20 sm:py-28 bg-mango-soft scroll-mt-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div appReveal class="max-w-3xl mx-auto text-center">
-          <h2 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-ink leading-tight">
-            How we nurture every child
-          </h2>
-          <p class="mt-5 text-lg text-ink-soft leading-relaxed">
-            Four simple things, given with a lot of love, help a boy grow strong in body, mind and heart.
-          </p>
+    <section id="nurture" class="on-dark bg-sage text-mist py-20 sm:py-28 scroll-mt-20">
+      <div class="container-page">
+        <div appReveal class="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
+          <div>
+            <p class="eyebrow">{{ intro.eyebrow }}</p>
+            <h2 class="section-title mt-3">{{ intro.title }}</h2>
+          </div>
+          <p class="text-[18px] sm:text-[20px] leading-relaxed lg:pb-2">{{ intro.lead }}</p>
         </div>
 
-        <div class="mt-14 grid gap-7 sm:grid-cols-2 xl:grid-cols-4">
-          @for (pillar of NURTURE; track pillar.id; let i = $index) {
-            <article
-              [appReveal]="i * 90"
-              class="bg-white rounded-card overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-300 border-t-8"
-              [class]="pillar.accentBorder"
+        <ul class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+          @for (pillar of pillars; track pillar.id; let i = $index) {
+            <li
+              [appReveal]="i * 100"
+              class="grid grid-cols-[84px_1fr] items-start gap-5 sm:grid-cols-1 sm:gap-0 sm:text-center"
             >
-              <div class="relative aspect-square overflow-hidden">
-                <img
-                  [src]="pillar.image"
-                  [alt]="pillar.imageAlt"
-                  class="breathe w-full h-full object-cover"
-                  [class]="pillar.breatheClass"
-                  loading="lazy"
-                />
-                <span
-                  class="absolute top-4 left-4 rounded-full px-3.5 py-1.5 text-xs font-heading font-bold shadow"
-                  [class]="pillar.accentBadge"
-                >
-                  {{ pillar.badge }}
-                </span>
+              <div
+                class="float w-[84px] h-[84px] sm:w-[150px] sm:h-[150px] sm:mx-auto rounded-full overflow-hidden border-[4px] sm:border-[6px]"
+                [class]="ringFor(pillar.ring) + ' float-' + (i + 1)"
+              >
+                <img [src]="pillar.image" [alt]="pillar.imageAlt" class="w-full h-full object-cover" loading="lazy" />
               </div>
-
-              <div class="p-6">
-                <h3 class="font-heading font-bold text-xl text-ink">{{ pillar.title }}</h3>
-                <p class="mt-2.5 text-[15px] text-ink-soft leading-relaxed">{{ pillar.body }}</p>
+              <div class="sm:mt-6">
+                <p class="text-[13px] font-bold uppercase tracking-[2px] text-sun">{{ pillar.badge }}</p>
+                <h3 class="mt-1.5 font-heading text-[24px] sm:text-[26px] leading-tight text-cream">{{ pillar.title }}</h3>
+                <p class="mt-2.5 text-[16px] leading-relaxed">{{ pillar.body }}</p>
               </div>
-            </article>
+            </li>
           }
-        </div>
+        </ul>
       </div>
     </section>
   `,
 })
 export class NurtureComponent {
-  readonly NURTURE = NURTURE_PILLARS;
+  readonly intro = NURTURE_INTRO;
+  readonly pillars = NURTURE_PILLARS;
+
+  ringFor(tone: Tone): string {
+    return RING[tone];
+  }
 }

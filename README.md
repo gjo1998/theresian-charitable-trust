@@ -35,35 +35,56 @@ the safeguarding decision the trust needs to make.
 ```
 src/app/
   core/
-    data/        site-content.ts, stories.ts
-    models/      content.models.ts, story.model.ts
-    services/    ui.service.ts  (the mobile drawer)
+    data/          site-content.ts, stories.ts
+    models/        content.models.ts, story.model.ts
+    services/      ui.service.ts  (the mobile drawer)
+    contact-links.ts  builds every mailto:, wa.me, tel: and Maps link
   shared/
-    components/  logo, site-header, site-footer, contact-fab
+    components/  logo, icon, plant, site-header, site-footer, contact-fab
     directives/  reveal.directive.ts
   features/
-    home/        hero, welcome, nurture, moments, story-teaser, family, visit
-    story/       the full story at /stories
+    home/        hero, nurture, growth, story-teaser, family
+    story/       /stories (timeline), chapter/ (/stories/:slug),
+                 chapter-visual, story-body
 ```
 
-The home page is short, warm and photo-led. The full history lives on `/stories`
-for anyone who wants to read it.
+The home page is short and bright: the growing tree, what we give a child, how
+a boy grows up here, a taste of the story and ways to join in. The footer
+doubles as the "Visit" section. The full history lives on `/stories`, and each
+chapter also has its own page at `/stories/<slug>` with previous/next links.
 
 ## Design system
 
-| | |
-| --- | --- |
-| Leaf | `#1F7A4D`, deep `#135437`, soft `#E3F3E9` |
-| Mango | `#FFC53D`, soft `#FFF4D1` |
-| Hibiscus | `#E8456A`, soft `#FDE4EA` |
-| Sky | `#3E9FD6`, soft `#E3F3FB` |
-| Ink | `#1E2A3F`, soft `#4D5A70` |
+"Growing Tree": warm cream pages, deep sage for headings and dark sections,
+peach for the main call to action.
 
-Headings use **Baloo Chettan 2**, which carries Malayalam as well as Latin;
-body text uses **Nunito Sans**. Buttons are pills; cards use a 26px radius
-(`rounded-card`) and no heavy borders. Mango with ink text is the primary
-action, leaf with white the secondary, and a white outline for ghost buttons on
-photographs.
+| Token | Value | Use |
+| --- | --- | --- |
+| `cream` | `#FBF7EE` | Page background (white `#FFFFFF` for cards) |
+| `sage` | `#2F5D46`, dark `#1D3E2E`, soft `#DDEBDF` | Headings, dark sections, sage buttons (white text); hover; soft cards and chips |
+| `leaf-600/500/400/300` | `#4F8A62` `#6AA37A` `#7FB38C` `#9FD0AD` | Illustrations only |
+| `peach` | `#F4A77C`, soft `#FBE6D6` | Primary CTA (ink text on it); soft cards |
+| `sun` | `#FBD46B`, soft `#FFF1C9` | Sun, fruit, labels and focus ring on sage; soft cards |
+| `bark` / `ground` | `#8A5A3B` / `#E6DCC4` | Trunks, the story branch; the ground |
+| `sky` | `#A9D4EA` | One decorative photo ring |
+| `ink` | `#23302A`, muted `#52605A` | Body text; secondary text |
+| `mist` | `#CFE2D5` | Light text on sage |
+| `clay` | `#B4572A` | Eyebrow labels (uppercase, 2px tracking, 15px bold) and focus ring. Cream or white backgrounds only |
+
+**Type.** Headings use **Young Serif** (400), large and airy: hero 40px on
+phones up to 76px on wide screens, section titles up to 54px (`.section-title`).
+Body text uses **Nunito Sans** (400/600/700/800). Both come from Google Fonts.
+
+**Shapes.** Pill buttons (`.btn` with `.btn-sage`, `.btn-peach`, `.btn-cream`,
+`.btn-outline`); cards at 32px (`rounded-card`) and 40px (`rounded-card-lg`);
+photos in soft frames: circles, arch tops (`rounded-arch`) and one leaf corner
+(`rounded-leaf-corner`), with a white border (`.photo-frame`). No heavy borders,
+no gradients, no emoji. Icons are inline SVG (`shared/components/icon`).
+
+**Contrast.** Checked against WCAG: ink on cream is about 13:1, muted on cream
+6.2:1, clay on cream 4.5:1, mist on sage 5.6:1, sun on sage 5.3:1, ink on peach
+7:1. Clay does not pass on sage-soft or peach-soft, so it isn't used there. On
+the peach card, text is ink rather than muted or sage.
 
 ## Motion
 
@@ -71,32 +92,40 @@ All CSS, no animation library.
 
 | Effect | Where |
 | --- | --- |
-| Hero slideshow — 7s crossfade, 1.6s fade, Ken Burns 1.02→1.14 over 9s | `hero.component.ts`, `.slide`, `kenBurns` |
 | Hero copy rising in, staggered 0.15s | `.hero-rise` |
-| Welcome photos floating, "27 brothers" badge wobbling | `.float-slow`, `.float-slow-late`, `.wobble` |
-| Nurture photos breathing, each offset | `.breathe`, `.breathe-1`..`-4` |
-| Moments marquee — 60s, duplicated track, pauses on hover/focus | `.marquee`, `.marquee-track` |
+| Tree crown sways ±1.8° about the foot of the trunk, 6s | `.tree-sway` |
+| Sun pulses gently, 5s | `.sun-pulse` |
+| Three leaves drift down and fade, 9s / 10s / 11s, staggered | `.leaf-fall`, `.leaf-fall-1`..`-3` |
+| Bird flies across the hero (16s) with flapping wings (0.6s) | `.bird-fly`, `.bird-wing` |
+| Hero badges, nurture photos, teaser and chapter photos float, offset | `.float`, `.float-1`..`-4` |
+| Growth-stage plants spring up from the soil on reveal | `.plant-grow` |
+| Timeline leaves sprout from the branch on reveal, then sway | `.leaf-sprout` |
+| Story hero Ken Burns, 1.02→1.14, 18s alternate | `.ken-burns` |
+| Leaves drifting beside the story hero photo | `.leaf-drift` |
 | Scroll reveals | `shared/directives/reveal.directive.ts` |
-| Story hero slow zoom | `.story-zoom` |
 
 **Every keyframe animation sits inside `@media (prefers-reduced-motion:
-no-preference)`**, so a visitor who has asked for less motion gets a completely
-still page rather than a slowed-down one. The hero slideshow also stops
-advancing. Verified under emulation: every animation reports `none`, hero copy
-sits at opacity 1, and all reveals render visible.
+no-preference)`**, including the "hidden before reveal" states of the plants
+and leaves. A visitor who has asked for less motion gets a completely still
+page, and nothing on it is hidden. Checked under emulation at 1280px and 390px:
+`document.getAnimations()` is empty and every reveal renders at opacity 1.
 
 ## Accessibility
 
-- 3px hibiscus focus ring (`#E8456A`) on `:focus-visible`, verified by tabbing
-- Meaningful `alt` on every photograph; decorative hero layers are `aria-hidden`
-- Slideshow dots are real buttons with `aria-label` and `aria-current`; the
-  caption is `aria-live="polite"`
-- Grids collapse at 980px and 560px; buttons go full width on small phones
-- Checked at 1280px and 390px: no horizontal overflow, all images load
+- 3px clay focus ring on `:focus-visible`, turning sun yellow inside sage
+  sections (`.on-dark`)
+- Meaningful `alt` on every photograph; the hero tree is one labelled
+  `role="img"`; icons, plants, leaves and the branch are `aria-hidden`
+- Real links and buttons throughout; the family cards are whole-card links
+- Single column on phones: the tree sits above the headline, buttons go full
+  width, pillars become rows, growth stages a 2×2 grid, and the timeline branch
+  moves to the left edge
+- Checked at 390, 560, 980 and 1280px on home, story and chapter pages: no
+  horizontal overflow, all images load
 
 ## Safety rules
 
 No payment form, no bank or UPI details anywhere on the site. Giving goes
 through Fr. Sebastian directly — email, WhatsApp or phone — so a donor always
 knows where the details came from. The Be-part-of-the-family section says so
-explicitly.
+explicitly, and the note stays visible under its title.

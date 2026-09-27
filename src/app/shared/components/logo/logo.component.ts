@@ -1,47 +1,33 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { TRUST } from '../../../core/data/site-content';
 
-/** A little mango house with a hibiscus heart inside it. */
+/** A small sprout in a sage-soft circle, beside the home's name. */
 @Component({
   selector: 'app-logo',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <span class="inline-flex items-center gap-3">
-      <svg
-        viewBox="0 0 48 48"
-        class="shrink-0"
-        [class]="size() === 'sm' ? 'w-10 h-10' : 'w-12 h-12'"
-        role="img"
-        aria-label="Ammaveedu"
+    <span class="inline-flex items-center gap-2.5">
+      <span
+        class="inline-flex items-center justify-center w-11 h-11 rounded-full bg-sage-soft shrink-0"
+        aria-hidden="true"
       >
-        <path d="M24 3 45 21v3H3v-3L24 3Z" fill="#FFC53D" />
-        <rect x="8" y="22" width="32" height="23" rx="4" fill="#FFC53D" />
-        <path
-          d="M24 40c-5.6-4.1-8.4-6.9-8.4-10.2a4.6 4.6 0 0 1 8.4-2.7 4.6 4.6 0 0 1 8.4 2.7c0 3.3-2.8 6.1-8.4 10.2Z"
-          fill="#E8456A"
-        />
-      </svg>
-
-      <span class="leading-tight">
-        <span
-          class="block font-heading font-extrabold tracking-tight"
-          [class]="onDark() ? 'text-white' : 'text-ink'"
-          [class.text-2xl]="size() !== 'sm'"
-          [class.text-xl]="size() === 'sm'"
-        >
-          Ammaveedu
-        </span>
-        <span
-          class="block text-[11px] font-semibold uppercase tracking-wider"
-          [class]="onDark() ? 'text-mango' : 'text-leaf'"
-        >
-          Theresian Charitable Trust
-        </span>
+        <svg viewBox="0 0 32 32" class="w-7 h-7" aria-hidden="true" focusable="false">
+          <path d="M16 28V15" stroke="#2F5D46" stroke-width="2.4" stroke-linecap="round" fill="none" />
+          <path d="M16 16c0-5.5 3.4-8.8 9.5-8.8 0 6-3.4 8.8-9.5 8.8Z" fill="#4F8A62" />
+          <path d="M16 19.5c0-4.4-2.7-7.2-7.8-7.2 0 4.9 2.7 7.2 7.8 7.2Z" fill="#7FB38C" />
+        </svg>
+      </span>
+      <span
+        class="font-heading text-[24px] leading-none"
+        [class]="onDark() ? 'text-cream' : 'text-sage'"
+      >
+        {{ name }}
       </span>
     </span>
   `,
 })
 export class LogoComponent {
-  readonly size = input<'sm' | 'md'>('md');
   readonly onDark = input(false);
+  readonly name = TRUST.alsoKnownAs;
 }
