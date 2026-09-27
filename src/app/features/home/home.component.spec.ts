@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { FAMILY_WAYS, GIVING_NOTE, NURTURE_PILLARS, TRUST } from '../../core/data/site-content';
+import { FAMILY_WAYS, GIVING_NOTE, HELPING_AREAS, HELPING_MOMENTS, NURTURE_PILLARS, TRUST } from '../../core/data/site-content';
 import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {
@@ -18,11 +18,12 @@ describe('HomeComponent', () => {
     element = fixture.nativeElement;
   });
 
-  it('shows the sections in order: hero, nurture, growth, story, family', () => {
+  it('shows the sections in order: hero, nurture, helping, growth, story, family', () => {
     const tags = Array.from(element.children).map((child) => child.tagName.toLowerCase());
     expect(tags).toEqual([
       'app-hero',
       'app-nurture',
+      'app-helping',
       'app-growth',
       'app-team',
       'app-story-teaser',
@@ -47,8 +48,11 @@ describe('HomeComponent', () => {
 
   it('labels each illustration and hides decorative SVGs', () => {
     const drawings = element.querySelectorAll('svg[role="img"]');
-    expect(drawings.length).toBe(3); // tree, guiding path, watering
+    expect(drawings.length).toBe(3 + HELPING_MOMENTS.length); // hero tree, guiding path, watering, one per nurture card
     drawings.forEach((svg) => expect(svg.getAttribute('aria-label')).toBeTruthy());
+
+    // The photo blended in behind the tree keeps its own alt text.
+    expect(element.querySelector<HTMLImageElement>('app-hero img')!.alt.length).toBeGreaterThan(0);
     element.querySelectorAll('app-icon, app-plant').forEach((icon) => {
       expect(icon.getAttribute('aria-hidden')).toBe('true');
     });
@@ -58,6 +62,20 @@ describe('HomeComponent', () => {
     const photos = element.querySelectorAll<HTMLImageElement>('#nurture img');
     expect(photos.length).toBe(NURTURE_PILLARS.length);
     photos.forEach((img) => expect(img.alt.length).toBeGreaterThan(0));
+  });
+
+  it('shows the five ways a child grows, and one card per thing we nurture, each with its own drawing', () => {
+    const areas = Array.from(element.querySelectorAll('#helping ul[aria-label] li')).map((li) => li.textContent!.trim());
+    expect(areas).toEqual(HELPING_AREAS);
+
+    const cards = element.querySelectorAll('#helping h3');
+    expect(cards.length).toBe(HELPING_MOMENTS.length);
+    HELPING_MOMENTS.forEach((moment, i) => {
+      const card = cards[i].closest('li')!;
+      expect(cards[i].textContent).toContain(moment.title);
+      expect(HELPING_AREAS).toContain(moment.area);
+      expect(card.querySelector('svg')!.getAttribute('aria-label')).toBe(moment.illustrationLabel);
+    });
   });
 
   it('shows four growth stages, each with a plant', () => {

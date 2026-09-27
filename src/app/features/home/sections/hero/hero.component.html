@@ -1,11 +1,14 @@
 <section data-hides-fab class="relative overflow-hidden bg-cream">
-  <div class="container-page pt-8 pb-16 sm:pt-12 lg:pt-16 lg:pb-24">
+  <div class="container-page pt-8 pb-16 sm:pt-12 lg:pt-[min(4rem,5svh)] lg:pb-20">
     <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
       <!-- Copy: first on every screen, so the headline and button show without scrolling -->
       <div class="hero-rise">
         <p class="eyebrow">{{ hero().eyebrow }}</p>
 
-        <h1 class="mt-4 font-heading text-[40px] sm:text-[56px] lg:text-[64px] xl:text-[76px] leading-[1.05] text-sage">
+        <!-- On wide but short screens the headline also follows the height, so the buttons stay in view -->
+        <h1
+          class="mt-4 font-heading text-[40px] sm:text-[56px] lg:text-[min(64px,7.4svh)] xl:text-[min(76px,7.4svh)] leading-[1.05] text-sage"
+        >
           {{ hero().title }}
         </h1>
 
@@ -33,50 +36,157 @@
       </div>
 
       <!-- Picture -->
-      <div class="relative mx-auto w-full max-w-[400px] sm:max-w-[480px] lg:max-w-none">
+      <div
+        class="relative mx-auto w-full max-w-[420px] sm:max-w-[500px] lg:max-w-[min(100%,calc((100svh-8rem)*0.9375))]"
+      >
         @if (hero().heroPhoto; as photo) {
-          <!-- The real home in an arch, with the tree as a small accent in front -->
-          <figure class="relative ms-auto w-[82%] lg:w-[80%]">
-            <div class="photo-frame rounded-arch aspect-[4/5]">
+          @if (photo.style === 'background') {
+          <!--
+            The home, faded softly into the page behind the tree. It stays
+            within the picture area, so the headline sits on plain cream.
+          -->
+          <div class="relative isolate">
+            <div class="hero-photo-blend absolute -inset-x-[12%] -top-[8%] -bottom-[4%] -z-10 overflow-hidden">
               <img
                 [appPhoto]="photo.image"
                 [alt]="photo.alt"
                 [focalPoint]="photo.focalPoint"
                 [capped]="false"
                 [priority]="true"
-                class="w-full h-full object-cover"
+                class="ken-burns w-full h-full object-cover"
               />
             </div>
+            <ng-container [ngTemplateOutlet]="tree" />
             @if (photo.caption) {
-              <figcaption
-                class="absolute bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white/95 px-4 py-1.5 text-[14px] font-bold text-sage shadow-soft"
+              <p
+                class="absolute bottom-[3%] right-0 sm:right-auto sm:left-0 rounded-full bg-white/95 px-4 py-1.5 text-[13px] sm:text-[14px] font-bold text-sage shadow-soft"
               >
                 {{ photo.caption }}
-              </figcaption>
+              </p>
             }
-          </figure>
-          <div class="absolute -bottom-6 -left-2 w-[48%] sm:w-[46%]">
-            <ng-container [ngTemplateOutlet]="tree" />
           </div>
+          } @else {
+          <!--
+            One scene: the photo of the home is a window inside the tree. The
+            canopy, trunk and ground sit behind it; a few leaves overlap its edges.
+          -->
+          <div class="relative aspect-[600/640]">
+            <!-- Behind the photo -->
+            <svg viewBox="0 0 600 640" class="absolute inset-0 w-full h-full" aria-hidden="true" focusable="false">
+              <g class="svg-part sun-pulse">
+                <circle cx="536" cy="74" r="50" fill="#FFF1C9" />
+                <circle cx="536" cy="74" r="30" fill="#FBD46B" />
+              </g>
+
+              <ellipse cx="300" cy="612" rx="276" ry="26" fill="#E6DCC4" />
+              <ellipse cx="120" cy="606" rx="30" ry="7" fill="#9FD0AD" />
+              <ellipse cx="486" cy="608" rx="36" ry="8" fill="#9FD0AD" />
+
+              <g class="canopy-sway">
+                <!-- Trunk rising from the ground, branches reaching past the frame -->
+                <path d="M270 614c8-34 12-74 10-120h40c-2 46 2 86 10 120Z" fill="#8A5A3B" />
+                <path
+                  d="M292 546c-60-8-130-40-180-100M308 546c60-8 130-40 180-100"
+                  stroke="#8A5A3B"
+                  stroke-width="12"
+                  stroke-linecap="round"
+                  fill="none"
+                />
+
+                <!-- Canopy, around and behind the arch -->
+                <circle cx="300" cy="160" r="150" fill="#4F8A62" />
+                <circle cx="150" cy="236" r="106" fill="#6AA37A" />
+                <circle cx="452" cy="226" r="106" fill="#6AA37A" />
+                <circle cx="206" cy="100" r="86" fill="#7FB38C" />
+                <circle cx="396" cy="96" r="86" fill="#7FB38C" />
+                <circle cx="300" cy="46" r="62" fill="#9FD0AD" />
+                <circle cx="92" cy="344" r="72" fill="#7FB38C" />
+                <circle cx="510" cy="336" r="72" fill="#9FD0AD" />
+                <circle cx="96" cy="440" r="50" fill="#6AA37A" />
+                <circle cx="504" cy="440" r="50" fill="#7FB38C" />
+
+                <circle cx="116" cy="198" r="10" fill="#F4A77C" />
+                <circle cx="478" cy="158" r="10" fill="#FBD46B" />
+                <circle cx="226" cy="40" r="9" fill="#F4A77C" />
+                <circle cx="376" cy="30" r="9" fill="#FBD46B" />
+                <circle cx="528" cy="304" r="10" fill="#F4A77C" />
+                <circle cx="70" cy="330" r="9" fill="#FBD46B" />
+                <circle cx="82" cy="452" r="8" fill="#F4A77C" />
+                <circle cx="520" cy="452" r="8" fill="#FBD46B" />
+              </g>
+
+              <path d="M40 614l3-9 3 9 3-11 3 11M540 616l3-8 3 8 3-10 3 10" stroke="#4F8A62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            </svg>
+
+            <!-- The photo, in its arch -->
+            <figure class="absolute left-[20%] top-[11%] w-[60%]">
+              <div class="photo-frame rounded-arch aspect-[4/5]">
+                <img
+                  [appPhoto]="photo.image"
+                  [alt]="photo.alt"
+                  [focalPoint]="photo.focalPoint"
+                  [capped]="false"
+                  [priority]="true"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              @if (photo.caption) {
+                <figcaption
+                  class="absolute bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white/95 px-4 py-1.5 text-[13px] sm:text-[14px] font-bold text-sage shadow-soft"
+                >
+                  {{ photo.caption }}
+                </figcaption>
+              }
+            </figure>
+
+            <!-- In front: leaves over the frame's edges, falling leaves, a bird -->
+            <svg
+              viewBox="0 0 600 640"
+              class="absolute inset-0 w-full h-full pointer-events-none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <g class="canopy-sway">
+                <circle cx="124" cy="498" r="30" fill="#6AA37A" />
+                <circle cx="146" cy="526" r="20" fill="#9FD0AD" />
+                <circle cx="118" cy="500" r="7" fill="#FBD46B" />
+                <circle cx="484" cy="176" r="28" fill="#7FB38C" />
+                <circle cx="470" cy="150" r="18" fill="#9FD0AD" />
+                <circle cx="492" cy="178" r="7" fill="#F4A77C" />
+              </g>
+              <path class="svg-part leaf-fall leaf-fall-1" d="M90 300c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#6AA37A" />
+              <path class="svg-part leaf-fall leaf-fall-2" d="M500 260c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#9FD0AD" />
+              <path class="svg-part leaf-fall leaf-fall-3" d="M470 400c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#7FB38C" />
+              <g transform="translate(40 120)">
+                <g class="bird-fly">
+                  <path class="bird-wing" d="M0 10c6-10 14-12 20-2" stroke="#2F5D46" stroke-width="3.5" stroke-linecap="round" fill="none" />
+                  <path class="bird-wing" d="M20 8c6-10 14-8 20 2" stroke="#2F5D46" stroke-width="3.5" stroke-linecap="round" fill="none" />
+                </g>
+              </g>
+            </svg>
+          </div>
+          }
         } @else {
           <ng-container [ngTemplateOutlet]="tree" />
         }
 
-        <!-- Floating badges -->
-        @for (badge of hero().badges; track badge.strong; let i = $index) {
-          <div
-            class="float absolute flex items-center gap-2.5 rounded-full bg-white shadow-soft ps-2 pe-4 py-2 text-[14px] sm:text-[15px] text-ink"
-            [class]="i === 0 ? 'float-1 top-[6%] left-0 sm:-left-2' : 'float-3 top-[46%] right-0 sm:-right-3'"
-          >
-            <span
-              class="w-9 h-9 rounded-full flex items-center justify-center"
-              [class]="i === 0 ? 'bg-peach-soft text-clay' : 'bg-sage-soft text-sage'"
+        <!-- Badges: floating over the scene from 640px; a tidy row beneath it on phones -->
+        <div class="mt-4 flex flex-wrap justify-center gap-2 sm:mt-0 sm:contents">
+          @for (badge of hero().badges; track badge.strong; let i = $index) {
+            <div
+              class="float flex items-center gap-2.5 rounded-full bg-white shadow-soft ps-2 pe-4 py-2 text-[14px] sm:text-[15px] text-ink sm:absolute"
+              [class]="i === 0 ? 'float-1 sm:top-[4%] sm:left-0' : 'float-3 sm:top-[83%] sm:right-0'"
             >
-              <app-icon [name]="i === 0 ? 'heart' : 'sprout'" [size]="18" />
-            </span>
-            <span><strong class="font-extrabold">{{ badge.strong }}</strong> {{ badge.rest }}</span>
-          </div>
-        }
+              <span
+                class="w-9 h-9 rounded-full flex items-center justify-center"
+                [class]="i === 0 ? 'bg-peach-soft text-clay' : 'bg-sage-soft text-sage'"
+              >
+                <app-icon [name]="i === 0 ? 'heart' : 'sprout'" [size]="18" />
+              </span>
+              <span><strong class="font-extrabold">{{ badge.strong }}</strong> {{ badge.rest }}</span>
+            </div>
+          }
+        </div>
       </div>
     </div>
   </div>

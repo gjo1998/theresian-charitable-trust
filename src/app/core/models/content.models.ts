@@ -73,8 +73,12 @@ export interface HomeHero {
   body: string;
   primaryCta: Cta;
   secondaryCta: Cta;
-  /** A real photograph in a large arch beside the illustrated tree. */
-  heroPhoto?: Photo & { caption?: string };
+  /**
+   * A real photograph with the illustrated tree.
+   * 'background': faded softly into the page behind the tree.
+   * 'window' (default): framed in an arch, set into the tree's canopy.
+   */
+  heroPhoto?: Photo & { caption?: string; style?: 'background' | 'window' };
   /** Short lines on the white badges floating over the picture. */
   badges: { strong: string; rest: string }[];
   /** Describes the illustration for screen readers. */
@@ -87,6 +91,34 @@ export interface SectionIntro {
   lead?: string;
   /** Describes the section's drawing for screen readers, when it has one. */
   illustrationLabel?: string;
+}
+
+/** Which drawing a "well-rounded child" card shows, one per area. */
+export type GrowingScene =
+  | 'kindness'
+  | 'feelings'
+  | 'routine'
+  | 'health'
+  | 'learning'
+  | 'respect'
+  | 'responsibility'
+  | 'money'
+  | 'honesty'
+  | 'talking';
+
+/** The five ways a child grows, used as tags on the cards. */
+export type GrowingArea = 'Morally' | 'Physically' | 'Mentally' | 'Emotionally' | 'Socially';
+
+/** One thing we nurture in every boy, told beside a small drawing. */
+export interface GrowingMoment {
+  id: GrowingScene;
+  area: GrowingArea;
+  title: string;
+  body: string;
+  /** The soft wash behind the drawing. */
+  tone: Tone;
+  /** Describes the drawing for screen readers. */
+  illustrationLabel: string;
 }
 
 /** One of the four things the home gives a child. */

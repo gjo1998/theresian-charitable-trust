@@ -130,6 +130,21 @@ h4 {
   pointer-events: none;
 }
 
+/* The hero's background photo: faded, warmed into the cream page, and
+   feathered at the edges with a mask (a soft edge, not a colour gradient). */
+.hero-photo-blend {
+  isolation: isolate;
+  background-color: theme('colors.cream');
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 45%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 45%, transparent 100%);
+}
+
+.hero-photo-blend img {
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  filter: saturate(0.75) sepia(0.12);
+}
+
 /* SVG parts that move about their own centre or a set point. */
 .svg-part {
   transform-box: fill-box;
@@ -181,6 +196,23 @@ h4 {
     }
     50% {
       transform: rotate(1.8deg);
+    }
+  }
+
+  /* 2b. The blended hero: canopy and branches sway about the trunk's foot. */
+  .canopy-sway {
+    transform-box: view-box;
+    transform-origin: 300px 614px;
+    animation: canopySway 7s ease-in-out infinite;
+  }
+
+  @keyframes canopySway {
+    0%,
+    100% {
+      transform: rotate(-1deg);
+    }
+    50% {
+      transform: rotate(1deg);
     }
   }
 
@@ -444,6 +476,18 @@ h4 {
     100% {
       opacity: 0;
       transform: translate(10px, 64px);
+    }
+  }
+
+  /* Helping them grow: the bicycle's spokes turn as the boy rides. */
+  .wheel-spin {
+    transform-origin: 50% 50%;
+    animation: wheelSpin 1.6s linear infinite;
+  }
+
+  @keyframes wheelSpin {
+    to {
+      transform: rotate(360deg);
     }
   }
 

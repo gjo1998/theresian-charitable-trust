@@ -151,12 +151,24 @@ describe('Optional content blocks', () => {
   });
 
   describe('hero photo', () => {
-    it('shows the photo in its arch when set', async () => {
-      const element = await render(HeroComponent);
-      const img = element.querySelector('figure img')!;
-      expect(img.getAttribute('src')).toBe(HOME_HERO.heroPhoto!.image);
+    it('blends the photo in behind the full tree in "background" style', async () => {
+      const photo = { ...HOME_HERO.heroPhoto!, style: 'background' as const };
+      const element = await render(HeroComponent, { hero: { ...HOME_HERO, heroPhoto: photo } });
+      const img = element.querySelector('.hero-photo-blend img')!;
+      expect(img.getAttribute('src')).toBe(photo.image);
       expect(img.getAttribute('alt')!.length).toBeGreaterThan(0);
+      expect(img.getAttribute('fetchpriority')).toBe('high');
+      expect(element.querySelector('svg[role="img"]')).toBeTruthy();
+      expect(element.textContent).toContain(photo.caption!);
+    });
+
+    it('sets the photo in an arch inside the tree in "window" style', async () => {
+      const photo = { ...HOME_HERO.heroPhoto!, style: 'window' as const };
+      const element = await render(HeroComponent, { hero: { ...HOME_HERO, heroPhoto: photo } });
+      const img = element.querySelector('figure img')!;
+      expect(img.getAttribute('src')).toBe(photo.image);
       expect(element.querySelector('figcaption')).toBeTruthy();
+      expect(element.querySelector('.hero-photo-blend')).toBeNull();
     });
 
     it('falls back to the full tree, with no empty frame, when unset', async () => {

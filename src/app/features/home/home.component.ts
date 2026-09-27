@@ -4,6 +4,7 @@ import { SeoService } from '../../core/services/seo.service';
 import { AlumniComponent } from './sections/alumni/alumni.component';
 import { FamilyComponent } from './sections/family/family.component';
 import { GrowthComponent } from './sections/growth/growth.component';
+import { HelpingComponent } from './sections/helping/helping.component';
 import { HeroComponent } from './sections/hero/hero.component';
 import { NurtureComponent } from './sections/nurture/nurture.component';
 import { StoryTeaserComponent } from './sections/story-teaser/story-teaser.component';
@@ -16,6 +17,7 @@ import { UpdatesComponent } from './sections/updates/updates.component';
   imports: [
     HeroComponent,
     NurtureComponent,
+    HelpingComponent,
     GrowthComponent,
     TeamComponent,
     StoryTeaserComponent,
@@ -27,6 +29,7 @@ import { UpdatesComponent } from './sections/updates/updates.component';
   template: `
     <app-hero />
     <app-nurture />
+    <app-helping />
     <app-growth />
     <app-team />
     <app-story-teaser />

@@ -39,7 +39,7 @@ at all** while empty: no heading, no gap.
 
 | Field (in `site-content.ts`) | Shows as |
 | --- | --- |
-| `HOME_HERO.heroPhoto` | The large arch photo in the home hero (set to the building). Remove it and the full illustrated tree takes its place. |
+| `HOME_HERO.heroPhoto` | A real photo with the hero tree (set to the building). `style: 'background'` (current) fades it softly into the page behind the tree; `style: 'window'` sets it in an arch inside the tree's canopy, which suits a photo of people better. Remove it and the tree stands alone. |
 | `ALUMNI` | "Where they are now". Only entries with `consentConfirmed: true` are shown. |
 | `TEAM` | "Who looks after the boys". Roles without names are fine. |
 | `NEEDS` | "What we need right now", inside Be part of the family, each with a WhatsApp link that opens with "I'd like to help with: *item*". |
@@ -81,8 +81,8 @@ src/app/
     not-found/   the 404 page
 ```
 
-The home page is short and bright: a photo of the home with the illustrated
-tree, what we give a child, how a boy grows up here, a taste of the story and
+The home page is short and bright: the illustrated tree with a photo of the home
+faded in behind it, what we give a child, how a boy grows up here, a taste of the story and
 ways to join in. The footer doubles as the "Visit" section. The full history
 lives on `/stories`, and each chapter also has its own page at
 `/stories/<slug>` with previous/next links.
@@ -145,12 +145,14 @@ Google Fonts, and `ng build` no longer needs network access: it was checked
 with all traffic sent to a dead proxy, which does fail the old build.
 
 **Illustrations.** Flat inline-SVG drawings in the leaf, bark, peach and sun
-tokens: the hero tree; a grown-up guiding three boys from home along a path
-towards a tree, one of them flying a kite (growth section); a grown-up
-watering sprouts with two boys helping (family section); and a signpost with
-a sprout (404). The first three are each one `role="img"` with a label in
-`site-content.ts`; the 404 drawing is decorative. The figures are simple and
-not portraits of anyone real.
+tokens: the hero tree, with the photo of the home faded in behind it (a CSS
+mask feathers the photo's edges into the cream; it is not a colour gradient); a grown-up guiding three boys from home along a path towards a tree,
+one of them flying a kite (growth section); a grown-up watering sprouts with
+two boys helping (family section); and a signpost with a sprout (404). The path
+and watering drawings are each one `role="img"` with a label in
+`site-content.ts`, and so is the hero tree, except in the window style, where
+the tree becomes decoration around the photo (which has its own alt text). The 404 drawing is decorative. The figures are simple and not
+portraits of anyone real.
 
 **Shapes.** Pill buttons (`.btn` with `.btn-sage`, `.btn-peach`, `.btn-cream`,
 `.btn-outline`); cards at 32px (`rounded-card`) and 40px (`rounded-card-lg`);
@@ -172,14 +174,15 @@ All CSS, no animation library.
 | Effect | Where |
 | --- | --- |
 | Hero copy rising in, staggered 0.15s | `.hero-rise` |
-| Tree crown sways ±1.8° about the foot of the trunk, 6s | `.tree-sway` |
+| Tree crown sways ±1.8° about the foot of the trunk, 6s (the tree on its own, when there is no hero photo) | `.tree-sway` |
+| Hero, window style: the canopy and branches around the photo sway ±1° about the trunk, 7s | `.canopy-sway` |
 | Sun pulses gently, 5s | `.sun-pulse` |
 | Three leaves drift down and fade, 9s / 10s / 11s, staggered | `.leaf-fall`, `.leaf-fall-1`..`-3` |
 | Bird flies across the hero (16s) with flapping wings (0.6s) | `.bird-fly`, `.bird-wing` |
 | Hero badges, nurture photos, teaser and chapter photos float, offset | `.float`, `.float-1`..`-4` |
 | Growth-stage plants spring up from the soil on reveal | `.plant-grow` |
 | Timeline leaves sprout from the branch on reveal, then sway | `.leaf-sprout` |
-| Story hero Ken Burns, 1.02→1.14, 18s alternate | `.ken-burns` |
+| Story hero, and the home hero's background photo: Ken Burns, 1.02→1.14, 18s alternate | `.ken-burns` |
 | Leaves drifting beside the story hero photo | `.leaf-drift` |
 | Guiding path: figures bob as they walk (0.9s, offset), path dashes move forward (2.4s), pointing arm lifts (3s) | `.walk-bob`, `.path-dash`, `.point-arm` |
 | Watering: can tips (4s), four drops fall (1.6s, staggered), three sprouts sway (4s, offset) | `.can-tip`, `.drip`, `.sprout-sway` |

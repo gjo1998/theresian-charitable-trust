@@ -4,6 +4,8 @@ import {
   Cta,
   FamilyWay,
   FooterContent,
+  GrowingArea,
+  GrowingMoment,
   GrowthStage,
   HomeHero,
   NavLink,
@@ -79,6 +81,7 @@ export const HOME_HERO: HomeHero = {
     alt: 'The Ammaveedu building at Thellakom, its name painted across the front',
     focalPoint: '48% 55%',
     caption: `Our home in ${TRUST.place}`,
+    style: 'background',
   },
   badges: [
     { strong: `${TRUST.boysAtHome} brothers`, rest: 'under one roof' },
@@ -134,6 +137,98 @@ export const NURTURE_PILLARS: NurturePillar[] = [
     image: 'images/home-visit.jpg',
     alt: 'A home visit to a neighbour',
     focalPoint: '50% 30%',
+  },
+];
+
+export const HELPING_INTRO: SectionIntro = {
+  eyebrow: 'Helping them grow',
+  title: 'Raising a well-rounded child',
+  lead: 'Food and a roof are only the start. We help every boy grow in every way, and these are the ten things we nurture, day in and day out.',
+};
+
+/** The five ways a boy grows, shown as tags above the cards. */
+export const HELPING_AREAS: GrowingArea[] = ['Morally', 'Physically', 'Mentally', 'Emotionally', 'Socially'];
+
+export const HELPING_MOMENTS: GrowingMoment[] = [
+  {
+    id: 'kindness',
+    area: 'Morally',
+    title: 'Kindness',
+    body: 'Empathy, sharing, helping and respecting others. Big brothers share first, and the little ones learn by watching.',
+    tone: 'peach',
+    illustrationLabel: 'An older boy hands a mango to a small boy while a grown-up rests a hand on his shoulder, and hearts float up',
+  },
+  {
+    id: 'feelings',
+    area: 'Emotionally',
+    title: 'Emotional strength',
+    body: 'It is all right to feel sad, angry or let down. We help each boy put his feelings into words and find his calm again.',
+    tone: 'sky',
+    illustrationLabel: 'A grown-up puts an arm around a boy under a rainbow, as a rain cloud gives way to the sun',
+  },
+  {
+    id: 'routine',
+    area: 'Mentally',
+    title: 'Discipline and punctuality',
+    body: 'Simple daily routines, from waking up to homework time, teach a boy to respect time and keep his word.',
+    tone: 'sun',
+    illustrationLabel: 'A boy with his school bag waves beside a big clock and a daily checklist with ticks',
+  },
+  {
+    id: 'health',
+    area: 'Physically',
+    title: 'Physical health',
+    body: 'Sports, outdoor play, cycling, healthy food and a good night’s sleep keep growing bodies strong.',
+    tone: 'peach',
+    illustrationLabel: 'A boy rides a bicycle while another boy runs to kick a football',
+  },
+  {
+    id: 'learning',
+    area: 'Mentally',
+    title: 'Love of learning',
+    body: 'Curiosity, reading, questions, creativity and solving problems. No question here is ever too small.',
+    tone: 'sky',
+    illustrationLabel: 'A boy reads an open book with a light bulb glowing above his head, beside a stack of books and a globe',
+  },
+  {
+    id: 'respect',
+    area: 'Socially',
+    title: 'Respect',
+    body: 'Respect for everyone, young and old, together with the confidence to think for himself.',
+    tone: 'sun',
+    illustrationLabel: 'A boy greets a grandmother with folded hands as she leans on her walking stick',
+  },
+  {
+    id: 'responsibility',
+    area: 'Morally',
+    title: 'Responsibility',
+    body: 'Small jobs that suit his age, like sweeping and watering the plants, and owning up to mistakes without fear.',
+    tone: 'peach',
+    illustrationLabel: 'One boy sweeps with a broom while another waters a potted plant',
+  },
+  {
+    id: 'money',
+    area: 'Mentally',
+    title: 'Money values',
+    body: 'Saving a little, spending wisely and always keeping something aside to share.',
+    tone: 'sky',
+    illustrationLabel: 'A boy drops a coin into a clay money pot, beside stacks of coins and a jar marked with a heart for sharing',
+  },
+  {
+    id: 'honesty',
+    area: 'Morally',
+    title: 'Honesty and integrity',
+    body: 'Telling the truth and doing the right thing, even when nobody is watching.',
+    tone: 'sun',
+    illustrationLabel: 'A boy hands a lost purse back to a grown-up, under a shining star',
+  },
+  {
+    id: 'talking',
+    area: 'Socially',
+    title: 'Communication',
+    body: 'Listening well, speaking up, disagreeing kindly and saying sorry like he means it.',
+    tone: 'peach',
+    illustrationLabel: 'Two boys shake hands, one saying "Sorry!" and the other replying "It\'s OK!"',
   },
 ];
 
