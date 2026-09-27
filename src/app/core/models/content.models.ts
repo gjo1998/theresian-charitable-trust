@@ -69,6 +69,8 @@ export interface Cta {
 export interface HomeHero {
   eyebrow: string;
   title: string;
+  /** One plain sentence saying what Ammaveedu is, under the headline. */
+  intro: string;
   body: string;
   primaryCta: Cta;
   secondaryCta: Cta;
@@ -139,6 +141,56 @@ export interface ChannelLabels {
   phone: string;
 }
 
+/** A former resident, shown only with written consent. */
+export interface Alumnus {
+  firstNameOrInitial: string;
+  yearsAtHome: string;
+  nowDoing: string;
+  quote?: string;
+  photo?: Photo;
+  /** Render nothing unless the trust holds written consent. */
+  consentConfirmed: boolean;
+}
+
+/** Someone who looks after the boys. A role on its own is fine. */
+export interface TeamMember {
+  name?: string;
+  role: string;
+  photo?: Photo;
+}
+
+/** Something the home needs now. */
+export interface Need {
+  item: string;
+  why: string;
+  season?: string;
+  quantity?: string;
+}
+
+/** A short piece of news. `date` is ISO, e.g. "2026-06-01". */
+export interface Update {
+  date: string;
+  title: string;
+  body: string;
+  image?: Photo;
+}
+
+export type SocialPlatform = 'facebook' | 'instagram' | 'youtube' | 'x' | 'website';
+
+export interface SocialLink {
+  platform: SocialPlatform;
+  url: string;
+}
+
+/** Registration numbers. Each shows only when filled in. */
+export interface Registrations {
+  trustRegistration?: string;
+  section12A?: string;
+  section80G?: string;
+  /** Child care institution registration under the Juvenile Justice Act. */
+  jjActCci?: string;
+}
+
 export interface FooterContent {
   visitHeading: string;
   helloHeading: string;
@@ -146,6 +198,10 @@ export interface FooterContent {
   mapsLabel: string;
   storyLabel: string;
   photoCredit: string;
+  socialHeading: string;
+  socialLabels: Record<SocialPlatform, string>;
+  registrationsHeading: string;
+  registrationLabels: Record<keyof Registrations, string>;
 }
 
 export interface NavLink {

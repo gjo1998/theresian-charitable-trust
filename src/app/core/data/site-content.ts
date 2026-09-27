@@ -1,4 +1,5 @@
 import {
+  Alumnus,
   ChannelLabels,
   Cta,
   FamilyWay,
@@ -6,11 +7,16 @@ import {
   GrowthStage,
   HomeHero,
   NavLink,
+  Need,
   NurturePillar,
+  Registrations,
   SectionIntro,
   ShellLabels,
+  SocialLink,
   StoryTeaser,
+  TeamMember,
   TrustProfile,
+  Update,
 } from '../models/content.models';
 
 /**
@@ -63,6 +69,7 @@ export const HEADER_CTA: Cta = { label: 'Be part of the family', path: '/', frag
 export const HOME_HERO: HomeHero = {
   eyebrow: TRUST.tagline,
   title: 'Every boy here is growing — taller, braver, kinder.',
+  intro: `${TRUST.alsoKnownAs}, in ${TRUST.place}, is a home for boys who need a family and care. ${TRUST.founderShortName} has run it since ${TRUST.foundedYear}.`,
   body: `${TRUST.alsoKnownAs} means “mother's house”. Here each boy has love, good food, school every day and a big family of brothers to grow up with.`,
   primaryCta: HEADER_CTA,
   secondaryCta: { label: 'Read our story', path: '/stories' },
@@ -83,7 +90,7 @@ export const HOME_HERO: HomeHero = {
 export const NURTURE_INTRO: SectionIntro = {
   eyebrow: 'How we nurture',
   title: 'What a boy needs to grow — we make sure he has it.',
-  lead: 'Four roots, planted deep, so every boy can stretch toward his own sky.',
+  lead: 'Four things every boy here can count on: a place to belong, a love of learning, good food and good health care.',
 };
 
 export const NURTURE_PILLARS: NurturePillar[] = [
@@ -132,7 +139,7 @@ export const NURTURE_PILLARS: NurturePillar[] = [
 export const GROWTH_INTRO: SectionIntro = {
   eyebrow: 'Growing up at Ammaveedu',
   title: 'From little sprout to young man',
-  lead: 'Every boy grows at his own pace. We walk beside him at every stage.',
+  lead: 'Every boy grows at his own pace. Here is what each stage looks like at Ammaveedu.',
   illustrationLabel:
     'An illustration of a grown-up holding a boy by the hand and pointing the way along a winding path, with two more boys walking with them towards a tree in the sunshine',
 };
@@ -243,6 +250,41 @@ export const CHANNEL_LABELS: ChannelLabels = {
 export const GIVING_NOTE =
   'We never take payments on this website. Please give only using details Fr. Sebastian shares with you directly, so you always know your gift reaches the children.';
 
+/* ---------------------------------------------------------------------------
+   Optional blocks. Each renders nothing at all while its data is empty.
+   See CONTENT-TODO.md for what the trust needs to supply.
+   --------------------------------------------------------------------------- */
+
+/** Former residents. Only entries with `consentConfirmed: true` are shown. */
+export const ALUMNI: Alumnus[] = [];
+export const ALUMNI_INTRO: SectionIntro = {
+  eyebrow: 'Grown up at Ammaveedu',
+  title: 'Where they are now',
+};
+export const ALUMNI_LABELS = { yearsAtHome: 'At Ammaveedu' };
+
+/** Who looks after the boys. A role without a name is fine. */
+export const TEAM: TeamMember[] = [];
+export const TEAM_INTRO: SectionIntro = { title: 'Who looks after the boys' };
+
+/** Current needs, shown inside "Be part of the family". */
+export const NEEDS: Need[] = [];
+export const NEEDS_CONTENT = {
+  title: 'What we need right now',
+  messagePrefix: "I'd like to help with: ",
+  ctaLabel: 'I can help',
+  quantityLabel: 'How many',
+};
+
+/** News. The newest three are shown on the home page. */
+export const UPDATES: Update[] = [];
+export const UPDATES_INTRO: SectionIntro = { title: 'Latest from Ammaveedu' };
+
+export const SOCIAL_LINKS: SocialLink[] = [];
+
+/** Registration numbers. Each appears in the footer only once filled in. */
+export const REGISTRATIONS: Registrations = {};
+
 export const FOOTER: FooterContent = {
   visitHeading: 'Come and visit',
   helloHeading: 'Say hello',
@@ -250,6 +292,21 @@ export const FOOTER: FooterContent = {
   mapsLabel: 'Open in Google Maps',
   storyLabel: 'Read our story',
   photoCredit: 'Photographs by the trust.',
+  socialHeading: 'Follow Ammaveedu',
+  socialLabels: {
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    youtube: 'YouTube',
+    x: 'X',
+    website: 'Website',
+  },
+  registrationsHeading: 'Registrations',
+  registrationLabels: {
+    trustRegistration: 'Trust registration',
+    section12A: '12A registration',
+    section80G: '80G registration',
+    jjActCci: 'Child care institution registration (Juvenile Justice Act)',
+  },
 };
 
 export const NAV_LINKS: NavLink[] = [

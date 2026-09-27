@@ -20,7 +20,23 @@ describe('HomeComponent', () => {
 
   it('shows the sections in order: hero, nurture, growth, story, family', () => {
     const tags = Array.from(element.children).map((child) => child.tagName.toLowerCase());
-    expect(tags).toEqual(['app-hero', 'app-nurture', 'app-growth', 'app-story-teaser', 'app-family']);
+    expect(tags).toEqual([
+      'app-hero',
+      'app-nurture',
+      'app-growth',
+      'app-team',
+      'app-story-teaser',
+      'app-alumni',
+      'app-updates',
+      'app-family',
+    ]);
+  });
+
+  it('says plainly what Ammaveedu is, built from the trust profile', () => {
+    const hero = element.querySelector('app-hero')!.textContent!;
+    expect(hero).toContain(TRUST.place);
+    expect(hero).toContain(TRUST.founderShortName);
+    expect(hero).toContain(String(TRUST.foundedYear));
   });
 
   it('takes the hero badge figures from the trust profile', () => {

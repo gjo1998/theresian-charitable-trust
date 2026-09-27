@@ -13,7 +13,12 @@ export type IconName =
   | 'clock'
   | 'heart'
   | 'shield'
-  | 'sprout';
+  | 'sprout'
+  | 'facebook'
+  | 'instagram'
+  | 'youtube'
+  | 'x'
+  | 'website';
 
 /** Simple line icons. Always decorative: the text beside them does the talking. */
 @Component({
@@ -76,6 +81,26 @@ export type IconName =
         @case ('shield') {
           <path d="M12 3 5 6v5.5c0 4.3 3 7.9 7 9.5 4-1.6 7-5.2 7-9.5V6l-7-3Z" />
           <path d="m9 12 2 2 4-4" />
+        }
+        @case ('facebook') {
+          <path d="M14 8h2.5V4.5H14A3.5 3.5 0 0 0 10.5 8v2.5H8V14h2.5v6.5H14V14h2.5l.5-3.5h-3V8.5a.5.5 0 0 1 .5-.5Z" />
+        }
+        @case ('instagram') {
+          <rect x="4" y="4" width="16" height="16" rx="5" />
+          <circle cx="12" cy="12" r="3.5" />
+          <path d="M16.5 7.5h.01" />
+        }
+        @case ('youtube') {
+          <rect x="3" y="6" width="18" height="12" rx="4" />
+          <path d="m10.5 9.5 4 2.5-4 2.5Z" />
+        }
+        @case ('x') {
+          <path d="M4 4h4.5L20 20h-4.5Z" />
+          <path d="M19.5 4 13 11.3M4.5 20l6.5-7.3" />
+        }
+        @case ('website') {
+          <circle cx="12" cy="12" r="8.5" />
+          <path d="M3.5 12h17M12 3.5c2.5 2.6 3.5 5.4 3.5 8.5s-1 5.9-3.5 8.5c-2.5-2.6-3.5-5.4-3.5-8.5s1-5.9 3.5-8.5Z" />
         }
         @case ('sprout') {
           <path d="M12 21v-9" />

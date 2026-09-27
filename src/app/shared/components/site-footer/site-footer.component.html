@@ -11,6 +11,20 @@
         <blockquote class="font-heading text-[20px] text-cream leading-snug max-w-sm">
           &ldquo;{{ quote.text }}&rdquo;
         </blockquote>
+        <!-- Accountability: registration numbers, each shown once filled in -->
+        @if (registrationRows().length) {
+          <div>
+            <h2 class="font-heading text-[20px] text-cream">{{ footer.registrationsHeading }}</h2>
+            <dl class="mt-2 space-y-1 text-[15px]">
+              @for (row of registrationRows(); track row.label) {
+                <div>
+                  <dt class="inline">{{ row.label }}:</dt>
+                  <dd class="inline font-bold text-cream">{{ row.value }}</dd>
+                </div>
+              }
+            </dl>
+          </div>
+        }
         <a routerLink="/stories" class="btn btn-outline !py-2.5 !px-5 text-[15px] min-h-[44px]">{{ footer.storyLabel }}</a>
       </div>
 
@@ -62,6 +76,25 @@
             </span>
           </li>
         </ul>
+
+        @if (socialLinks().length) {
+          <h2 class="mt-8 font-heading text-[20px] text-cream">{{ footer.socialHeading }}</h2>
+          <ul class="mt-2 flex flex-wrap gap-2">
+            @for (link of socialLinks(); track link.url) {
+              <li>
+                <a
+                  [href]="link.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center w-11 h-11 rounded-full bg-sage-dark text-cream hover:text-sun transition-colors"
+                  [attr.aria-label]="footer.socialLabels[link.platform]"
+                >
+                  <app-icon [name]="link.platform" />
+                </a>
+              </li>
+            }
+          </ul>
+        }
       </div>
     </div>
 

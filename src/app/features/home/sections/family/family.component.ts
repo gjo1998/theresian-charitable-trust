@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { emailLink, phoneLink, whatsappLink } from '../../../../core/contact-links';
-import { CHANNEL_LABELS, FAMILY_INTRO, FAMILY_WAYS, GIVING_NOTE } from '../../../../core/data/site-content';
-import { ContactChannel, FamilyWay, Tone } from '../../../../core/models/content.models';
+import { CHANNEL_LABELS, FAMILY_INTRO, FAMILY_WAYS, GIVING_NOTE, NEEDS, NEEDS_CONTENT } from '../../../../core/data/site-content';
+import { ContactChannel, FamilyWay, Need, Tone } from '../../../../core/models/content.models';
 import { IconComponent, IconName } from '../../../../shared/components/icon/icon.component';
 import { WateringComponent } from '../../../../shared/components/illustrations/watering.component';
 import { RevealDirective } from '../../../../shared/directives/reveal.directive';
@@ -88,6 +88,44 @@ const ICON: Record<ContactChannel, IconName> = {
             </li>
           }
         </ul>
+
+        <!-- What we need right now: only when the trust has listed something -->
+        @if (needs().length) {
+          <div id="needs" appReveal class="mt-14 rounded-card-lg bg-white p-7 sm:p-10 shadow-soft">
+            <h3 class="font-heading text-[28px] sm:text-[34px] leading-tight text-sage">{{ needsContent.title }}</h3>
+            <ul class="mt-6 divide-y divide-sage-soft">
+              @for (need of needs(); track need.item) {
+                <li class="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+                  <div>
+                    <p class="font-extrabold text-[18px] text-ink">{{ need.item }}</p>
+                    <p class="mt-1 text-[16px] text-ink-muted leading-relaxed">{{ need.why }}</p>
+                    @if (need.season || need.quantity) {
+                      <p class="mt-1 text-[15px] text-ink-muted">
+                        {{ need.season }}
+                        @if (need.season && need.quantity) {
+                          <span aria-hidden="true">&middot;</span>
+                        }
+                        @if (need.quantity) {
+                          {{ needsContent.quantityLabel }}: {{ need.quantity }}
+                        }
+                      </p>
+                    }
+                  </div>
+                  <a
+                    [href]="needLink(need)"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-outline shrink-0 min-h-[44px] self-start sm:self-center"
+                  >
+                    <app-icon name="whatsapp" [size]="18" />
+                    {{ needsContent.ctaLabel }}
+                    <span class="sr-only">: {{ need.item }}</span>
+                  </a>
+                </li>
+              }
+            </ul>
+          </div>
+        }
       </div>
     </section>
   `,
@@ -98,6 +136,8 @@ export class FamilyComponent {
   readonly note = GIVING_NOTE;
   readonly labels = CHANNEL_LABELS;
   readonly icons = ICON;
+  readonly needs = input<Need[]>(NEEDS);
+  readonly needsContent = NEEDS_CONTENT;
 
   private static readonly CHANNELS: ContactChannel[] = ['email', 'whatsapp', 'phone'];
 
@@ -111,6 +151,11 @@ export class FamilyComponent {
       default:
         return emailLink(way.emailSubject, way.emailBody);
     }
+  }
+
+  /** WhatsApp, opened with "I'd like to help with: <item>". */
+  needLink(need: Need): string {
+    return whatsappLink(this.needsContent.messagePrefix + need.item);
   }
 
   othersFor(way: FamilyWay): ContactChannel[] {

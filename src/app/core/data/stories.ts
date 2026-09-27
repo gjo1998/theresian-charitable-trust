@@ -26,7 +26,7 @@ export const STORIES: Story[] = [
       },
       {
         type: 'p',
-        text: 'Thirteen kilometres away, near Cochin, he met families who were doing their best with very little. He spent his time there listening rather than teaching, and he saw how much difference a little care could make to a household that had been managing alone.',
+        text: 'The course took him to families near Cochin who were doing their best with very little. He spent his time there listening rather than teaching, and he saw how much difference a little care could make to a household that had been managing alone.',
       },
       {
         type: 'p',
@@ -52,7 +52,7 @@ export const STORIES: Story[] = [
       },
       {
         type: 'p',
-        text: 'He spent his holidays working on a rubber and ginger plantation, wanting to understand the working families he hoped to serve from the inside rather than from a distance. He was ordained in 1997 and had a parish of his own by 1999 - and still his heart kept pulling him towards families who simply needed a friend.',
+        text: 'He spent his holidays working on a rubber and ginger plantation, wanting to understand the working families he hoped to serve from the inside rather than from a distance. He was ordained in 1997 and had a parish of his own by 1999 — and still his heart kept pulling him towards families who simply needed a friend.',
       },
     ],
   },
@@ -69,7 +69,7 @@ export const STORIES: Story[] = [
     body: [
       {
         type: 'p',
-        text: 'He asked his Bishop for permission to go and work among those families. The answer was not yes, so he asked again - making the 120 kilometre journey many times over several years, and setting out his reasons in writing three times over.',
+        text: 'He asked his Bishop for permission to go and work among those families. The answer was not yes, so he asked again — making the 120-kilometre journey many times over several years, and setting out his reasons in writing three times over.',
       },
       {
         type: 'p',
@@ -87,7 +87,7 @@ export const STORIES: Story[] = [
     body: [
       {
         type: 'p',
-        text: 'Fr. James gave him somewhere to stay, and a social worker named Mr. Jolly introduced him to the families he knew. Money ran low, and there were days when nothing seemed to be working - yet he felt calm, certain he was finally doing what he had waited years to do.',
+        text: 'Fr. James gave him somewhere to stay, and a social worker named Mr. Jolly introduced him to the families he knew. Money ran low, and there were days when nothing seemed to be working — yet he felt calm, certain he was finally doing what he had waited years to do.',
       },
       {
         type: 'p',
@@ -95,7 +95,7 @@ export const STORIES: Story[] = [
       },
       {
         type: 'quote',
-        text: 'If I get a house, will you stay with me? - Yes.',
+        text: 'If I get a house, will you stay with me? — Yes.',
       },
       {
         type: 'p',
@@ -113,7 +113,7 @@ export const STORIES: Story[] = [
     body: [
       {
         type: 'p',
-        text: 'Other boys who needed a family followed, one by one. The house was named Ammaveedu - mother\'s house - because that is exactly how it was meant to feel.',
+        text: 'Other boys who needed a family followed, one by one. The house was named Ammaveedu — mother\'s house — because that is exactly how it was meant to feel.',
       },
       {
         type: 'p',
@@ -167,7 +167,7 @@ export const STORIES: Story[] = [
       },
       {
         type: 'p',
-        text: 'There is no endowment behind any of it. Everything here comes from the love of friends - and the next chapter is one we hope to write with you.',
+        text: 'There is no endowment behind any of it. Everything here comes from the love of friends — and the next chapter is one we hope to write with you.',
       },
     ],
   },
@@ -182,7 +182,7 @@ export const STORY_PAGE: StoryPageContent = {
   hero: {
     eyebrow: `Our history · ${TRUST.foundedYear} to today`,
     title: 'From one seed, a whole tree.',
-    lead: `How one priest, one boy and one borrowed house grew into ${TRUST.alsoKnownAs} — told in seven short chapters.`,
+    lead: `How one priest, one boy and the gift of a house grew into ${TRUST.alsoKnownAs} — told in seven short chapters.`,
     image: 'images/ammaveedu-building.webp',
     imageAlt: 'The Ammaveedu building at Thellakom, its name painted across the front',
   },
