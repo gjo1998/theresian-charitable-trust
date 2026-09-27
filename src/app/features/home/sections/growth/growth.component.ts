@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { GROWTH_INTRO, GROWTH_STAGES } from '../../../../core/data/site-content';
+import { GuidingPathComponent } from '../../../../shared/components/illustrations/guiding-path.component';
 import { PlantComponent } from '../../../../shared/components/plant/plant.component';
 import { RevealDirective } from '../../../../shared/directives/reveal.directive';
 
@@ -10,15 +11,22 @@ const PLANT_SIZES = ['w-20 h-20', 'w-24 h-24', 'w-28 h-28', 'w-32 h-32'];
 @Component({
   selector: 'app-growth',
   standalone: true,
-  imports: [RevealDirective, PlantComponent],
+  imports: [RevealDirective, PlantComponent, GuidingPathComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section id="growing" class="bg-cream pt-20 sm:pt-28 pb-16 sm:pb-24 scroll-mt-20">
       <div class="container-page">
-        <div appReveal class="max-w-3xl">
-          <p class="eyebrow">{{ intro.eyebrow }}</p>
-          <h2 class="section-title mt-3">{{ intro.title }}</h2>
-          <p class="mt-5 text-[18px] sm:text-[20px] text-ink-muted leading-relaxed">{{ intro.lead }}</p>
+        <div class="grid items-center gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10">
+          <div appReveal>
+            <p class="eyebrow">{{ intro.eyebrow }}</p>
+            <h2 class="section-title mt-3">{{ intro.title }}</h2>
+            <p class="mt-5 text-[18px] sm:text-[20px] text-ink-muted leading-relaxed">{{ intro.lead }}</p>
+          </div>
+          <app-guiding-path
+            [appReveal]="150"
+            [label]="intro.illustrationLabel ?? ''"
+            class="mx-auto w-full max-w-[560px] lg:max-w-none lg:-me-4"
+          />
         </div>
 
         <div class="relative mt-14">

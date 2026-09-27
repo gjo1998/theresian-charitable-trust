@@ -113,6 +113,8 @@ export const GROWTH_INTRO: SectionIntro = {
   eyebrow: 'Growing up at Ammaveedu',
   title: 'From little sprout to young man',
   lead: 'Every boy grows at his own pace. We walk beside him at every stage.',
+  illustrationLabel:
+    'An illustration of a grown-up holding a boy by the hand and pointing the way along a winding path, with two more boys walking with them towards a tree in the sunshine',
 };
 
 export const GROWTH_STAGES: GrowthStage[] = [
@@ -165,6 +167,8 @@ export const FAMILY_INTRO: SectionIntro = {
   eyebrow: 'Be part of the family',
   title: 'Help us water the garden.',
   lead: "Every meal, school book and birthday cake here is made possible by friends. There's a place for you too.",
+  illustrationLabel:
+    'An illustration of a grown-up watering three young plants of different sizes while a boy holds his hand',
 };
 
 export const FAMILY_WAYS: FamilyWay[] = [

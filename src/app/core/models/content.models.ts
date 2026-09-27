@@ -65,6 +65,8 @@ export interface SectionIntro {
   eyebrow?: string;
   title: string;
   lead?: string;
+  /** Describes the section's drawing for screen readers, when it has one. */
+  illustrationLabel?: string;
 }
 
 /** One of the four things the home gives a child. */

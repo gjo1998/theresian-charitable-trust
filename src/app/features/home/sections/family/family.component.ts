@@ -3,6 +3,7 @@ import { emailLink, phoneLink, whatsappLink } from '../../../../core/contact-lin
 import { FAMILY_INTRO, FAMILY_WAYS, GIVING_NOTE } from '../../../../core/data/site-content';
 import { FamilyWay, Tone } from '../../../../core/models/content.models';
 import { IconComponent, IconName } from '../../../../shared/components/icon/icon.component';
+import { WateringComponent } from '../../../../shared/components/illustrations/watering.component';
 import { RevealDirective } from '../../../../shared/directives/reveal.directive';
 
 const CARD: Record<Tone, string> = {
@@ -22,21 +23,28 @@ const ICON: Record<FamilyWay['ctaKind'], IconName> = {
 @Component({
   selector: 'app-family',
   standalone: true,
-  imports: [RevealDirective, IconComponent],
+  imports: [RevealDirective, IconComponent, WateringComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section id="family" class="bg-cream py-20 sm:py-28 scroll-mt-20">
       <div class="container-page">
-        <div appReveal class="max-w-3xl mx-auto text-center">
-          <p class="eyebrow">{{ intro.eyebrow }}</p>
-          <h2 class="section-title mt-3">{{ intro.title }}</h2>
-          <p class="mt-5 text-[18px] sm:text-[20px] text-ink-muted leading-relaxed">{{ intro.lead }}</p>
-          <p
-            class="mt-7 inline-flex items-start gap-3 text-left rounded-card bg-white shadow-soft px-5 py-4 text-[15px] sm:text-[16px] text-ink leading-relaxed"
-          >
-            <app-icon name="shield" [size]="22" class="mt-0.5 text-sage" />
-            <span>{{ note }}</span>
-          </p>
+        <div class="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+          <app-watering
+            [appReveal]="120"
+            [label]="intro.illustrationLabel ?? ''"
+            class="mx-auto w-full max-w-[560px] lg:max-w-none lg:-ms-4"
+          />
+          <div appReveal class="text-center lg:text-left">
+            <p class="eyebrow">{{ intro.eyebrow }}</p>
+            <h2 class="section-title mt-3">{{ intro.title }}</h2>
+            <p class="mt-5 text-[18px] sm:text-[20px] text-ink-muted leading-relaxed">{{ intro.lead }}</p>
+            <p
+              class="mt-7 inline-flex items-start gap-3 text-left rounded-card bg-white shadow-soft px-5 py-4 text-[15px] sm:text-[16px] text-ink leading-relaxed"
+            >
+              <app-icon name="shield" [size]="22" class="mt-0.5 text-sage" />
+              <span>{{ note }}</span>
+            </p>
+          </div>
         </div>
 
         <ul class="mt-14 grid gap-6 md:grid-cols-3">

@@ -40,7 +40,8 @@ src/app/
     services/      ui.service.ts  (the mobile drawer)
     contact-links.ts  builds every mailto:, wa.me, tel: and Maps link
   shared/
-    components/  logo, icon, plant, site-header, site-footer, contact-fab
+    components/  logo, icon, plant, site-header, site-footer, contact-fab,
+                 illustrations/ (guiding-path, watering)
     directives/  reveal.directive.ts
   features/
     home/        hero, nurture, growth, story-teaser, family
@@ -75,6 +76,13 @@ peach for the main call to action.
 phones up to 76px on wide screens, section titles up to 54px (`.section-title`).
 Body text uses **Nunito Sans** (400/600/700/800). Both come from Google Fonts.
 
+**Illustrations.** Three flat inline-SVG drawings in the leaf, bark, peach and
+sun tokens: the hero tree; a grown-up guiding three boys from home along a
+path towards a tree, one of them flying a kite (growth section, beside the
+intro); and a grown-up watering sprouts with two boys helping (family section,
+beside the title on desktop). Each is one `role="img"` with its label in `site-content.ts`.
+The figures are simple and not portraits of anyone real.
+
 **Shapes.** Pill buttons (`.btn` with `.btn-sage`, `.btn-peach`, `.btn-cream`,
 `.btn-outline`); cards at 32px (`rounded-card`) and 40px (`rounded-card-lg`);
 photos in soft frames: circles, arch tops (`rounded-arch`) and one leaf corner
@@ -102,6 +110,9 @@ All CSS, no animation library.
 | Timeline leaves sprout from the branch on reveal, then sway | `.leaf-sprout` |
 | Story hero Ken Burns, 1.02→1.14, 18s alternate | `.ken-burns` |
 | Leaves drifting beside the story hero photo | `.leaf-drift` |
+| Guiding path: figures bob as they walk (0.9s, offset), path dashes move forward (2.4s), pointing arm lifts (3s) | `.walk-bob`, `.path-dash`, `.point-arm` |
+| Watering: can tips (4s), four drops fall (1.6s, staggered), three sprouts sway (4s, offset) | `.can-tip`, `.drip`, `.sprout-sway` |
+| Scene life in both drawings: clouds drift (14s), the kite dances (4s), butterflies flutter (0.35s) and wander (7s), the second boy's can tips (3.2s) | `.cloud-drift`, `.kite-fly`, `.butterfly-wing`, `.bf-drift`, `.can-tip-small` |
 | Scroll reveals | `shared/directives/reveal.directive.ts` |
 
 **Every keyframe animation sits inside `@media (prefers-reduced-motion:

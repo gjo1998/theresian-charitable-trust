@@ -29,9 +29,10 @@ describe('HomeComponent', () => {
     expect(hero).toContain(`since ${TRUST.foundedYear}`);
   });
 
-  it('labels the tree illustration and hides decorative SVGs', () => {
-    const tree = element.querySelector('app-hero svg[role="img"]');
-    expect(tree?.getAttribute('aria-label')).toBeTruthy();
+  it('labels each illustration and hides decorative SVGs', () => {
+    const drawings = element.querySelectorAll('svg[role="img"]');
+    expect(drawings.length).toBe(3); // tree, guiding path, watering
+    drawings.forEach((svg) => expect(svg.getAttribute('aria-label')).toBeTruthy());
     element.querySelectorAll('app-icon, app-plant').forEach((icon) => {
       expect(icon.getAttribute('aria-hidden')).toBe('true');
     });

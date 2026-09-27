@@ -347,6 +347,194 @@ h4 {
       transform: translate(12px, 22px) rotate(18deg);
     }
   }
+
+  /* 11. Guiding path: everyone bobs along as they walk, the dashes on the
+     path move forward, and the grown-up's pointing arm lifts gently. */
+  .walk-bob {
+    animation: walkBob 0.9s ease-in-out infinite alternate;
+  }
+
+  .walk-bob-2 { animation-delay: -0.3s; }
+  .walk-bob-3 { animation-delay: -0.6s; }
+
+  @keyframes walkBob {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-3px);
+    }
+  }
+
+  .path-dash {
+    animation: pathDash 2.4s linear infinite;
+  }
+
+  /* The dash pattern is 18 units long, so moving by 36 loops without a jump. */
+  @keyframes pathDash {
+    to {
+      stroke-dashoffset: -36;
+    }
+  }
+
+  .point-arm {
+    transform-box: fill-box;
+    transform-origin: 0% 100%;
+    animation: pointArm 3s ease-in-out infinite;
+  }
+
+  @keyframes pointArm {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(-6deg);
+    }
+  }
+
+  /* 12. Watering: the can tips, drops fall, the sprouts sway. */
+  .can-tip {
+    transform-origin: 0% 50%;
+    animation: canTip 4s ease-in-out infinite;
+  }
+
+  @keyframes canTip {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(5deg);
+    }
+  }
+
+  .drip {
+    animation: drip 1.6s ease-in infinite;
+  }
+
+  .drip-2 { animation-delay: -0.4s; }
+  .drip-3 { animation-delay: -0.8s; }
+  .drip-4 { animation-delay: -1.2s; }
+
+  @keyframes drip {
+    0% {
+      opacity: 0;
+      transform: translate(0, 0);
+    }
+    15% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(10px, 64px);
+    }
+  }
+
+  .sprout-sway {
+    transform-origin: 50% 100%;
+    animation: sproutSway 4s ease-in-out infinite;
+  }
+
+  /* 13. Scene life: clouds drift, the kite dances, butterflies flutter. */
+  .cloud-drift {
+    animation: cloudDrift 14s ease-in-out infinite;
+  }
+
+  .cloud-drift-late {
+    animation-delay: -7s;
+  }
+
+  @keyframes cloudDrift {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(18px);
+    }
+  }
+
+  .kite-fly {
+    animation: kiteFly 4s ease-in-out infinite;
+  }
+
+  @keyframes kiteFly {
+    0%,
+    100% {
+      transform: rotate(-6deg);
+    }
+    50% {
+      transform: rotate(6deg) translateY(-4px);
+    }
+  }
+
+  .butterfly-wing {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: flutter 0.35s ease-in-out infinite alternate;
+  }
+
+  @keyframes flutter {
+    from {
+      transform: scaleX(1);
+    }
+    to {
+      transform: scaleX(0.3);
+    }
+  }
+
+  .bf-drift {
+    animation: bfDrift 7s ease-in-out infinite;
+  }
+
+  .bf-drift-late {
+    animation-delay: -3.5s;
+  }
+
+  @keyframes bfDrift {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(10px, -8px);
+    }
+    50% {
+      transform: translate(18px, 2px);
+    }
+    75% {
+      transform: translate(6px, 8px);
+    }
+  }
+
+  .can-tip-small {
+    transform-origin: 100% 50%;
+    animation: canTipSmall 3.2s ease-in-out infinite;
+  }
+
+  @keyframes canTipSmall {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(-6deg);
+    }
+  }
+
+  .sprout-sway-2 { animation-delay: -1.3s; }
+  .sprout-sway-3 { animation-delay: -2.6s; }
+
+  @keyframes sproutSway {
+    0%,
+    100% {
+      transform: rotate(-4deg);
+    }
+    50% {
+      transform: rotate(4deg);
+    }
+  }
 }
 
 /* With reduced motion the reveal directive never arms, but belt and braces. */
