@@ -2,21 +2,26 @@
   <article class="bg-cream">
     <div class="container-page pt-8 pb-20 sm:pt-12 sm:pb-28">
       <div class="max-w-3xl mx-auto">
-        <a
-          routerLink="/stories"
-          [fragment]="item.slug"
-          class="inline-flex items-center gap-2 font-bold text-sage hover:underline underline-offset-4"
-        >
-          <app-icon name="arrow-left" [size]="18" />
-          {{ page.article.allChaptersLabel }}
-        </a>
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <a
+            routerLink="/stories"
+            [fragment]="item.slug"
+            class="inline-flex items-center gap-2 min-h-[44px] font-bold text-sage hover:underline underline-offset-4"
+          >
+            <app-icon name="arrow-left" [size]="18" />
+            {{ page.article.allChaptersLabel }}
+          </a>
+          <p class="inline-flex items-center min-h-[44px] rounded-full bg-sage-soft px-4 text-[15px] font-bold text-sage">
+            {{ page.chapterLabel }} {{ item.order }} {{ page.article.ofLabel }} {{ total }}
+          </p>
+        </div>
 
-        <p class="eyebrow mt-8">{{ page.chapterLabel }} {{ item.order }} &middot; {{ item.era }}</p>
+        <p class="eyebrow mt-8">{{ item.era }}</p>
         <h1 class="mt-3 font-heading text-[40px] sm:text-[56px] leading-[1.05] text-sage">{{ item.title }}</h1>
       </div>
 
       <div class="mt-10 sm:mt-14" [class.pb-6]="item.secondImage">
-        <app-chapter-visual [chapter]="item" [index]="position()" />
+        <app-chapter-visual [chapter]="item" [index]="position()" [priority]="true" />
       </div>
 
       <div class="max-w-3xl mx-auto mt-12 sm:mt-16">
@@ -71,7 +76,7 @@
       <h1 class="section-title">{{ page.article.notFoundTitle }}</h1>
       <p class="mt-5 text-[18px] text-ink-muted">{{ page.article.notFoundBody }}</p>
       <div class="btn-row mt-8 sm:justify-center">
-        <a routerLink="/stories" class="btn btn-sage">{{ page.article.allChaptersLabel }}</a>
+        <a routerLink="/stories" class="btn btn-sage min-h-[44px]">{{ page.article.allChaptersLabel }}</a>
       </div>
     </div>
   </section>

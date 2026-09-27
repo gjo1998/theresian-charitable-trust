@@ -1,4 +1,4 @@
-<footer id="visit" class="on-dark bg-sage text-mist scroll-mt-24">
+<footer id="visit" data-hides-fab class="on-dark bg-sage text-mist scroll-mt-24">
   <div class="container-page py-16 sm:py-20">
     <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr]">
       <!-- Who we are -->
@@ -11,7 +11,7 @@
         <blockquote class="font-heading text-[20px] text-cream leading-snug max-w-sm">
           &ldquo;{{ quote.text }}&rdquo;
         </blockquote>
-        <a routerLink="/stories" class="btn btn-outline !py-2.5 !px-5 text-[15px]">{{ footer.storyLabel }}</a>
+        <a routerLink="/stories" class="btn btn-outline !py-2.5 !px-5 text-[15px] min-h-[44px]">{{ footer.storyLabel }}</a>
       </div>
 
       <!-- Where to find us -->
@@ -30,7 +30,7 @@
           [href]="mapsUrl"
           target="_blank"
           rel="noopener noreferrer"
-          class="mt-4 inline-block font-bold text-cream underline underline-offset-4 decoration-sun hover:text-sun"
+          class="mt-2 inline-flex items-center min-h-[44px] font-bold text-cream underline underline-offset-4 decoration-sun hover:text-sun"
         >
           {{ footer.mapsLabel }}
         </a>
@@ -39,17 +39,17 @@
       <!-- Say hello -->
       <div>
         <h2 class="font-heading text-[24px] text-cream">{{ footer.helloHeading }}</h2>
-        <ul class="mt-4 space-y-3">
+        <ul class="mt-2 space-y-1">
           @if (trust.phoneVerified) {
             <li>
-              <a [href]="phoneUrl" class="inline-flex items-center gap-3 hover:text-sun transition-colors">
+              <a [href]="phoneUrl" class="inline-flex items-center gap-3 min-h-[44px] hover:text-sun transition-colors">
                 <app-icon name="phone" class="text-sun" />
                 {{ trust.phone }}
               </a>
             </li>
           }
           <li>
-            <a [href]="emailUrl" class="inline-flex items-center gap-3 hover:text-sun transition-colors break-all">
+            <a [href]="emailUrl" class="inline-flex items-center gap-3 min-h-[44px] hover:text-sun transition-colors break-all">
               <app-icon name="mail" class="text-sun" />
               {{ trust.email }}
             </a>

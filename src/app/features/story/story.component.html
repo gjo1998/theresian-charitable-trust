@@ -14,8 +14,10 @@
         <div class="absolute -top-6 -right-6 w-40 h-40 rounded-full bg-sun-soft" aria-hidden="true"></div>
         <div class="photo-frame relative rounded-arch aspect-[4/5]">
           <img
-            [src]="page.hero.image"
+            [appPhoto]="page.hero.image"
             [alt]="page.hero.imageAlt"
+            [capped]="false"
+            [priority]="true"
             class="ken-burns w-full h-full object-cover"
           />
         </div>
@@ -27,29 +29,38 @@
         </svg>
       </div>
     </div>
-
-    <!-- Chapter chips -->
-    <nav class="mt-12 lg:mt-16" [attr.aria-label]="page.chipsLabel">
-      <ul class="flex flex-wrap gap-2.5">
-        @for (chapter of chapters; track chapter.slug) {
-          <li>
-            <a
-              routerLink="/stories"
-              [fragment]="chapter.slug"
-              class="inline-flex items-center gap-2 rounded-full bg-sage-soft px-4 py-2 text-[15px] font-bold text-sage hover:bg-sage hover:text-white transition-colors"
-            >
-              <span class="font-extrabold">{{ chapter.order }}</span>
-              {{ chapter.title }}
-            </a>
-          </li>
-        }
-      </ul>
-    </nav>
   </div>
 </section>
 
+<!-- Chapter index: stays in view under the header, and marks the chapter on screen -->
+<nav
+  data-sticky
+  class="sticky top-20 z-30 bg-cream/95 backdrop-blur-md border-y border-sage-soft"
+  [attr.aria-label]="page.chipsLabel"
+>
+  <div class="container-page">
+    <ul #chipRow class="flex gap-2 overflow-x-auto py-2.5 [scrollbar-width:thin]">
+      @for (chapter of chapters; track chapter.slug) {
+        <li class="shrink-0">
+          <a
+            routerLink="/stories"
+            [fragment]="chapter.slug"
+            [attr.data-chip]="chapter.slug"
+            [attr.aria-current]="active() === chapter.slug ? 'location' : null"
+            class="inline-flex items-center gap-2 min-h-[44px] rounded-full px-4 text-[14px] sm:text-[15px] font-bold whitespace-nowrap transition-colors"
+            [class]="active() === chapter.slug ? 'bg-sage text-white' : 'bg-sage-soft text-sage hover:bg-sage hover:text-white'"
+          >
+            <span class="font-extrabold">{{ chapter.order }}</span>
+            {{ chapter.title }}
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+</nav>
+
 <!-- Timeline: a branch runs down the middle; each chapter sprouts a leaf -->
-<section class="bg-cream pb-16 sm:pb-24">
+<section class="bg-cream pt-4 pb-16 sm:pb-24">
   <div class="container-page">
     <div class="relative">
       <svg
@@ -74,7 +85,8 @@
           <li
             [id]="chapter.slug"
             appReveal
-            class="relative grid gap-8 pl-14 py-10 lg:grid-cols-2 lg:gap-28 lg:pl-0 lg:py-16 lg:items-center scroll-mt-28"
+            data-chapter
+            class="relative grid gap-8 pl-14 py-10 lg:grid-cols-2 lg:gap-28 lg:pl-0 lg:py-16 lg:items-center scroll-mt-40"
           >
             <!-- Node and leaf on the branch -->
             <span
@@ -128,10 +140,10 @@
       @for (item of page.thenAndNow.items; track item.image; let i = $index) {
         <figure [appReveal]="i * 120" class="flex flex-col items-center">
           <img
-            [src]="item.image"
+            [appPhoto]="item.image"
             [alt]="item.alt"
-            class="w-full aspect-[4/3] object-cover rounded-card-lg shadow-soft"
-            loading="lazy"
+            [frameAspect]="2"
+            class="w-full aspect-[2/1] object-cover rounded-card-lg shadow-soft"
           />
           <figcaption
             class="-mt-6 relative rounded-full bg-white px-5 py-2.5 text-center text-[15px] sm:text-[16px] text-ink shadow-soft"

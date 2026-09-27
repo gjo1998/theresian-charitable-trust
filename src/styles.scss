@@ -122,6 +122,14 @@ h4 {
   transform: none;
 }
 
+/* The floating contact button steps aside where contact options are already
+   on screen. It fades under motion (below) and switches instantly without. */
+.fab-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* SVG parts that move about their own centre or a set point. */
 .svg-part {
   transform-box: fill-box;
@@ -129,6 +137,13 @@ h4 {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  /* 0. The floating contact button fades in and out. */
+  .fab {
+    transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease;
+  }
+
   /* 1. Hero copy rises in, staggered. */
   .hero-rise > * {
     opacity: 0;
@@ -539,6 +554,10 @@ h4 {
 
 /* With reduced motion the reveal directive never arms, but belt and braces. */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .reveal {
     opacity: 1;
     transform: none;

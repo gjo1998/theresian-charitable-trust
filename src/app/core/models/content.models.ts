@@ -10,10 +10,14 @@ export interface TrustProfile {
   alsoKnownAs: string;
   malayalamName: string;
   tagline: string;
+  /** Where the home is, in words, e.g. "Thellakom, Kottayam". */
+  place: string;
   foundedYear: number;
   /** How many boys live at the home today. Shown in the hero badge. */
   boysAtHome: number;
   founder: string;
+  /** How the founder is named in running text, e.g. "Fr. Sebastian". */
+  founderShortName: string;
   email: string;
   /** Display form, e.g. "+91 94466 81395". */
   phone: string;
@@ -35,11 +39,24 @@ export interface TrustProfile {
   mapsQuery: string;
 }
 
+/** A photograph from public/images, with its words. */
+export interface Photo {
+  image: string;
+  alt: string;
+  /**
+   * CSS object-position, so faces are not cropped out of a frame,
+   * e.g. "50% 25%". Centre when empty.
+   */
+  focalPoint?: string;
+}
+
 /** The soft colours a card or ring can take. Components map these to classes. */
 export type Tone = 'peach' | 'sun' | 'sage' | 'mint' | 'sky';
 
 /** Plants drawn in the growth stages and the chapter cards. */
 export type PlantKind = 'sprout' | 'sapling' | 'young-tree' | 'branching';
+
+export type ContactChannel = 'email' | 'whatsapp' | 'phone';
 
 export interface Cta {
   label: string;
@@ -55,7 +72,9 @@ export interface HomeHero {
   body: string;
   primaryCta: Cta;
   secondaryCta: Cta;
-  /** Short lines on the white badges floating over the tree. */
+  /** A real photograph in a large arch beside the illustrated tree. */
+  heroPhoto?: Photo & { caption?: string };
+  /** Short lines on the white badges floating over the picture. */
   badges: { strong: string; rest: string }[];
   /** Describes the illustration for screen readers. */
   illustrationLabel: string;
@@ -70,15 +89,13 @@ export interface SectionIntro {
 }
 
 /** One of the four things the home gives a child. */
-export interface NurturePillar {
+export interface NurturePillar extends Photo {
   id: string;
   badge: string;
-  /** Colour of the ring around the photograph. */
+  /** Colour accent on the photograph's frame. */
   ring: Tone;
   title: string;
   body: string;
-  image: string;
-  imageAlt: string;
 }
 
 /** One stage of growing up, from nursery to young man. */
@@ -97,7 +114,7 @@ export interface StoryTeaser {
   title: string;
   body: string;
   cta: Cta;
-  photos: { image: string; alt: string }[];
+  photos: Photo[];
 }
 
 /** One of the three ways to join in. */
@@ -105,14 +122,21 @@ export interface FamilyWay {
   id: string;
   title: string;
   body: string;
+  /** The channel on the big button; the other two appear as small links. */
+  primary: ContactChannel;
   ctaLabel: string;
-  /** 'email' | 'whatsapp' | 'phone' — the component builds the link. */
-  ctaKind: 'email' | 'whatsapp' | 'phone';
+  emailSubject: string;
+  emailBody: string;
+  whatsappMessage: string;
   tone: Tone;
-  /** Email subject, when the card opens an email. */
-  subject?: string;
-  /** Prefilled email body or WhatsApp message. */
-  message?: string;
+}
+
+/** Words for the contact channels, used on the family cards. */
+export interface ChannelLabels {
+  or: string;
+  email: string;
+  whatsapp: string;
+  phone: string;
 }
 
 export interface FooterContent {
@@ -135,11 +159,11 @@ export interface NavLink {
 /** Small labels used by the shell: header, drawer and floating button. */
 export interface ShellLabels {
   homeAriaLabel: string;
+  mainNavLabel: string;
   openMenu: string;
   closeMenu: string;
   backToHome: string;
   backToHomeShort: string;
-  storyCta: Cta;
   fabOpen: string;
   fabClose: string;
   fabWhatsapp: string;

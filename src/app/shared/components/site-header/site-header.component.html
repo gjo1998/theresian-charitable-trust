@@ -1,4 +1,5 @@
 <header
+  data-sticky
   class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md transition-shadow duration-300"
   [class.shadow-soft]="scrolled()"
 >
@@ -20,11 +21,11 @@
         </a>
 
         <a
-          [routerLink]="labels.storyCta.path"
-          [fragment]="labels.storyCta.fragment"
+          [routerLink]="cta.path"
+          [fragment]="cta.fragment"
           class="justify-self-end btn btn-peach !hidden md:!inline-flex !py-3 !px-6"
         >
-          {{ labels.storyCta.label }}
+          {{ cta.label }}
         </a>
       </div>
     } @else {
@@ -34,15 +35,15 @@
         </a>
 
         <!-- Desktop navigation -->
-        <nav class="hidden lg:flex items-center gap-9 text-[16px] font-bold text-ink">
+        <nav class="hidden lg:flex items-center gap-7 text-[16px] font-bold text-ink" [attr.aria-label]="labels.mainNavLabel">
           @for (link of navLinks; track link.label) {
-            @if (link.path) {
-              <a [routerLink]="link.path" class="hover:text-sage transition-colors">{{ link.label }}</a>
-            } @else {
-              <a routerLink="/" [fragment]="link.fragment" class="hover:text-sage transition-colors">
-                {{ link.label }}
-              </a>
-            }
+            <a
+              [routerLink]="link.path"
+              [fragment]="link.fragment"
+              class="inline-flex items-center min-h-[44px] px-1 hover:text-sage transition-colors"
+            >
+              {{ link.label }}
+            </a>
           }
         </nav>
 
@@ -75,24 +76,14 @@
   @if (menuOpen() && !onStory()) {
     <nav id="mobileNav" class="lg:hidden bg-cream border-t border-sage-soft px-4 py-4 space-y-1 shadow-soft">
       @for (link of navLinks; track link.label) {
-        @if (link.path) {
-          <a
-            [routerLink]="link.path"
-            (click)="closeMenu()"
-            class="block rounded-2xl px-4 py-3 font-bold text-ink hover:bg-sage-soft"
-          >
-            {{ link.label }}
-          </a>
-        } @else {
-          <a
-            routerLink="/"
-            [fragment]="link.fragment"
-            (click)="closeMenu()"
-            class="block rounded-2xl px-4 py-3 font-bold text-ink hover:bg-sage-soft"
-          >
-            {{ link.label }}
-          </a>
-        }
+        <a
+          [routerLink]="link.path"
+          [fragment]="link.fragment"
+          (click)="closeMenu()"
+          class="block rounded-2xl px-4 py-3 font-bold text-ink hover:bg-sage-soft"
+        >
+          {{ link.label }}
+        </a>
       }
       <a
         [routerLink]="cta.path"

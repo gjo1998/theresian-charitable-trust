@@ -54,12 +54,35 @@ describe('HomeComponent', () => {
       expect(element.querySelector('#family')!.textContent).toContain(GIVING_NOTE);
     });
 
-    it('sends every card to Fr. Sebastian by email, WhatsApp or phone', () => {
-      const links = Array.from(element.querySelectorAll<HTMLAnchorElement>('#family ul a'));
-      expect(links.length).toBe(FAMILY_WAYS.length);
-      expect(links[0].href).toMatch(new RegExp(`^mailto:${TRUST.email}`));
-      expect(links[1].href).toContain(`https://wa.me/${TRUST.phoneE164}`);
-      expect(links[2].href).toBe(`tel:+${TRUST.phoneE164}`);
+    it('offers every channel on every card, primary first', () => {
+      const cards = Array.from(element.querySelectorAll('#family article'));
+      expect(cards.length).toBe(FAMILY_WAYS.length);
+
+      const prefix: Record<string, string> = {
+        email: `mailto:${TRUST.email}`,
+        whatsapp: `https://wa.me/${TRUST.phoneE164}`,
+        phone: `tel:+${TRUST.phoneE164}`,
+      };
+      cards.forEach((card, i) => {
+        const hrefs = Array.from(card.querySelectorAll('a')).map((a) => a.getAttribute('href')!);
+        expect(hrefs.length).toBe(3);
+        expect(hrefs[0].startsWith(prefix[FAMILY_WAYS[i].primary])).toBeTrue();
+        for (const start of Object.values(prefix)) {
+          expect(hrefs.some((href) => href.startsWith(start))).toBeTrue();
+        }
+      });
+    });
+
+    it("carries each card's own message on every channel", () => {
+      const cards = Array.from(element.querySelectorAll('#family article'));
+      cards.forEach((card, i) => {
+        const way = FAMILY_WAYS[i];
+        const hrefs = Array.from(card.querySelectorAll('a')).map((a) => a.getAttribute('href')!);
+        expect(hrefs.find((href) => href.startsWith('mailto:'))).toContain(encodeURIComponent(way.emailSubject));
+        expect(hrefs.find((href) => href.startsWith('https://wa.me/'))).toContain(
+          encodeURIComponent(way.whatsappMessage),
+        );
+      });
     });
 
     it('has no payment form and no bank or UPI details', () => {

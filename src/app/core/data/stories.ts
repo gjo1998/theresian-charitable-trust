@@ -218,6 +218,7 @@ export const STORY_PAGE: StoryPageContent = {
   },
   article: {
     allChaptersLabel: 'All seven chapters',
+    ofLabel: 'of',
     previousLabel: 'Previous chapter',
     nextLabel: 'Next chapter',
     endTitle: 'That is the story so far',

@@ -60,6 +60,8 @@ export interface StoryPageContent {
   };
   article: {
     allChaptersLabel: string;
+    /** "Chapter 4 of 7" — the word between the two numbers. */
+    ofLabel: string;
     previousLabel: string;
     nextLabel: string;
     endTitle: string;

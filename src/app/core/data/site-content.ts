@@ -1,4 +1,6 @@
 import {
+  ChannelLabels,
+  Cta,
   FamilyWay,
   FooterContent,
   GrowthStage,
@@ -15,18 +17,23 @@ import {
  * Single source of truth for the site's copy.
  *
  * Facts come from the trust's own published material. Anything still needing
- * confirmation is listed in CONTENT-TODO.md.
+ * confirmation is listed in CONTENT-TODO.md; wording changes awaiting
+ * approval are listed in COPY-CHANGES.md.
  */
+
+const PLACE = 'Thellakom, Kottayam';
 
 export const TRUST: TrustProfile = {
   legalName: 'The Theresian Charitable Trust',
   shortName: 'Theresian Charitable Trust',
   alsoKnownAs: 'Ammaveedu',
   malayalamName: 'അമ്മവീട്',
-  tagline: 'A family home in Thellakom, Kottayam',
+  tagline: `A family home in ${PLACE}`,
+  place: PLACE,
   foundedYear: 2006,
   boysAtHome: 27,
   founder: 'Fr. Sebastian Mannapathuparambil',
+  founderShortName: 'Fr. Sebastian',
   email: 'theresiantrust@yahoo.co.in',
   phone: '+91 94466 81395',
   phoneE164: '919446681395',
@@ -50,12 +57,21 @@ export const PHILOSOPHY_QUOTE = {
   attribution: 'The Theresian Charitable Trust',
 };
 
+/** The one action that leads to #family, named the same everywhere. */
+export const HEADER_CTA: Cta = { label: 'Be part of the family', path: '/', fragment: 'family' };
+
 export const HOME_HERO: HomeHero = {
   eyebrow: TRUST.tagline,
   title: 'Every boy here is growing — taller, braver, kinder.',
   body: `${TRUST.alsoKnownAs} means “mother's house”. Here each boy has love, good food, school every day and a big family of brothers to grow up with.`,
-  primaryCta: { label: 'Help a child grow', path: '/', fragment: 'family' },
+  primaryCta: HEADER_CTA,
   secondaryCta: { label: 'Read our story', path: '/stories' },
+  heroPhoto: {
+    image: 'images/ammaveedu-building.webp',
+    alt: 'The Ammaveedu building at Thellakom, its name painted across the front',
+    focalPoint: '48% 55%',
+    caption: `Our home in ${TRUST.place}`,
+  },
   badges: [
     { strong: `${TRUST.boysAtHome} brothers`, rest: 'under one roof' },
     { strong: 'Growing', rest: `since ${TRUST.foundedYear}` },
@@ -78,7 +94,8 @@ export const NURTURE_PILLARS: NurturePillar[] = [
     title: 'A place to belong',
     body: 'A bed of his own, brothers beside him and grown-ups who are there for him. Feeling at home comes first.',
     image: 'images/ammaveedu-boys.jpg',
-    imageAlt: 'Boys of Ammaveedu together',
+    alt: 'Boys of Ammaveedu together',
+    focalPoint: '50% 50%',
   },
   {
     id: 'learning',
@@ -87,7 +104,8 @@ export const NURTURE_PILLARS: NurturePillar[] = [
     title: 'A love of learning',
     body: 'Our free nursery gives little ones a happy start, and every boy over six goes to school every day.',
     image: 'images/children-meal.jpg',
-    imageAlt: 'Young children sitting together at Ammaveedu',
+    alt: 'Young children sitting together at Ammaveedu',
+    focalPoint: '55% 40%',
   },
   {
     id: 'nourishment',
@@ -96,7 +114,8 @@ export const NURTURE_PILLARS: NurturePillar[] = [
     title: 'Good food, shared',
     body: 'Warm meals around the table, and a weekly rice round that shares our blessings with around a hundred neighbouring families.',
     image: 'images/rice-delivery.jpg',
-    imageAlt: 'Rice being carried in for the weekly round',
+    alt: 'Rice being carried in for the weekly round',
+    focalPoint: '50% 20%',
   },
   {
     id: 'wellbeing',
@@ -105,7 +124,8 @@ export const NURTURE_PILLARS: NurturePillar[] = [
     title: 'Healthy and cared for',
     body: 'A paediatrician on our team keeps an eye on every child, and we visit neighbours who need care at home.',
     image: 'images/home-visit.jpg',
-    imageAlt: 'A home visit to a neighbour',
+    alt: 'A home visit to a neighbour',
+    focalPoint: '50% 30%',
   },
 ];
 
@@ -155,11 +175,15 @@ export const GROWTH_STAGES: GrowthStage[] = [
 export const STORY_TEASER: StoryTeaser = {
   eyebrow: 'Our history',
   title: 'From one seed, a whole tree.',
-  body: `In ${TRUST.foundedYear}, Fr. Sebastian set out with Rs. 4,000 and a lot of hope. One boy said yes, a friend gave a house, and ${TRUST.alsoKnownAs} began to grow.`,
+  body: `In ${TRUST.foundedYear}, ${TRUST.founderShortName} set out with Rs. 4,000 and a lot of hope. One boy said yes, a friend gave a house, and ${TRUST.alsoKnownAs} began to grow.`,
   cta: { label: 'Read the full story, with photos →', path: '/stories' },
   photos: [
     { image: 'images/ammaveedu-house.jpg', alt: 'The first house in Kottayam that became Ammaveedu' },
-    { image: 'images/ammaveedu-building.webp', alt: 'The Ammaveedu building at Thellakom today, its name painted across the front' },
+    {
+      image: 'images/ammaveedu-building.webp',
+      alt: 'The Ammaveedu building at Thellakom today, its name painted across the front',
+      focalPoint: '48% 55%',
+    },
   ],
 };
 
@@ -168,39 +192,53 @@ export const FAMILY_INTRO: SectionIntro = {
   title: 'Help us water the garden.',
   lead: "Every meal, school book and birthday cake here is made possible by friends. There's a place for you too.",
   illustrationLabel:
-    'An illustration of a grown-up watering three young plants of different sizes while a boy holds his hand',
+    'An illustration of a grown-up watering three young plants of different sizes while one boy holds his hand and another helps with a small watering can',
 };
+
+const REPLY_FOOTER = '\n\n\n---\nMy name:\nMy phone:\n';
 
 export const FAMILY_WAYS: FamilyWay[] = [
   {
     id: 'give',
     title: 'Help a child grow',
     body: "Support a boy's schooling, a month of meals or our nursery. Fr. Sebastian will reply personally with how to give and where your gift will go.",
+    primary: 'email',
     ctaLabel: 'Email Fr. Sebastian',
-    ctaKind: 'email',
     tone: 'peach',
-    subject: 'I would like to help a child at Ammaveedu',
-    message:
-      'Dear Fr. Sebastian,\n\nI came across the Ammaveedu website and would like to help. Please let me know how best to give and where it would be most useful.\n\n\n---\nMy name:\nMy phone:\n',
+    emailSubject: 'I would like to help a child at Ammaveedu',
+    emailBody: `Dear Fr. Sebastian,\n\nI came across the Ammaveedu website and would like to help. Please let me know how best to give and where it would be most useful.${REPLY_FOOTER}`,
+    whatsappMessage: 'Hello Fr. Sebastian, I would like to help a child at Ammaveedu. Please let me know how best to give.',
   },
   {
     id: 'time',
     title: 'Share your time',
     body: 'Help with homework, play with the boys, teach a skill you love, or join the weekly rice round. Every hour spent with them matters.',
+    primary: 'whatsapp',
     ctaLabel: 'WhatsApp us',
-    ctaKind: 'whatsapp',
     tone: 'sage',
-    message: 'Hello Fr. Sebastian, I would love to share some time with the boys at Ammaveedu.',
+    emailSubject: 'I would like to share some time with the boys at Ammaveedu',
+    emailBody: `Dear Fr. Sebastian,\n\nI would love to share some time with the boys at Ammaveedu. Please let me know how I could help.${REPLY_FOOTER}`,
+    whatsappMessage: 'Hello Fr. Sebastian, I would love to share some time with the boys at Ammaveedu.',
   },
   {
     id: 'celebrate',
     title: 'Celebrate with us',
     body: 'Spend a birthday or special day with the boys. Share a meal, bring some games and make a memory together.',
+    primary: 'phone',
     ctaLabel: `Call ${TRUST.phone}`,
-    ctaKind: 'phone',
     tone: 'sun',
+    emailSubject: 'I would like to celebrate a special day at Ammaveedu',
+    emailBody: `Dear Fr. Sebastian,\n\nI would like to spend a birthday or special day with the boys at Ammaveedu. Please let me know what would work.${REPLY_FOOTER}`,
+    whatsappMessage: 'Hello Fr. Sebastian, I would like to celebrate a birthday or special day with the boys at Ammaveedu.',
   },
 ];
+
+export const CHANNEL_LABELS: ChannelLabels = {
+  or: 'or',
+  email: 'Email',
+  whatsapp: 'WhatsApp',
+  phone: 'Call',
+};
 
 export const GIVING_NOTE =
   'We never take payments on this website. Please give only using details Fr. Sebastian shares with you directly, so you always know your gift reaches the children.';
@@ -215,20 +253,18 @@ export const FOOTER: FooterContent = {
 };
 
 export const NAV_LINKS: NavLink[] = [
-  { label: 'How we nurture', fragment: 'nurture' },
+  { label: 'How we nurture', path: '/', fragment: 'nurture' },
   { label: 'Our story', path: '/stories' },
-  { label: 'Visit', fragment: 'visit' },
+  { label: 'Visit', path: '/', fragment: 'visit' },
 ];
-
-export const HEADER_CTA = { label: 'Be part of the family', path: '/', fragment: 'family' };
 
 export const SHELL: ShellLabels = {
   homeAriaLabel: `${TRUST.alsoKnownAs}, home`,
+  mainNavLabel: 'Main',
   openMenu: 'Open menu',
   closeMenu: 'Close menu',
   backToHome: 'Back to home',
   backToHomeShort: 'Home',
-  storyCta: { label: 'Be part of the next chapter', path: '/stories', fragment: 'next-chapter' },
   fabOpen: 'Contact the trust by WhatsApp or phone',
   fabClose: 'Close contact options',
   fabWhatsapp: 'Chat on WhatsApp',

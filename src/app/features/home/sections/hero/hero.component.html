@@ -1,103 +1,67 @@
-<section class="relative overflow-hidden bg-cream">
+<section data-hides-fab class="relative overflow-hidden bg-cream">
   <div class="container-page pt-8 pb-16 sm:pt-12 lg:pt-16 lg:pb-24">
-    <div class="grid items-center gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-10">
-      <!-- Copy -->
-      <div class="hero-rise order-2 lg:order-1">
-        <p class="eyebrow">{{ hero.eyebrow }}</p>
+    <div class="grid items-center gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
+      <!-- Copy: first on every screen, so the headline and button show without scrolling -->
+      <div class="hero-rise">
+        <p class="eyebrow">{{ hero().eyebrow }}</p>
 
         <h1 class="mt-4 font-heading text-[40px] sm:text-[56px] lg:text-[64px] xl:text-[76px] leading-[1.05] text-sage">
-          {{ hero.title }}
+          {{ hero().title }}
         </h1>
 
-        <p class="mt-6 text-[18px] sm:text-[20px] text-ink-muted leading-relaxed max-w-xl">
-          {{ hero.body }}
+        <p class="mt-5 text-[18px] sm:text-[20px] text-ink-muted leading-relaxed max-w-xl">
+          {{ hero().body }}
         </p>
 
-        <div class="btn-row mt-9">
+        <div class="btn-row mt-7 sm:mt-9">
           <a
-            [routerLink]="hero.primaryCta.path"
-            [fragment]="hero.primaryCta.fragment"
+            [routerLink]="hero().primaryCta.path"
+            [fragment]="hero().primaryCta.fragment"
             class="btn btn-sage text-[17px] !px-8 !py-4"
           >
-            {{ hero.primaryCta.label }}
+            {{ hero().primaryCta.label }}
           </a>
-          <a [routerLink]="hero.secondaryCta.path" class="btn btn-outline text-[17px] !px-8 !py-4">
-            {{ hero.secondaryCta.label }}
+          <a [routerLink]="hero().secondaryCta.path" class="btn btn-outline text-[17px] !px-8 !py-4">
+            {{ hero().secondaryCta.label }}
           </a>
         </div>
       </div>
 
-      <!-- The growing tree -->
-      <div class="relative order-1 lg:order-2 mx-auto w-full max-w-[340px] sm:max-w-[460px] lg:max-w-none">
-        <svg
-          viewBox="0 0 520 480"
-          class="w-full h-auto"
-          role="img"
-          [attr.aria-label]="hero.illustrationLabel"
-          focusable="false"
-        >
-          <!-- Sun -->
-          <g class="svg-part sun-pulse">
-            <circle cx="438" cy="78" r="54" fill="#FFF1C9" />
-            <circle cx="438" cy="78" r="34" fill="#FBD46B" />
-          </g>
-
-          <!-- Ground -->
-          <ellipse cx="260" cy="440" rx="220" ry="28" fill="#E6DCC4" />
-          <ellipse cx="150" cy="436" rx="26" ry="7" fill="#9FD0AD" />
-          <ellipse cx="376" cy="438" rx="32" ry="8" fill="#9FD0AD" />
-
-          <!-- Tree: sways about the foot of its trunk -->
-          <g class="tree-sway">
-            <path d="M236 442c7-50 9-100 5-156h30c-4 56-2 106 5 156Z" fill="#8A5A3B" />
-            <path
-              d="M250 340c-18-18-40-30-66-48M262 322c20-18 44-30 74-44M256 300c-2-20 0-38 4-56"
-              stroke="#8A5A3B"
-              stroke-width="11"
-              stroke-linecap="round"
-              fill="none"
-            />
-
-            <!-- Crown -->
-            <circle cx="256" cy="186" r="118" fill="#4F8A62" />
-            <circle cx="160" cy="232" r="78" fill="#6AA37A" />
-            <circle cx="352" cy="226" r="80" fill="#6AA37A" />
-            <circle cx="206" cy="124" r="76" fill="#7FB38C" />
-            <circle cx="310" cy="122" r="74" fill="#7FB38C" />
-            <circle cx="258" cy="88" r="58" fill="#9FD0AD" />
-            <circle cx="126" cy="190" r="44" fill="#7FB38C" />
-            <circle cx="392" cy="176" r="46" fill="#9FD0AD" />
-            <circle cx="256" cy="262" r="62" fill="#6AA37A" />
-
-            <!-- Fruit -->
-            <circle cx="186" cy="200" r="10" fill="#F4A77C" />
-            <circle cx="300" cy="170" r="10" fill="#FBD46B" />
-            <circle cx="236" cy="120" r="9" fill="#F4A77C" />
-            <circle cx="360" cy="244" r="10" fill="#F4A77C" />
-            <circle cx="140" cy="248" r="9" fill="#FBD46B" />
-            <circle cx="268" cy="248" r="9" fill="#FBD46B" />
-            <circle cx="330" cy="98" r="8" fill="#F4A77C" />
-          </g>
-
-          <!-- Three leaves drifting down -->
-          <path class="svg-part leaf-fall leaf-fall-1" d="M150 290c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#6AA37A" />
-          <path class="svg-part leaf-fall leaf-fall-2" d="M338 300c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#9FD0AD" />
-          <path class="svg-part leaf-fall leaf-fall-3" d="M246 318c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#7FB38C" />
-
-          <!-- A bird on its way across -->
-          <g transform="translate(70 70)">
-            <g class="bird-fly">
-              <path class="bird-wing" d="M0 10c6-10 14-12 20-2" stroke="#2F5D46" stroke-width="3.5" stroke-linecap="round" fill="none" />
-              <path class="bird-wing" d="M20 8c6-10 14-8 20 2" stroke="#2F5D46" stroke-width="3.5" stroke-linecap="round" fill="none" />
-            </g>
-          </g>
-        </svg>
+      <!-- Picture -->
+      <div class="relative mx-auto w-full max-w-[400px] sm:max-w-[480px] lg:max-w-none">
+        @if (hero().heroPhoto; as photo) {
+          <!-- The real home in an arch, with the tree as a small accent in front -->
+          <figure class="relative ms-auto w-[82%] lg:w-[80%]">
+            <div class="photo-frame rounded-arch aspect-[4/5]">
+              <img
+                [appPhoto]="photo.image"
+                [alt]="photo.alt"
+                [focalPoint]="photo.focalPoint"
+                [capped]="false"
+                [priority]="true"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            @if (photo.caption) {
+              <figcaption
+                class="absolute bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white/95 px-4 py-1.5 text-[14px] font-bold text-sage shadow-soft"
+              >
+                {{ photo.caption }}
+              </figcaption>
+            }
+          </figure>
+          <div class="absolute -bottom-6 -left-2 w-[48%] sm:w-[46%]">
+            <ng-container [ngTemplateOutlet]="tree" />
+          </div>
+        } @else {
+          <ng-container [ngTemplateOutlet]="tree" />
+        }
 
         <!-- Floating badges -->
-        @for (badge of hero.badges; track badge.strong; let i = $index) {
+        @for (badge of hero().badges; track badge.strong; let i = $index) {
           <div
             class="float absolute flex items-center gap-2.5 rounded-full bg-white shadow-soft ps-2 pe-4 py-2 text-[14px] sm:text-[15px] text-ink"
-            [class]="i === 0 ? 'float-1 top-[6%] left-0 sm:-left-2' : 'float-3 bottom-[4%] right-0 sm:-right-2'"
+            [class]="i === 0 ? 'float-1 top-[6%] left-0 sm:-left-2' : 'float-3 top-[46%] right-0 sm:-right-3'"
           >
             <span
               class="w-9 h-9 rounded-full flex items-center justify-center"
@@ -112,3 +76,70 @@
     </div>
   </div>
 </section>
+
+<!-- The illustrated tree: the whole picture on its own, or an accent beside the photo -->
+<ng-template #tree>
+  <svg
+    viewBox="0 0 520 480"
+    class="w-full h-auto"
+    role="img"
+    [attr.aria-label]="hero().illustrationLabel"
+    focusable="false"
+  >
+    <!-- Sun -->
+    <g class="svg-part sun-pulse">
+      <circle cx="438" cy="78" r="54" fill="#FFF1C9" />
+      <circle cx="438" cy="78" r="34" fill="#FBD46B" />
+    </g>
+
+    <!-- Ground -->
+    <ellipse cx="260" cy="440" rx="220" ry="28" fill="#E6DCC4" />
+    <ellipse cx="150" cy="436" rx="26" ry="7" fill="#9FD0AD" />
+    <ellipse cx="376" cy="438" rx="32" ry="8" fill="#9FD0AD" />
+
+    <!-- Tree: sways about the foot of its trunk -->
+    <g class="tree-sway">
+      <path d="M236 442c7-50 9-100 5-156h30c-4 56-2 106 5 156Z" fill="#8A5A3B" />
+      <path
+        d="M250 340c-18-18-40-30-66-48M262 322c20-18 44-30 74-44M256 300c-2-20 0-38 4-56"
+        stroke="#8A5A3B"
+        stroke-width="11"
+        stroke-linecap="round"
+        fill="none"
+      />
+
+      <!-- Crown -->
+      <circle cx="256" cy="186" r="118" fill="#4F8A62" />
+      <circle cx="160" cy="232" r="78" fill="#6AA37A" />
+      <circle cx="352" cy="226" r="80" fill="#6AA37A" />
+      <circle cx="206" cy="124" r="76" fill="#7FB38C" />
+      <circle cx="310" cy="122" r="74" fill="#7FB38C" />
+      <circle cx="258" cy="88" r="58" fill="#9FD0AD" />
+      <circle cx="126" cy="190" r="44" fill="#7FB38C" />
+      <circle cx="392" cy="176" r="46" fill="#9FD0AD" />
+      <circle cx="256" cy="262" r="62" fill="#6AA37A" />
+
+      <!-- Fruit -->
+      <circle cx="186" cy="200" r="10" fill="#F4A77C" />
+      <circle cx="300" cy="170" r="10" fill="#FBD46B" />
+      <circle cx="236" cy="120" r="9" fill="#F4A77C" />
+      <circle cx="360" cy="244" r="10" fill="#F4A77C" />
+      <circle cx="140" cy="248" r="9" fill="#FBD46B" />
+      <circle cx="268" cy="248" r="9" fill="#FBD46B" />
+      <circle cx="330" cy="98" r="8" fill="#F4A77C" />
+    </g>
+
+    <!-- Three leaves drifting down -->
+    <path class="svg-part leaf-fall leaf-fall-1" d="M150 290c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#6AA37A" />
+    <path class="svg-part leaf-fall leaf-fall-2" d="M338 300c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#9FD0AD" />
+    <path class="svg-part leaf-fall leaf-fall-3" d="M246 318c10-12 26-12 30 0-10 12-26 12-30 0Z" fill="#7FB38C" />
+
+    <!-- A bird on its way across -->
+    <g transform="translate(70 70)">
+      <g class="bird-fly">
+        <path class="bird-wing" d="M0 10c6-10 14-12 20-2" stroke="#2F5D46" stroke-width="3.5" stroke-linecap="round" fill="none" />
+        <path class="bird-wing" d="M20 8c6-10 14-8 20 2" stroke="#2F5D46" stroke-width="3.5" stroke-linecap="round" fill="none" />
+      </g>
+    </g>
+  </svg>
+</ng-template>

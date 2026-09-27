@@ -19,6 +19,7 @@ export class ChapterComponent {
 
   readonly page = STORY_PAGE;
   readonly ordered = [...STORIES].sort((a, b) => a.order - b.order);
+  readonly total = STORIES.length;
 
   readonly story = computed(() => storyBySlug(this.slug()));
 

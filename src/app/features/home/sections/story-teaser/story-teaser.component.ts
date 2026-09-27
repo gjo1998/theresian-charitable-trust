@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { STORY_TEASER } from '../../../../core/data/site-content';
+import { PhotoDirective } from '../../../../shared/directives/photo.directive';
 import { RevealDirective } from '../../../../shared/directives/reveal.directive';
 
 @Component({
   selector: 'app-story-teaser',
   standalone: true,
-  imports: [RouterLink, RevealDirective],
+  imports: [RouterLink, RevealDirective, PhotoDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="bg-sage-soft py-20 sm:py-28">
@@ -27,11 +28,12 @@ import { RevealDirective } from '../../../../shared/directives/reveal.directive'
           <div class="grid grid-cols-2 gap-4 sm:gap-6">
             @for (photo of teaser.photos; track photo.image; let i = $index) {
               <img
-                [src]="photo.image"
+                [appPhoto]="photo.image"
                 [alt]="photo.alt"
-                class="photo-frame float w-full aspect-[4/5] object-cover"
+                [frameAspect]="1"
+                [focalPoint]="photo.focalPoint"
+                class="photo-frame float w-full aspect-square object-cover mx-auto"
                 [class]="i === 0 ? 'rounded-arch float-1 mb-10' : 'rounded-leaf-corner float-3 mt-10'"
-                loading="lazy"
               />
             }
           </div>

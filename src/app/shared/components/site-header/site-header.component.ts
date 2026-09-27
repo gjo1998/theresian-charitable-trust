@@ -31,8 +31,11 @@ export class SiteHeaderComponent {
     { initialValue: this.router.url },
   );
 
-  /** The story pages get their own, simpler header. */
-  readonly onStory = computed(() => this.url().startsWith('/stories'));
+  /**
+   * The story page gets its own, simpler header. Chapter pages keep the main
+   * navigation, so a reader can always get back to the rest of the site.
+   */
+  readonly onStory = computed(() => this.url().split(/[?#]/)[0] === '/stories');
 
   /** The header gains a shadow once the page has moved. */
   readonly scrolled = signal(false);
