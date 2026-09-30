@@ -6,6 +6,14 @@ export type Hand = readonly [number, number];
 /** How a face looks. */
 export type Mood = 'happy' | 'joy' | 'calm' | 'sad' | 'wonder';
 
+/** Which arm, if any, waves back and forth. */
+export type Wave = 'left' | 'right';
+
+/** A random start, so a scene full of faces doesn't blink or breathe in step. */
+function randomDelay(seconds: number): string {
+  return `${-(Math.random() * seconds).toFixed(2)}s`;
+}
+
 /**
  * A face for a round head of radius 10, centred on the origin, below the
  * hair. Scale it for a bigger head. Open eyes blink now and then.
@@ -19,9 +27,12 @@ export type Mood = 'happy' | 'joy' | 'calm' | 'sad' | 'wonder';
       <!-- Closed, content eyes -->
       <svg:path d="M-5 1.8q1.6-1.7 3.2 0M1.8 1.8q1.6-1.7 3.2 0" stroke="#23302A" stroke-width="1.1" stroke-linecap="round" fill="none" />
     } @else {
-      <svg:g class="svg-part face-blink">
+      <svg:g class="svg-part face-blink" [style.animation-delay]="blinkDelay">
         <svg:circle cx="-3.4" cy="1.4" [attr.r]="mood() === 'wonder' ? 1.55 : 1.3" fill="#23302A" />
         <svg:circle cx="3.4" cy="1.4" [attr.r]="mood() === 'wonder' ? 1.55 : 1.3" fill="#23302A" />
+        <!-- A glint in each eye -->
+        <svg:circle cx="-3" cy="1" r="0.4" fill="#FFFFFF" />
+        <svg:circle cx="3.8" cy="1" r="0.4" fill="#FFFFFF" />
       </svg:g>
     }
     @if (mood() !== 'sad') {
@@ -50,12 +61,14 @@ export type Mood = 'happy' | 'joy' | 'calm' | 'sad' | 'wonder';
 })
 export class FaceComponent {
   readonly mood = input<Mood>('happy');
+  readonly blinkDelay = randomDelay(5);
 }
 
 /**
  * The boy drawn across the site's scenes, feet at the origin. Arms are drawn
  * only when a hand is given, from the shoulder to that point. Use on a <g>
- * inside an <svg>, and place it with a transform.
+ * inside an <svg>, and place it with a transform. He breathes gently, and
+ * can wave one arm.
  */
 @Component({
   selector: 'g[appBoy]',
@@ -63,23 +76,32 @@ export class FaceComponent {
   imports: [FaceComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <svg:path d="M-5 0v-17M5 0v-17" stroke="#9C6848" stroke-width="5" stroke-linecap="round" />
-    <svg:rect x="-9" y="-27" width="18" height="12" rx="3" fill="#2F5D46" />
-    <svg:rect x="-11" y="-49" width="22" height="26" rx="8" [attr.fill]="shirt()" />
-    <svg:circle cy="-59" r="10" fill="#A86E4A" />
-    <svg:path d="M-10 -60a10 10 0 0 1 20 0q-10-5-20 0Z" fill="#2B1F18" />
-    <svg:g appFace transform="translate(0 -59)" [mood]="mood()" />
-    @for (arm of arms(); track arm.from) {
-      <svg:path [attr.d]="arm.d" [attr.stroke]="shirt()" stroke-width="5" stroke-linecap="round" />
-      <svg:circle [attr.cx]="arm.hand[0]" [attr.cy]="arm.hand[1]" r="2.8" fill="#A86E4A" />
-    }
+    <svg:ellipse cy="1" rx="12" ry="2.6" fill="#23302A" opacity="0.12" />
+    <svg:g class="figure-breathe" [style.animation-delay]="breatheDelay">
+      <svg:path d="M-5 0v-17M5 0v-17" stroke="#9C6848" stroke-width="5" stroke-linecap="round" />
+      <svg:rect x="-9" y="-27" width="18" height="12" rx="3" fill="#2F5D46" />
+      <svg:rect x="-11" y="-49" width="22" height="26" rx="8" [attr.fill]="shirt()" />
+      <!-- Collar -->
+      <svg:path d="M-4 -49l4 4 4-4" stroke="#FFFFFF" stroke-width="1.2" stroke-linejoin="round" fill="none" opacity="0.7" />
+      <svg:circle cy="-59" r="10" fill="#A86E4A" />
+      <svg:path d="M-10 -60a10 10 0 0 1 20 0q-10-5-20 0Z" fill="#2B1F18" />
+      <svg:g appFace transform="translate(0 -59)" [mood]="mood()" />
+      @for (arm of arms(); track arm.from) {
+        <svg:g [attr.class]="wave() === arm.from ? 'arm-wave-' + arm.from : null">
+          <svg:path [attr.d]="arm.d" [attr.stroke]="shirt()" stroke-width="5" stroke-linecap="round" />
+          <svg:circle [attr.cx]="arm.hand[0]" [attr.cy]="arm.hand[1]" r="2.8" fill="#A86E4A" />
+        </svg:g>
+      }
+    </svg:g>
   `,
 })
 export class BoyFigureComponent {
   readonly shirt = input('#7FB38C');
   readonly mood = input<Mood>('happy');
+  readonly wave = input<Wave>();
   readonly left = input<Hand>();
   readonly right = input<Hand>();
+  readonly breatheDelay = randomDelay(3);
 
   readonly arms = computed(() =>
     armsFrom([-9, -44], this.left(), [9, -44], this.right()),
@@ -96,20 +118,27 @@ export class BoyFigureComponent {
   imports: [FaceComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <svg:ellipse cx="-7" cy="0" rx="7" ry="3.5" fill="#23302A" />
-    <svg:ellipse cx="9" cy="0" rx="7" ry="3.5" fill="#23302A" />
-    <svg:path d="M-13 -90q13-7 26 0l8 86q-21 6-42 0Z" [attr.fill]="robe()" stroke="#2F5D46" stroke-width="2.5" stroke-linejoin="round" />
-    @if (bun()) {
-      <svg:circle cx="11" cy="-112" r="6" [attr.fill]="hair()" />
-    }
-    <svg:circle cy="-106" r="13" fill="#B97A56" />
-    <svg:path d="M-13 -107a13 13 0 0 1 26 0q-6-6-13-5-7-1-13 5Z" [attr.fill]="hair()" />
-    <svg:g appFace transform="translate(0 -106) scale(1.3)" [mood]="mood()" />
-    @for (arm of arms(); track arm.from) {
-      <svg:path [attr.d]="arm.d" stroke="#2F5D46" stroke-width="10" stroke-linecap="round" />
-      <svg:path [attr.d]="arm.d" [attr.stroke]="robe()" stroke-width="6" stroke-linecap="round" />
-      <svg:circle [attr.cx]="arm.hand[0]" [attr.cy]="arm.hand[1]" r="4.5" fill="#B97A56" />
-    }
+    <svg:ellipse cx="1" cy="1" rx="22" ry="3.6" fill="#23302A" opacity="0.12" />
+    <svg:g class="figure-breathe" [style.animation-delay]="breatheDelay">
+      <svg:ellipse cx="-7" cy="0" rx="7" ry="3.5" fill="#23302A" />
+      <svg:ellipse cx="9" cy="0" rx="7" ry="3.5" fill="#23302A" />
+      <svg:path d="M-13 -90q13-7 26 0l8 86q-21 6-42 0Z" [attr.fill]="robe()" stroke="#2F5D46" stroke-width="2.5" stroke-linejoin="round" />
+      <!-- A soft fold down the robe -->
+      <svg:path d="M1 -80v70" stroke="#2F5D46" stroke-width="1.2" stroke-linecap="round" opacity="0.18" />
+      @if (bun()) {
+        <svg:circle cx="11" cy="-112" r="6" [attr.fill]="hair()" />
+      }
+      <svg:circle cy="-106" r="13" fill="#B97A56" />
+      <svg:path d="M-13 -107a13 13 0 0 1 26 0q-6-6-13-5-7-1-13 5Z" [attr.fill]="hair()" />
+      <svg:g appFace transform="translate(0 -106) scale(1.3)" [mood]="mood()" />
+      @for (arm of arms(); track arm.from) {
+        <svg:g [attr.class]="wave() === arm.from ? 'arm-wave-' + arm.from : null">
+          <svg:path [attr.d]="arm.d" stroke="#2F5D46" stroke-width="10" stroke-linecap="round" />
+          <svg:path [attr.d]="arm.d" [attr.stroke]="robe()" stroke-width="6" stroke-linecap="round" />
+          <svg:circle [attr.cx]="arm.hand[0]" [attr.cy]="arm.hand[1]" r="4.5" fill="#B97A56" />
+        </svg:g>
+      }
+    </svg:g>
   `,
 })
 export class AdultFigureComponent {
@@ -117,8 +146,10 @@ export class AdultFigureComponent {
   readonly mood = input<Mood>('happy');
   readonly hair = input('#3A2A22');
   readonly bun = input(false);
+  readonly wave = input<Wave>();
   readonly left = input<Hand>([-31, -54]);
   readonly right = input<Hand>([19, -56]);
+  readonly breatheDelay = randomDelay(3);
 
   readonly arms = computed(() =>
     armsFrom([-11, -82], this.left(), [11, -84], this.right()),
@@ -127,9 +158,9 @@ export class AdultFigureComponent {
 
 function armsFrom(leftShoulder: Hand, left: Hand | undefined, rightShoulder: Hand, right: Hand | undefined) {
   return [
-    { from: 'left', shoulder: leftShoulder, hand: left },
-    { from: 'right', shoulder: rightShoulder, hand: right },
+    { from: 'left' as const, shoulder: leftShoulder, hand: left },
+    { from: 'right' as const, shoulder: rightShoulder, hand: right },
   ]
-    .filter((arm): arm is { from: string; shoulder: Hand; hand: Hand } => !!arm.hand)
+    .filter((arm): arm is { from: Wave; shoulder: Hand; hand: Hand } => !!arm.hand)
     .map((arm) => ({ ...arm, d: `M${arm.shoulder[0]} ${arm.shoulder[1]}L${arm.hand[0]} ${arm.hand[1]}` }));
 }

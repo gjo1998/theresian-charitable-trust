@@ -177,7 +177,7 @@ export function storyBySlug(slug: string): Story | undefined {
   return STORIES.find((story) => story.slug === slug);
 }
 
-const STORY_LEAD = `How one priest, one boy and the gift of a house grew into ${TRUST.alsoKnownAs} — told in seven short chapters.`;
+const STORY_LEAD = `How one priest, one boy and the gift of a house took root and grew into ${TRUST.alsoKnownAs}, told in seven short chapters.`;
 
 /** Copy for the story page and the single-chapter pages. */
 export const STORY_PAGE: StoryPageContent = {
@@ -210,7 +210,7 @@ export const STORY_PAGE: StoryPageContent = {
   },
   closing: {
     title: "The next chapter is one we'd love to write with you.",
-    body: `There is no endowment behind ${TRUST.alsoKnownAs} — everything here comes from the love of friends. Write to Fr. Sebastian and he will reply to you personally.`,
+    body: `There is no endowment behind ${TRUST.alsoKnownAs}. Every meal and every lesson grows from the love of friends. Write to Fr. Sebastian and he will reply to you personally.`,
     emailLabel: 'Email Fr. Sebastian',
     emailSubject: 'I would like to be part of the next chapter at Ammaveedu',
     emailBody:

@@ -73,9 +73,9 @@ export const HEADER_CTA: Cta = { label: 'Be part of the family', path: '/', frag
 
 export const HOME_HERO: HomeHero = {
   eyebrow: TRUST.tagline,
-  title: 'Every boy here is growing — taller, braver, kinder.',
-  intro: `${TRUST.alsoKnownAs}, in ${TRUST.place}, is a home for boys who need a family and care. ${TRUST.founderShortName} has run it since ${TRUST.foundedYear}.`,
-  body: `${TRUST.alsoKnownAs} means “mother's house”. Here each boy has love, good food, school every day and a big family of brothers to grow up with.`,
+  title: 'Every boy here is growing, rooted in love.',
+  intro: `${TRUST.alsoKnownAs}, in ${TRUST.place}, is a home where boys who need a family find one. ${TRUST.founderShortName} has tended it since ${TRUST.foundedYear}.`,
+  body: `${TRUST.alsoKnownAs} means “mother's house”. Here every boy is held in love, fed at a shared table, sent to school each morning and surrounded by a big family of brothers to grow up with.`,
   primaryCta: HEADER_CTA,
   secondaryCta: { label: 'Read our story', path: '/stories' },
   heroPhoto: {
@@ -104,8 +104,8 @@ export const HOME_HERO: HomeHero = {
 
 export const NURTURE_INTRO: SectionIntro = {
   eyebrow: 'How we nurture',
-  title: 'What a boy needs to grow — we make sure he has it.',
-  lead: 'Four things every boy here can count on: a place to belong, a love of learning, good food and good health care.',
+  title: 'Good soil, warm sun, gentle hands — all a boy needs to grow.',
+  lead: 'Four things every boy here can count on, as sure as sunrise: a place to belong, a love of learning, good food and good health care.',
 };
 
 export const NURTURE_PILLARS: NurturePillar[] = [
@@ -113,8 +113,8 @@ export const NURTURE_PILLARS: NurturePillar[] = [
     id: 'belonging',
     badge: 'Belonging',
     ring: 'peach',
-    title: 'A place to belong',
-    body: 'A bed of his own, brothers beside him and grown-ups who are there for him. Feeling at home comes first.',
+    title: 'A place to put down roots',
+    body: 'A bed of his own, brothers beside him and grown-ups who are always there. Before anything can grow, a child must know he is home.',
     image: 'images/ammaveedu-boys.jpg',
     alt: 'Boys of Ammaveedu together',
     focalPoint: '50% 50%',
@@ -123,8 +123,8 @@ export const NURTURE_PILLARS: NurturePillar[] = [
     id: 'learning',
     badge: 'Learning',
     ring: 'sun',
-    title: 'A love of learning',
-    body: 'Our free nursery gives little ones a happy start, and every boy over six goes to school every day.',
+    title: 'Minds that blossom',
+    body: 'Our free nursery gives little ones a gentle, happy start, and every boy over six goes to school every day.',
     image: 'images/children-meal.jpg',
     alt: 'Young children sitting together at Ammaveedu',
     focalPoint: '55% 40%',
@@ -133,8 +133,8 @@ export const NURTURE_PILLARS: NurturePillar[] = [
     id: 'nourishment',
     badge: 'Nourishment',
     ring: 'mint',
-    title: 'Good food, shared',
-    body: 'Warm meals around the table, and a weekly rice round that shares our blessings with around a hundred neighbouring families.',
+    title: 'Nourished at one table',
+    body: 'Warm meals shared around one table, and a weekly rice round that carries our blessings to around a hundred neighbouring families.',
     image: 'images/rice-delivery.jpg',
     alt: 'Rice being carried in for the weekly round',
     focalPoint: '50% 20%',
@@ -143,8 +143,8 @@ export const NURTURE_PILLARS: NurturePillar[] = [
     id: 'wellbeing',
     badge: 'Wellbeing',
     ring: 'sky',
-    title: 'Healthy and cared for',
-    body: 'A paediatrician on our team keeps an eye on every child, and we visit neighbours who need care at home.',
+    title: 'Tended with care',
+    body: 'A paediatrician on our team watches over every child, and we visit neighbours who need care at home.',
     image: 'images/home-visit.jpg',
     alt: 'A home visit to a neighbour',
     focalPoint: '50% 30%',
@@ -154,12 +154,12 @@ export const NURTURE_PILLARS: NurturePillar[] = [
 export const HELPING_INTRO: SectionIntro = {
   eyebrow: 'Helping them grow',
   title: 'Raising a well-rounded child',
-  lead: 'Food and a roof are only the start. We help every boy grow in every way, and these are the nine things we nurture, day in and day out.',
+  lead: 'A roof and a meal are only the soil. What grows from it is the heart of a good man, and we tend it every day in nine gentle ways.',
   illustrationLabel: 'A vine grows from a sprout to a young tree, with each of the nine things we nurture along the way',
 };
 
 /** The closing line at the foot of the vine. */
-export const HELPING_CLOSING = 'Little by little, a sprout becomes a young man who can stand on his own.';
+export const HELPING_CLOSING = 'Leaf by leaf, year by year, a sprout becomes a young man who can stand tall on his own.';
 
 /** The five ways a boy grows. Each colours its values on the vine. */
 export const HELPING_AREAS: GrowingArea[] = ['Morally', 'Physically', 'Mentally', 'Emotionally', 'Socially'];
@@ -169,63 +169,63 @@ export const HELPING_MOMENTS: GrowingMoment[] = [
     id: 'kindness',
     area: 'Morally',
     title: 'Kindness',
-    body: 'Empathy, sharing, helping and respecting others. Big brothers share first, and the little ones learn by watching.',
+    body: 'Empathy, sharing, helping and respecting others. Big brothers share first, and the little ones learn by watching: kindness, passed from hand to hand.',
     illustrationLabel: 'An older boy hands a mango to a small boy while a grown-up rests a hand on his shoulder, and hearts float up',
   },
   {
     id: 'feelings',
     area: 'Emotionally',
     title: 'Emotional strength',
-    body: 'It is all right to feel sad, angry or let down. We help each boy put his feelings into words and find his calm again.',
+    body: 'Sad, angry or let down, every feeling is welcome here. We help each boy find words for his heart and, after the rain, his calm again.',
     illustrationLabel: 'A grown-up puts an arm around a boy under a rainbow, as a rain cloud gives way to the sun',
   },
   {
     id: 'routine',
     area: 'Mentally',
     title: 'Discipline and punctuality',
-    body: 'Simple daily routines, from waking up to homework time, teach a boy to respect time and keep his word.',
+    body: 'Gentle daily rhythms, from sunrise to homework time, teach a boy to honour time and keep his word.',
     illustrationLabel: 'A boy with his school bag waves beside a big clock and a daily checklist with ticks',
   },
   {
     id: 'health',
     area: 'Physically',
     title: 'Physical health',
-    body: 'Sports, outdoor play, cycling, healthy food and a good night’s sleep keep growing bodies strong.',
+    body: 'Sports, outdoor play, cycling, good food and a good night’s sleep keep growing bodies strong and spirits bright.',
     illustrationLabel: 'A boy rides a bicycle while another boy runs to kick a football',
   },
   {
     id: 'learning',
     area: 'Mentally',
     title: 'Love of learning',
-    body: 'Curiosity, reading, questions, creativity and solving problems. No question here is ever too small.',
+    body: 'Curiosity, reading, questions, creativity and solving problems. No question here is too small, and every “why?” is a seed.',
     illustrationLabel: 'A boy reads an open book with a light bulb glowing above his head, beside a stack of books and a globe',
   },
   {
     id: 'respect',
     area: 'Socially',
     title: 'Respect',
-    body: 'Respect for everyone, young and old, together with the confidence to think for himself.',
+    body: 'Respect for everyone, young and old, alongside the courage to think for himself.',
     illustrationLabel: 'A boy greets a grandmother with folded hands as she leans on her walking stick',
   },
   {
     id: 'responsibility',
     area: 'Morally',
     title: 'Responsibility',
-    body: 'Small jobs that suit his age, like sweeping and watering the plants, and owning up to mistakes without fear.',
+    body: 'Small jobs that suit his age, like sweeping and watering the plants, and the courage to own a mistake without fear.',
     illustrationLabel: 'One boy sweeps with a broom while another waters a potted plant',
   },
   {
     id: 'honesty',
     area: 'Morally',
     title: 'Honesty and integrity',
-    body: 'Telling the truth and doing the right thing, even when nobody is watching.',
+    body: 'Telling the truth and doing the right thing, even when no one is watching: a quiet strength that grows with him.',
     illustrationLabel: 'A boy hands a lost purse back to a grown-up, under a shining star',
   },
   {
     id: 'talking',
     area: 'Socially',
     title: 'Communication',
-    body: 'Listening well, speaking up, disagreeing kindly and saying sorry like he means it.',
+    body: 'Listening well, speaking up, disagreeing kindly and saying sorry like he means it. Building bridges, not walls.',
     illustrationLabel: 'Two boys shake hands, one saying "Sorry!" and the other replying "It\'s OK!"',
   },
 ];
@@ -233,7 +233,7 @@ export const HELPING_MOMENTS: GrowingMoment[] = [
 export const GROWTH_INTRO: SectionIntro = {
   eyebrow: 'Growing up at Ammaveedu',
   title: 'From little sprout to young man',
-  lead: 'Every boy grows at his own pace. Here is what each stage looks like at Ammaveedu.',
+  lead: 'Every boy grows in his own season. Here is how each stage unfolds at Ammaveedu.',
   illustrationLabel:
     'An illustration of a grown-up holding a boy by the hand and pointing the way along a winding path, with two more boys walking with them towards a tree in the sunshine',
 };
@@ -243,7 +243,7 @@ export const GROWTH_STAGES: GrowthStage[] = [
     id: 'sprout',
     name: 'Sprout',
     label: 'In our nursery',
-    body: 'The youngest start in our free nursery, finding their way into English, Malayalam and maths through play.',
+    body: 'The youngest begin in our free nursery, discovering English, Malayalam and maths through play.',
     plant: 'sprout',
     highlight: false,
   },
@@ -259,7 +259,7 @@ export const GROWTH_STAGES: GrowthStage[] = [
     id: 'growing-strong',
     name: 'Growing strong',
     label: 'Among brothers',
-    body: 'Friends to play with, games after school and a house full of brothers cheering him on. Confidence grows here.',
+    body: 'Friends to play with, games after school and a house full of brothers cheering him on. Here, confidence takes root.',
     plant: 'young-tree',
     highlight: false,
   },
@@ -267,7 +267,7 @@ export const GROWTH_STAGES: GrowthStage[] = [
     id: 'branching-out',
     name: 'Branching out',
     label: 'Our dream',
-    body: 'Skills training so every young man is ready for life after 18. It is the next thing we hope to build.',
+    body: 'Skills training so every young man is ready for life after 18. It is the next dream we hope to plant.',
     plant: 'branching',
     highlight: true,
   },
@@ -276,7 +276,7 @@ export const GROWTH_STAGES: GrowthStage[] = [
 export const STORY_TEASER: StoryTeaser = {
   eyebrow: 'Our history',
   title: 'From one seed, a whole tree.',
-  body: `In ${TRUST.foundedYear}, ${TRUST.founderShortName} set out with Rs. 4,000 and a lot of hope. One boy said yes, a friend gave a house, and ${TRUST.alsoKnownAs} began to grow.`,
+  body: `In ${TRUST.foundedYear}, ${TRUST.founderShortName} set out with Rs. 4,000 and a heart full of hope. One boy said yes, a friend gave a house, and a small seed of love began to grow into ${TRUST.alsoKnownAs}.`,
   cta: { label: 'Read the full story, with photos →', path: '/stories' },
   photos: [
     { image: 'images/ammaveedu-house.jpg', alt: 'The first house in Kottayam that became Ammaveedu' },
@@ -291,7 +291,7 @@ export const STORY_TEASER: StoryTeaser = {
 export const FAMILY_INTRO: SectionIntro = {
   eyebrow: 'Be part of the family',
   title: 'Help us water the garden.',
-  lead: "Every meal, school book and birthday cake here is made possible by friends. There's a place for you too.",
+  lead: "Every meal, school book and birthday cake here grows from the kindness of friends. There's a place in this garden for you too.",
   illustrationLabel:
     'An illustration of a grown-up watering three young plants of different sizes while one boy holds his hand and another helps with a small watering can',
 };
@@ -302,7 +302,7 @@ export const FAMILY_WAYS: FamilyWay[] = [
   {
     id: 'give',
     title: 'Help a child grow',
-    body: "Support a boy's schooling, a month of meals or our nursery. Fr. Sebastian will reply personally with how to give and where your gift will go.",
+    body: "Support a boy's schooling, a month of meals or our nursery, and watch it bloom. Fr. Sebastian will reply personally with how to give and where your gift will go.",
     primary: 'email',
     ctaLabel: 'Email Fr. Sebastian',
     tone: 'peach',
@@ -313,7 +313,7 @@ export const FAMILY_WAYS: FamilyWay[] = [
   {
     id: 'time',
     title: 'Share your time',
-    body: 'Help with homework, play with the boys, teach a skill you love, or join the weekly rice round. Every hour spent with them matters.',
+    body: 'Help with homework, play with the boys, teach a skill you love, or join the weekly rice round. Every hour you give is sunlight to a growing child.',
     primary: 'whatsapp',
     ctaLabel: 'WhatsApp us',
     tone: 'sage',
@@ -324,7 +324,7 @@ export const FAMILY_WAYS: FamilyWay[] = [
   {
     id: 'celebrate',
     title: 'Celebrate with us',
-    body: 'Spend a birthday or special day with the boys. Share a meal, bring some games and make a memory together.',
+    body: 'Spend a birthday or special day with the boys. Share a meal, bring some games and plant a memory that blossoms long after the day.',
     primary: 'phone',
     ctaLabel: `Call ${TRUST.phone}`,
     tone: 'sun',
@@ -430,13 +430,13 @@ export const DEFAULT_SHARE_IMAGE = 'images/ammaveedu-building.webp';
 
 export const HOME_META: PageMeta = {
   title: `${TRUST.alsoKnownAs} | A family home for boys in ${TRUST.place}`,
-  description: `${TRUST.alsoKnownAs} is a family home in ${TRUST.place}, where ${TRUST.boysAtHome} boys grow up together as brothers — cared for, cheered on and helped to become everything they can be.`,
+  description: `${TRUST.alsoKnownAs} is a family home in ${TRUST.place}, where ${TRUST.boysAtHome} boys grow up as brothers: rooted in love, cared for and cheered on to become all they can be.`,
 };
 
 export const GALLERY_PAGE: GalleryPageContent = {
   eyebrow: 'Gallery',
   title: `Life at ${TRUST.alsoKnownAs}`,
-  lead: 'Snapshots of our home, from the first little house to the boys growing up together today. Tap any photo to see it full size.',
+  lead: 'Snapshots of a home in full bloom, from the first little house to the brothers growing up together today. Tap any photo to see it full size.',
   openLabel: 'Open photo',
   closeLabel: 'Close',
   previousLabel: 'Previous photo',
@@ -556,8 +556,8 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
 ];
 
 export const NOT_FOUND: NotFoundContent = {
-  title: "We couldn't find that page",
-  body: 'It may have moved, or the link may have a typo. Everything else is just a click away.',
+  title: 'This path seems to have wandered off',
+  body: 'The page may have moved, or the link may have a typo. Every other path leads back home.',
   homeLabel: 'Back to home',
   storyLabel: 'Read our story',
   meta: {

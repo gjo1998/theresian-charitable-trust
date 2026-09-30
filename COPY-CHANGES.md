@@ -143,3 +143,77 @@ link is shared on WhatsApp.
 | Story | The story of Ammaveedu \| Theresian Charitable Trust (unchanged) | How one priest, one boy and the gift of a house grew into Ammaveedu — told in seven short chapters. (the story page's own lead) |
 | Each chapter (new) | *Chapter title* \| The story of Ammaveedu | The chapter's first sentence, unchanged |
 | Not found (new) | Page not found \| Ammaveedu | The page you were looking for is not on the Ammaveedu website. |
+
+## Part 4 — a warmer, more poetic voice (2026-09-30)
+
+The site's words now lean on one image: a home as a garden, where boys are
+planted, tended and grow toward the light. No facts changed. Every number,
+name and date is exactly as before.
+
+### Home: hero
+
+| Old | New |
+| --- | --- |
+| Every boy here is growing — taller, braver, kinder. | Every boy here is growing, rooted in love. |
+| … is a home for boys who need a family and care. Fr. Sebastian has run it since 2006. | … is a home where boys who need a family find one. Fr. Sebastian has tended it since 2006. |
+| Here each boy has love, good food, school every day and a big family of brothers to grow up with. | Here every boy is held in love, fed at a shared table, sent to school each morning and surrounded by a big family of brothers to grow up with. |
+
+### Home: how we nurture
+
+| Old | New |
+| --- | --- |
+| What a boy needs to grow — we make sure he has it. | Good soil, warm sun, gentle hands — all a boy needs to grow. |
+| Four things every boy here can count on: … | Four things every boy here can count on, as sure as sunrise: … |
+| A place to belong | A place to put down roots |
+| … grown-ups who are there for him. Feeling at home comes first. | … grown-ups who are always there. Before anything can grow, a child must know he is home. |
+| A love of learning | Minds that blossom |
+| Our free nursery gives little ones a happy start … | Our free nursery gives little ones a gentle, happy start … |
+| Good food, shared | Nourished at one table |
+| Warm meals around the table, and a weekly rice round that shares our blessings with … | Warm meals shared around one table, and a weekly rice round that carries our blessings to … |
+| Healthy and cared for | Tended with care |
+| A paediatrician on our team keeps an eye on every child … | A paediatrician on our team watches over every child … |
+
+### Home: raising a well-rounded child
+
+| Old | New |
+| --- | --- |
+| Food and a roof are only the start. We help every boy grow in every way, and these are the nine things we nurture, day in and day out. | A roof and a meal are only the soil. What grows from it is the heart of a good man, and we tend it every day in nine gentle ways. |
+| Kindness: … the little ones learn by watching. | … the little ones learn by watching: kindness, passed from hand to hand. |
+| Emotional strength: It is all right to feel sad, angry or let down. We help each boy put his feelings into words and find his calm again. | Sad, angry or let down, every feeling is welcome here. We help each boy find words for his heart and, after the rain, his calm again. |
+| Discipline: Simple daily routines, from waking up to homework time, teach a boy to respect time … | Gentle daily rhythms, from sunrise to homework time, teach a boy to honour time … |
+| Physical health: … keep growing bodies strong. | … keep growing bodies strong and spirits bright. |
+| Learning: … No question here is ever too small. | … No question here is too small, and every "why?" is a seed. |
+| Respect: … together with the confidence to think for himself. | … alongside the courage to think for himself. |
+| Responsibility: … and owning up to mistakes without fear. | … and the courage to own a mistake without fear. |
+| Honesty: … even when nobody is watching. | … even when no one is watching: a quiet strength that grows with him. |
+| Communication: … saying sorry like he means it. | … saying sorry like he means it. Building bridges, not walls. |
+| Little by little, a sprout becomes a young man who can stand on his own. | Leaf by leaf, year by year, a sprout becomes a young man who can stand tall on his own. |
+
+### Home: growing up, our history, be part of the family
+
+| Old | New |
+| --- | --- |
+| Every boy grows at his own pace. Here is what each stage looks like at Ammaveedu. | Every boy grows in his own season. Here is how each stage unfolds at Ammaveedu. |
+| The youngest start in our free nursery, finding their way into English, Malayalam and maths through play. | The youngest begin in our free nursery, discovering English, Malayalam and maths through play. |
+| … cheering him on. Confidence grows here. | … cheering him on. Here, confidence takes root. |
+| … It is the next thing we hope to build. | … It is the next dream we hope to plant. |
+| … set out with Rs. 4,000 and a lot of hope. One boy said yes, a friend gave a house, and Ammaveedu began to grow. | … set out with Rs. 4,000 and a heart full of hope. One boy said yes, a friend gave a house, and a small seed of love began to grow into Ammaveedu. |
+| Every meal, school book and birthday cake here is made possible by friends. There's a place for you too. | Every meal, school book and birthday cake here grows from the kindness of friends. There's a place in this garden for you too. |
+| Help a child grow: … or our nursery. Fr. Sebastian will reply … | … or our nursery, and watch it bloom. Fr. Sebastian will reply … |
+| Share your time: … Every hour spent with them matters. | … Every hour you give is sunlight to a growing child. |
+| Celebrate with us: … and make a memory together. | … and plant a memory that blossoms long after the day. |
+
+### Other pages
+
+| Where | Old | New |
+| --- | --- | --- |
+| Gallery | Snapshots of our home, from the first little house to the boys growing up together today. | Snapshots of a home in full bloom, from the first little house to the brothers growing up together today. |
+| Story page lead | How one priest, one boy and the gift of a house grew into Ammaveedu — told in seven short chapters. | How one priest, one boy and the gift of a house took root and grew into Ammaveedu, told in seven short chapters. |
+| Story page closing | … — everything here comes from the love of friends. | … Every meal and every lesson grows from the love of friends. |
+| Not found | We couldn't find that page | This path seems to have wandered off |
+| Not found | It may have moved, or the link may have a typo. Everything else is just a click away. | The page may have moved, or the link may have a typo. Every other path leads back home. |
+| Home, search description | … where 27 boys grow up together as brothers — cared for, cheered on and helped to become everything they can be. | … where 27 boys grow up as brothers: rooted in love, cared for and cheered on to become all they can be. (148 characters, within Google's limit) |
+
+Unchanged on purpose: the trust's own quote, the giving note (it has to stay
+plain and exact), button labels, the seven chapters, and the headings of the
+optional blocks.
