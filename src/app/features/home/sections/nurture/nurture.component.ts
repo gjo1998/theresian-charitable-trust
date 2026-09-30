@@ -19,7 +19,7 @@ const RING: Record<Tone, string> = {
   imports: [RevealDirective, PhotoDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section id="nurture" class="on-dark bg-sage text-mist py-20 sm:py-28 scroll-mt-20">
+    <section id="nurture" class="bg-white text-ink-muted py-20 sm:py-28 scroll-mt-20">
       <div class="container-page">
         <div appReveal class="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-end">
           <div>
@@ -48,9 +48,9 @@ const RING: Record<Tone, string> = {
                 />
               </div>
               <div class="sm:mt-6">
-                <p class="text-[13px] font-bold uppercase tracking-[2px] text-sun">{{ pillar.badge }}</p>
+                <p class="text-[13px] font-bold uppercase tracking-[2px] text-clay">{{ pillar.badge }}</p>
                 <!-- Two lines reserved, so the four columns share a baseline -->
-                <h3 class="mt-1.5 font-heading text-[22px] sm:text-[26px] leading-tight text-cream sm:min-h-[2.5em]">
+                <h3 class="mt-1.5 font-heading text-[22px] sm:text-[26px] leading-tight text-sage sm:min-h-[2.5em]">
                   {{ pillar.title }}
                 </h3>
                 <p class="mt-2.5 text-[16px] leading-relaxed">{{ pillar.body }}</p>

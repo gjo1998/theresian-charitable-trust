@@ -3,6 +3,55 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 /** A hand's position, relative to the figure's feet. */
 export type Hand = readonly [number, number];
 
+/** How a face looks. */
+export type Mood = 'happy' | 'joy' | 'calm' | 'sad' | 'wonder';
+
+/**
+ * A face for a round head of radius 10, centred on the origin, below the
+ * hair. Scale it for a bigger head. Open eyes blink now and then.
+ */
+@Component({
+  selector: 'g[appFace]',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    @if (mood() === 'calm') {
+      <!-- Closed, content eyes -->
+      <svg:path d="M-5 1.8q1.6-1.7 3.2 0M1.8 1.8q1.6-1.7 3.2 0" stroke="#23302A" stroke-width="1.1" stroke-linecap="round" fill="none" />
+    } @else {
+      <svg:g class="svg-part face-blink">
+        <svg:circle cx="-3.4" cy="1.4" [attr.r]="mood() === 'wonder' ? 1.55 : 1.3" fill="#23302A" />
+        <svg:circle cx="3.4" cy="1.4" [attr.r]="mood() === 'wonder' ? 1.55 : 1.3" fill="#23302A" />
+      </svg:g>
+    }
+    @if (mood() !== 'sad') {
+      <svg:circle cx="-6.2" cy="4.4" r="1.5" fill="#F4A77C" opacity="0.55" />
+      <svg:circle cx="6.2" cy="4.4" r="1.5" fill="#F4A77C" opacity="0.55" />
+    }
+    @switch (mood()) {
+      @case ('joy') {
+        <svg:path d="M-3.2 4.2h6.4q0 4-3.2 4t-3.2-4Z" fill="#7A2E1F" />
+      }
+      @case ('calm') {
+        <svg:path d="M-2.2 5q2.2 1.8 4.4 0" stroke="#23302A" stroke-width="1.1" stroke-linecap="round" fill="none" />
+      }
+      @case ('sad') {
+        <svg:path d="M-2.6 6.8q2.6-2.2 5.2 0" stroke="#23302A" stroke-width="1.1" stroke-linecap="round" fill="none" />
+        <svg:path d="M4 3.4q1 1.5 0 2.3-1-.8 0-2.3Z" fill="#A9D4EA" />
+      }
+      @case ('wonder') {
+        <svg:ellipse cy="5.8" rx="1.3" ry="1.6" fill="#7A2E1F" />
+      }
+      @default {
+        <svg:path d="M-3 4.6q3 2.8 6 0" stroke="#23302A" stroke-width="1.1" stroke-linecap="round" fill="none" />
+      }
+    }
+  `,
+})
+export class FaceComponent {
+  readonly mood = input<Mood>('happy');
+}
+
 /**
  * The boy drawn across the site's scenes, feet at the origin. Arms are drawn
  * only when a hand is given, from the shoulder to that point. Use on a <g>
@@ -11,6 +60,7 @@ export type Hand = readonly [number, number];
 @Component({
   selector: 'g[appBoy]',
   standalone: true,
+  imports: [FaceComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <svg:path d="M-5 0v-17M5 0v-17" stroke="#9C6848" stroke-width="5" stroke-linecap="round" />
@@ -18,6 +68,7 @@ export type Hand = readonly [number, number];
     <svg:rect x="-11" y="-49" width="22" height="26" rx="8" [attr.fill]="shirt()" />
     <svg:circle cy="-59" r="10" fill="#A86E4A" />
     <svg:path d="M-10 -60a10 10 0 0 1 20 0q-10-5-20 0Z" fill="#2B1F18" />
+    <svg:g appFace transform="translate(0 -59)" [mood]="mood()" />
     @for (arm of arms(); track arm.from) {
       <svg:path [attr.d]="arm.d" [attr.stroke]="shirt()" stroke-width="5" stroke-linecap="round" />
       <svg:circle [attr.cx]="arm.hand[0]" [attr.cy]="arm.hand[1]" r="2.8" fill="#A86E4A" />
@@ -26,6 +77,7 @@ export type Hand = readonly [number, number];
 })
 export class BoyFigureComponent {
   readonly shirt = input('#7FB38C');
+  readonly mood = input<Mood>('happy');
   readonly left = input<Hand>();
   readonly right = input<Hand>();
 
@@ -41,6 +93,7 @@ export class BoyFigureComponent {
 @Component({
   selector: 'g[appAdult]',
   standalone: true,
+  imports: [FaceComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <svg:ellipse cx="-7" cy="0" rx="7" ry="3.5" fill="#23302A" />
@@ -51,6 +104,7 @@ export class BoyFigureComponent {
     }
     <svg:circle cy="-106" r="13" fill="#B97A56" />
     <svg:path d="M-13 -107a13 13 0 0 1 26 0q-6-6-13-5-7-1-13 5Z" [attr.fill]="hair()" />
+    <svg:g appFace transform="translate(0 -106) scale(1.3)" [mood]="mood()" />
     @for (arm of arms(); track arm.from) {
       <svg:path [attr.d]="arm.d" stroke="#2F5D46" stroke-width="10" stroke-linecap="round" />
       <svg:path [attr.d]="arm.d" [attr.stroke]="robe()" stroke-width="6" stroke-linecap="round" />
@@ -60,6 +114,7 @@ export class BoyFigureComponent {
 })
 export class AdultFigureComponent {
   readonly robe = input('#FFFFFF');
+  readonly mood = input<Mood>('happy');
   readonly hair = input('#3A2A22');
   readonly bun = input(false);
   readonly left = input<Hand>([-31, -54]);

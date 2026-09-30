@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { FaceComponent } from './figures.component';
 
 /**
  * A grown-up watering three sprouts of different sizes while one boy holds
@@ -8,6 +9,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 @Component({
   selector: 'app-watering',
   standalone: true,
+  imports: [FaceComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'block' },
   template: `
@@ -102,6 +104,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       />
       <circle cx="130" cy="132" r="14" fill="#B97A56" />
       <path d="M116 131a14 14 0 0 1 28 0q-7-6-14-5-7-1-14 5Z" fill="#3A2A22" />
+      <g appFace transform="translate(130 132) scale(1.4)" />
       <!-- Arm down to the boy's hand -->
       <path d="M118 160l-18 26" stroke="#2F5D46" stroke-width="10" stroke-linecap="round" />
       <path d="M118 160l-18 26" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" />
@@ -127,6 +130,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
           <path d="M9 -44l6 -22" stroke="#FBD46B" stroke-width="5" stroke-linecap="round" />
           <circle cy="-59" r="10" fill="#A86E4A" />
           <path d="M-10 -60a10 10 0 0 1 20 0q-10-5-20 0Z" fill="#2B1F18" />
+          <g appFace mood="joy" transform="translate(0 -59)" />
         </g>
       </g>
 
@@ -137,6 +141,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         <rect x="-11" y="-49" width="22" height="26" rx="8" fill="#7FB38C" />
         <circle cy="-59" r="10" fill="#A86E4A" />
         <path d="M-10 -60a10 10 0 0 1 20 0q-10-5-20 0Z" fill="#2B1F18" />
+        <g appFace transform="translate(0 -59)" />
         <g class="svg-part can-tip-small">
           <path d="M-9 -42l-12 2" stroke="#7FB38C" stroke-width="5" stroke-linecap="round" />
           <rect x="-44" y="-50" width="22" height="16" rx="5" fill="#FBD46B" />

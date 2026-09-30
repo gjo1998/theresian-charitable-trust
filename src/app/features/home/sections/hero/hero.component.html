@@ -33,6 +33,22 @@
             {{ hero().secondaryCta.label }}
           </a>
         </div>
+
+        <!-- Registration numbers, seen on first view. Hidden until filled in. -->
+        @if (registrationRows().length) {
+          <div class="mt-6 flex flex-wrap items-center gap-2 text-[14px]">
+            <p class="me-1 inline-flex items-center gap-1.5 font-bold text-sage">
+              <app-icon name="shield" [size]="18" />{{ hero().registrations.heading }}
+            </p>
+            <ul class="contents">
+              @for (row of registrationRows(); track row.label) {
+                <li class="rounded-full border border-sage-soft bg-white px-3 py-1 text-ink shadow-soft">
+                  <span class="text-ink-muted">{{ row.label }}</span>{{ ' ' }}<strong class="font-extrabold">{{ row.value }}</strong>
+                </li>
+              }
+            </ul>
+          </div>
+        }
       </div>
 
       <!-- Picture -->

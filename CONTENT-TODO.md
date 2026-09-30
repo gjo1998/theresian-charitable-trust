@@ -28,7 +28,7 @@ goes.
 - [ ] **Two or three alumni stories, each with written consent** → `ALUMNI` (§10)
 - [ ] **Team roles** (names optional) → `TEAM` (§10)
 - [ ] **A current needs list**, e.g. school supplies before term starts → `NEEDS` (§10)
-- [ ] **Social media links** → `SOCIAL_LINKS` (§10)
+- [ ] **Social media links** → `SOCIAL_LINKS` (§10). Facebook is in (confirmed 2026-09-27); add Instagram or YouTube if the trust has them.
 - [ ] **News updates**, if the trust wants to post them → `UPDATES` (§10)
 - [ ] **5 to 10 new high-resolution photographs** (§6, with guidance)
 
@@ -118,6 +118,10 @@ the trust's own channels, but publishing them on an official site is a separate
 decision and the trust should make it deliberately. Any photograph can be
 swapped or dropped by editing the data files; chapters accept a `coverQuote`
 instead of an `image`, and chapters 1 and 3 already use one.
+
+**Gallery photos.** Eight recent photos in `public/images/gallery/` came from
+the trust's Facebook page (added 2026-09-30). Several show the boys' faces
+clearly; the same safeguarding decision applies to them.
 
 **Resolution.** The five 2011 files are only 500px wide. The site never
 stretches a photo past its natural size, so these five set the size of the
@@ -218,4 +222,5 @@ one renders nothing at all while it is empty: no heading, no gap.
 | `NEEDS` | "What we need right now", inside Be part of the family | Each item gets a WhatsApp button that opens with "I'd like to help with: <item>". `season` and `quantity` are optional. Keep it current; remove items once met. |
 | `UPDATES` | "Latest from Ammaveedu" on the home page | The newest three show. `date` is written as `'2026-06-01'`. |
 | `SOCIAL_LINKS` | Icons in the footer | Platforms: facebook, instagram, youtube, x, website. |
+| `GALLERY_PHOTOS` | The gallery page (`/gallery`), newest first | Only the trust's own photos, and only ones it is happy to publish (§6 on children's faces). Put the file in `public/images/`, add its size to `images.ts`, then add a line with `image`, `alt`, `caption` and, optionally, `when`. |
 | `REGISTRATIONS` | "Registrations" in the footer | See §3. |

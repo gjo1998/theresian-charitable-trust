@@ -18,6 +18,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/story/chapter/chapter.component').then((m) => m.ChapterComponent),
   },
   {
+    path: 'gallery',
+    loadComponent: () => import('./features/gallery/gallery.component').then((m) => m.GalleryComponent),
+  },
+  {
     path: '**',
     loadComponent: () => import('./features/not-found/not-found.component').then((m) => m.NotFoundComponent),
   },

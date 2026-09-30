@@ -4,6 +4,8 @@ import {
   Cta,
   FamilyWay,
   FooterContent,
+  GalleryPageContent,
+  GalleryPhoto,
   GrowingArea,
   GrowingMoment,
   GrowthStage,
@@ -87,6 +89,15 @@ export const HOME_HERO: HomeHero = {
     { strong: `${TRUST.boysAtHome} brothers`, rest: 'under one roof' },
     { strong: 'Growing', rest: `since ${TRUST.foundedYear}` },
   ],
+  registrations: {
+    heading: 'Registered charitable trust',
+    labels: {
+      trustRegistration: 'Reg. No.',
+      section12A: '12A',
+      section80G: '80G',
+      jjActCci: 'JJ Act CCI',
+    },
+  },
   illustrationLabel:
     'An illustrated tree with a round, leafy crown and fruit, standing in the sun while a bird flies past',
 };
@@ -143,10 +154,14 @@ export const NURTURE_PILLARS: NurturePillar[] = [
 export const HELPING_INTRO: SectionIntro = {
   eyebrow: 'Helping them grow',
   title: 'Raising a well-rounded child',
-  lead: 'Food and a roof are only the start. We help every boy grow in every way, and these are the ten things we nurture, day in and day out.',
+  lead: 'Food and a roof are only the start. We help every boy grow in every way, and these are the nine things we nurture, day in and day out.',
+  illustrationLabel: 'A vine grows from a sprout to a young tree, with each of the nine things we nurture along the way',
 };
 
-/** The five ways a boy grows, shown as tags above the cards. */
+/** The closing line at the foot of the vine. */
+export const HELPING_CLOSING = 'Little by little, a sprout becomes a young man who can stand on his own.';
+
+/** The five ways a boy grows. Each colours its values on the vine. */
 export const HELPING_AREAS: GrowingArea[] = ['Morally', 'Physically', 'Mentally', 'Emotionally', 'Socially'];
 
 export const HELPING_MOMENTS: GrowingMoment[] = [
@@ -155,7 +170,6 @@ export const HELPING_MOMENTS: GrowingMoment[] = [
     area: 'Morally',
     title: 'Kindness',
     body: 'Empathy, sharing, helping and respecting others. Big brothers share first, and the little ones learn by watching.',
-    tone: 'peach',
     illustrationLabel: 'An older boy hands a mango to a small boy while a grown-up rests a hand on his shoulder, and hearts float up',
   },
   {
@@ -163,7 +177,6 @@ export const HELPING_MOMENTS: GrowingMoment[] = [
     area: 'Emotionally',
     title: 'Emotional strength',
     body: 'It is all right to feel sad, angry or let down. We help each boy put his feelings into words and find his calm again.',
-    tone: 'sky',
     illustrationLabel: 'A grown-up puts an arm around a boy under a rainbow, as a rain cloud gives way to the sun',
   },
   {
@@ -171,7 +184,6 @@ export const HELPING_MOMENTS: GrowingMoment[] = [
     area: 'Mentally',
     title: 'Discipline and punctuality',
     body: 'Simple daily routines, from waking up to homework time, teach a boy to respect time and keep his word.',
-    tone: 'sun',
     illustrationLabel: 'A boy with his school bag waves beside a big clock and a daily checklist with ticks',
   },
   {
@@ -179,7 +191,6 @@ export const HELPING_MOMENTS: GrowingMoment[] = [
     area: 'Physically',
     title: 'Physical health',
     body: 'Sports, outdoor play, cycling, healthy food and a good night’s sleep keep growing bodies strong.',
-    tone: 'peach',
     illustrationLabel: 'A boy rides a bicycle while another boy runs to kick a football',
   },
   {
@@ -187,7 +198,6 @@ export const HELPING_MOMENTS: GrowingMoment[] = [
     area: 'Mentally',
     title: 'Love of learning',
     body: 'Curiosity, reading, questions, creativity and solving problems. No question here is ever too small.',
-    tone: 'sky',
     illustrationLabel: 'A boy reads an open book with a light bulb glowing above his head, beside a stack of books and a globe',
   },
   {
@@ -195,7 +205,6 @@ export const HELPING_MOMENTS: GrowingMoment[] = [
     area: 'Socially',
     title: 'Respect',
     body: 'Respect for everyone, young and old, together with the confidence to think for himself.',
-    tone: 'sun',
     illustrationLabel: 'A boy greets a grandmother with folded hands as she leans on her walking stick',
   },
   {
@@ -203,23 +212,13 @@ export const HELPING_MOMENTS: GrowingMoment[] = [
     area: 'Morally',
     title: 'Responsibility',
     body: 'Small jobs that suit his age, like sweeping and watering the plants, and owning up to mistakes without fear.',
-    tone: 'peach',
     illustrationLabel: 'One boy sweeps with a broom while another waters a potted plant',
-  },
-  {
-    id: 'money',
-    area: 'Mentally',
-    title: 'Money values',
-    body: 'Saving a little, spending wisely and always keeping something aside to share.',
-    tone: 'sky',
-    illustrationLabel: 'A boy drops a coin into a clay money pot, beside stacks of coins and a jar marked with a heart for sharing',
   },
   {
     id: 'honesty',
     area: 'Morally',
     title: 'Honesty and integrity',
     body: 'Telling the truth and doing the right thing, even when nobody is watching.',
-    tone: 'sun',
     illustrationLabel: 'A boy hands a lost purse back to a grown-up, under a shining star',
   },
   {
@@ -227,7 +226,6 @@ export const HELPING_MOMENTS: GrowingMoment[] = [
     area: 'Socially',
     title: 'Communication',
     body: 'Listening well, speaking up, disagreeing kindly and saying sorry like he means it.',
-    tone: 'peach',
     illustrationLabel: 'Two boys shake hands, one saying "Sorry!" and the other replying "It\'s OK!"',
   },
 ];
@@ -376,7 +374,9 @@ export const NEEDS_CONTENT = {
 export const UPDATES: Update[] = [];
 export const UPDATES_INTRO: SectionIntro = { title: 'Latest from Ammaveedu' };
 
-export const SOCIAL_LINKS: SocialLink[] = [];
+export const SOCIAL_LINKS: SocialLink[] = [
+  { platform: 'facebook', url: 'https://www.facebook.com/Ammaveedu.Orphanage/' },
+];
 
 /** Registration numbers. Each appears in the footer only once filled in. */
 export const REGISTRATIONS: Registrations = {};
@@ -408,6 +408,7 @@ export const FOOTER: FooterContent = {
 export const NAV_LINKS: NavLink[] = [
   { label: 'How we nurture', path: '/', fragment: 'nurture' },
   { label: 'Our story', path: '/stories' },
+  { label: 'Gallery', path: '/gallery' },
   { label: 'Visit', path: '/', fragment: 'visit' },
 ];
 
@@ -431,6 +432,128 @@ export const HOME_META: PageMeta = {
   title: `${TRUST.alsoKnownAs} | A family home for boys in ${TRUST.place}`,
   description: `${TRUST.alsoKnownAs} is a family home in ${TRUST.place}, where ${TRUST.boysAtHome} boys grow up together as brothers — cared for, cheered on and helped to become everything they can be.`,
 };
+
+export const GALLERY_PAGE: GalleryPageContent = {
+  eyebrow: 'Gallery',
+  title: `Life at ${TRUST.alsoKnownAs}`,
+  lead: 'Snapshots of our home, from the first little house to the boys growing up together today. Tap any photo to see it full size.',
+  openLabel: 'Open photo',
+  closeLabel: 'Close',
+  previousLabel: 'Previous photo',
+  nextLabel: 'Next photo',
+  meta: {
+    title: `Gallery | ${TRUST.alsoKnownAs}`,
+    description: `Photos of ${TRUST.alsoKnownAs}, a family home for boys in ${TRUST.place}: the home, the boys and daily life together.`,
+  },
+};
+
+/**
+ * The gallery, newest first. Only the trust's own photos, and only ones it is
+ * happy to publish (see CONTENT-TODO.md §6 on children's faces). Adding one:
+ * put the file in public/images, add its size to images.ts, add a line here.
+ */
+export const GALLERY_PHOTOS: GalleryPhoto[] = [
+  // Recent photos, from the trust's Facebook page
+  {
+    image: 'images/gallery/after-school.jpg',
+    focalPoint: '50% 60%',
+    alt: 'A group of smiling boys in school uniform on the veranda, with a young man sitting in front of them',
+    caption: 'Home from school',
+    when: 'Recent',
+  },
+  {
+    image: 'images/gallery/hands-together.jpg',
+    focalPoint: '50% 50%',
+    alt: 'A volunteer and boys of Ammaveedu sitting in a circle, all their hands stacked together in the middle',
+    caption: 'All hands in, together',
+    when: 'Recent',
+  },
+  {
+    image: 'images/gallery/veranda-together.jpg',
+    alt: 'Boys of Ammaveedu and two visiting volunteers sitting together on the front steps',
+    caption: 'An afternoon on the steps',
+    when: 'Recent',
+  },
+  {
+    image: 'images/gallery/school-friends.jpg',
+    focalPoint: '50% 50%',
+    alt: 'Three boys in school uniform with their bags, standing in front of the home',
+    caption: 'Ready for school',
+    when: 'Recent',
+  },
+  {
+    image: 'images/gallery/off-to-school.jpg',
+    focalPoint: '50% 42%',
+    alt: 'Boys in school uniform with their bags by the gate, on the way to school',
+    caption: 'Heading out through the gate',
+    when: 'Recent',
+  },
+  {
+    image: 'images/gallery/football.jpg',
+    focalPoint: '50% 42%',
+    alt: 'Boys playing football barefoot on an open patch of red earth, with trees behind',
+    caption: 'Football on the red-earth ground',
+    when: 'Recent',
+  },
+  {
+    image: 'images/gallery/volunteer-chat.jpg',
+    focalPoint: '50% 50%',
+    alt: `A volunteer and a young man sitting on the steps of ${TRUST.alsoKnownAs}, looking at a phone together, the home's sign above`,
+    caption: 'A quiet chat on the steps',
+    when: 'Recent',
+  },
+  {
+    image: 'images/gallery/christmas-crib.jpg',
+    focalPoint: '50% 45%',
+    alt: 'A Christmas crib built in the yard, with a leaf-roofed stable, little figures, sheep and a small fence',
+    caption: 'Our Christmas crib',
+    when: 'Recent',
+  },
+  // Earlier photos
+  {
+    image: 'images/ammaveedu-today.jpg',
+    alt: `${TRUST.founderShortName} with the boys of ${TRUST.alsoKnownAs}`,
+    caption: `${TRUST.founderShortName} with the boys`,
+    when: 'Today',
+    focalPoint: '50% 35%',
+  },
+  {
+    image: 'images/ammaveedu-building.webp',
+    alt: `The ${TRUST.alsoKnownAs} building at Thellakom, its name painted across the front`,
+    caption: `Our home in ${TRUST.place}`,
+    when: 'Today',
+  },
+  {
+    image: 'images/ammaveedu-boys.jpg',
+    alt: `Boys of ${TRUST.alsoKnownAs} together`,
+    caption: 'Brothers under one roof',
+    when: '2011',
+  },
+  {
+    image: 'images/children-meal.jpg',
+    alt: `Young children sitting together at ${TRUST.alsoKnownAs}`,
+    caption: 'Children sharing a meal',
+    when: '2011',
+  },
+  {
+    image: 'images/rice-delivery.jpg',
+    alt: 'Rice being carried in for the weekly round',
+    caption: 'The weekly rice round for neighbouring families',
+    when: '2011',
+  },
+  {
+    image: 'images/home-visit.jpg',
+    alt: 'A home visit to a neighbour',
+    caption: 'Visiting a neighbour who needs care at home',
+    when: '2011',
+  },
+  {
+    image: 'images/ammaveedu-house.jpg',
+    alt: `The first house where ${TRUST.alsoKnownAs} began`,
+    caption: 'The first little house, where it all began',
+    when: '2011',
+  },
+];
 
 export const NOT_FOUND: NotFoundContent = {
   title: "We couldn't find that page",

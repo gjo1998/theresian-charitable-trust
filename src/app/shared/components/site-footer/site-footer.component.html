@@ -1,25 +1,25 @@
-<footer id="visit" data-hides-fab class="on-dark bg-sage text-mist scroll-mt-24">
+<footer id="visit" data-hides-fab class="bg-sage-soft text-ink-muted scroll-mt-24">
   <div class="container-page py-16 sm:py-20">
     <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr]">
       <!-- Who we are -->
       <div class="space-y-5">
-        <app-logo [onDark]="true" />
+        <app-logo />
         <p class="leading-relaxed">
           {{ trust.legalName }}
-          <span class="block text-cream mt-1" lang="ml">{{ trust.malayalamName }}</span>
+          <span class="block text-sage mt-1" lang="ml">{{ trust.malayalamName }}</span>
         </p>
-        <blockquote class="font-heading text-[20px] text-cream leading-snug max-w-sm">
+        <blockquote class="font-heading text-[20px] text-sage leading-snug max-w-sm">
           &ldquo;{{ quote.text }}&rdquo;
         </blockquote>
         <!-- Accountability: registration numbers, each shown once filled in -->
         @if (registrationRows().length) {
           <div>
-            <h2 class="font-heading text-[20px] text-cream">{{ footer.registrationsHeading }}</h2>
+            <h2 class="font-heading text-[20px] text-sage">{{ footer.registrationsHeading }}</h2>
             <dl class="mt-2 space-y-1 text-[15px]">
               @for (row of registrationRows(); track row.label) {
                 <div>
                   <dt class="inline">{{ row.label }}:</dt>
-                  <dd class="inline font-bold text-cream">{{ row.value }}</dd>
+                  <dd class="ms-1 inline font-bold text-sage">{{ row.value }}</dd>
                 </div>
               }
             </dl>
@@ -30,9 +30,9 @@
 
       <!-- Where to find us -->
       <div>
-        <h2 class="font-heading text-[24px] text-cream">{{ footer.visitHeading }}</h2>
+        <h2 class="font-heading text-[24px] text-sage">{{ footer.visitHeading }}</h2>
         <address class="mt-4 not-italic leading-relaxed flex gap-3">
-          <app-icon name="pin" class="mt-1 text-sun" />
+          <app-icon name="pin" class="mt-1 text-clay" />
           <span>
             {{ trust.address.line1 }}, {{ trust.address.line2 }}<br />
             {{ trust.address.line3 }}<br />
@@ -44,7 +44,7 @@
           [href]="mapsUrl"
           target="_blank"
           rel="noopener noreferrer"
-          class="mt-2 inline-flex items-center min-h-[44px] font-bold text-cream underline underline-offset-4 decoration-sun hover:text-sun"
+          class="mt-2 inline-flex items-center min-h-[44px] font-bold text-sage underline underline-offset-4 decoration-clay hover:text-clay"
         >
           {{ footer.mapsLabel }}
         </a>
@@ -52,24 +52,24 @@
 
       <!-- Say hello -->
       <div>
-        <h2 class="font-heading text-[24px] text-cream">{{ footer.helloHeading }}</h2>
+        <h2 class="font-heading text-[24px] text-sage">{{ footer.helloHeading }}</h2>
         <ul class="mt-2 space-y-1">
           @if (trust.phoneVerified) {
             <li>
-              <a [href]="phoneUrl" class="inline-flex items-center gap-3 min-h-[44px] hover:text-sun transition-colors">
-                <app-icon name="phone" class="text-sun" />
+              <a [href]="phoneUrl" class="inline-flex items-center gap-3 min-h-[44px] hover:text-sage transition-colors">
+                <app-icon name="phone" class="text-clay" />
                 {{ trust.phone }}
               </a>
             </li>
           }
           <li>
-            <a [href]="emailUrl" class="inline-flex items-center gap-3 min-h-[44px] hover:text-sun transition-colors break-all">
-              <app-icon name="mail" class="text-sun" />
+            <a [href]="emailUrl" class="inline-flex items-center gap-3 min-h-[44px] hover:text-sage transition-colors break-all">
+              <app-icon name="mail" class="text-clay" />
               {{ trust.email }}
             </a>
           </li>
           <li class="flex gap-3">
-            <app-icon name="clock" class="mt-0.5 text-sun" />
+            <app-icon name="clock" class="mt-0.5 text-clay" />
             <span>
               <span class="sr-only">{{ footer.hoursLabel }}: </span>
               {{ trust.officeHours }}
@@ -78,7 +78,7 @@
         </ul>
 
         @if (socialLinks().length) {
-          <h2 class="mt-8 font-heading text-[20px] text-cream">{{ footer.socialHeading }}</h2>
+          <h2 class="mt-8 font-heading text-[20px] text-sage">{{ footer.socialHeading }}</h2>
           <ul class="mt-2 flex flex-wrap gap-2">
             @for (link of socialLinks(); track link.url) {
               <li>
@@ -86,7 +86,7 @@
                   [href]="link.url"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="inline-flex items-center justify-center w-11 h-11 rounded-full bg-sage-dark text-cream hover:text-sun transition-colors"
+                  class="inline-flex items-center justify-center w-11 h-11 rounded-full bg-white text-sage shadow-soft hover:bg-sage hover:text-white transition-colors"
                   [attr.aria-label]="footer.socialLabels[link.platform]"
                 >
                   <app-icon [name]="link.platform" />
@@ -98,7 +98,7 @@
       </div>
     </div>
 
-    <p class="mt-14 pt-6 border-t border-cream/15 text-sm">
+    <p class="mt-14 pt-6 border-t border-sage/15 text-sm">
       &copy; {{ currentYear }} {{ trust.legalName }}. {{ footer.photoCredit }}
     </p>
   </div>

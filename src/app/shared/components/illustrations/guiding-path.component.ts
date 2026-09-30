@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { FaceComponent } from './figures.component';
 
 /**
  * A grown-up walking three boys from home, along a winding path, towards a
@@ -8,6 +9,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 @Component({
   selector: 'app-guiding-path',
   standalone: true,
+  imports: [FaceComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'block' },
   template: `
@@ -20,6 +22,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
           <rect x="-11" y="-49" width="22" height="26" rx="8" fill="currentColor" />
           <circle cy="-59" r="10" fill="#A86E4A" />
           <path d="M-10 -60a10 10 0 0 1 20 0q-10-5-20 0Z" fill="#2B1F18" />
+          <g appFace transform="translate(0 -59)" />
         </g>
         <g id="gp-cloud">
           <path d="M0 0a14 14 0 0 1 22-12 20 20 0 0 1 38 4 13 13 0 0 1 8 22H0a8 8 0 0 1 0-14Z" fill="#DDEBDF" />
@@ -146,6 +149,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
         />
         <circle cx="245" cy="234" r="13" fill="#B97A56" />
         <path d="M232 233a13 13 0 0 1 26 0q-6-6-13-5-7-1-13 5Z" fill="#3A2A22" />
+        <g appFace transform="translate(245 234) scale(1.3)" />
         <!-- Arm down to the little one's hand -->
         <path d="M234 258l-20 28" stroke="#2F5D46" stroke-width="10" stroke-linecap="round" />
         <path d="M234 258l-20 28" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" />

@@ -150,6 +150,21 @@ describe('Optional content blocks', () => {
     });
   });
 
+  describe('hero: registration strip', () => {
+    it('renders nothing while no number is filled in', async () => {
+      const element = await render(HeroComponent, { registrations: { section12A: '  ' } });
+      expect(element.textContent).not.toContain(HOME_HERO.registrations.heading);
+    });
+
+    it('shows the filled-in numbers on first view, in a fixed order', async () => {
+      const registrations: Registrations = { section80G: '80G/456', trustRegistration: 'TR/2010/12', jjActCci: '' };
+      const element = await render(HeroComponent, { registrations });
+      expect(element.textContent).toContain(HOME_HERO.registrations.heading);
+      const chips = Array.from(element.querySelectorAll('li')).map((li) => li.textContent!.replace(/\s+/g, ' ').trim());
+      expect(chips).toEqual(['Reg. No. TR/2010/12', '80G 80G/456']);
+    });
+  });
+
   describe('hero photo', () => {
     it('blends the photo in behind the full tree in "background" style', async () => {
       const photo = { ...HOME_HERO.heroPhoto!, style: 'background' as const };

@@ -81,6 +81,11 @@ export interface HomeHero {
   heroPhoto?: Photo & { caption?: string; style?: 'background' | 'window' };
   /** Short lines on the white badges floating over the picture. */
   badges: { strong: string; rest: string }[];
+  /**
+   * The registration strip under the buttons, seen on first view. It shows
+   * only the numbers filled in under REGISTRATIONS, with these short labels.
+   */
+  registrations: { heading: string; labels: Record<keyof Registrations, string> };
   /** Describes the illustration for screen readers. */
   illustrationLabel: string;
 }
@@ -93,7 +98,7 @@ export interface SectionIntro {
   illustrationLabel?: string;
 }
 
-/** Which drawing a "well-rounded child" card shows, one per area. */
+/** Which drawing each value on the "well-rounded child" vine shows. */
 export type GrowingScene =
   | 'kindness'
   | 'feelings'
@@ -102,11 +107,10 @@ export type GrowingScene =
   | 'learning'
   | 'respect'
   | 'responsibility'
-  | 'money'
   | 'honesty'
   | 'talking';
 
-/** The five ways a child grows, used as tags on the cards. */
+/** The five ways a child grows. Each gives its values a colour on the vine. */
 export type GrowingArea = 'Morally' | 'Physically' | 'Mentally' | 'Emotionally' | 'Socially';
 
 /** One thing we nurture in every boy, told beside a small drawing. */
@@ -115,8 +119,6 @@ export interface GrowingMoment {
   area: GrowingArea;
   title: string;
   body: string;
-  /** The soft wash behind the drawing. */
-  tone: Tone;
   /** Describes the drawing for screen readers. */
   illustrationLabel: string;
 }
@@ -255,6 +257,27 @@ export interface ShellLabels {
   fabClose: string;
   fabWhatsapp: string;
   fabCall: string;
+}
+
+/** One photograph on the gallery page. */
+export interface GalleryPhoto extends Photo {
+  /** A short line under the photo in the full-size view. */
+  caption: string;
+  /** When it was taken, e.g. "2011" or "Today". Optional. */
+  when?: string;
+}
+
+/** Words on the gallery page. The photos themselves are GALLERY_PHOTOS. */
+export interface GalleryPageContent {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  /** Screen-reader words for the full-size view. */
+  openLabel: string;
+  closeLabel: string;
+  previousLabel: string;
+  nextLabel: string;
+  meta: PageMeta;
 }
 
 /** Title and description for a route. */

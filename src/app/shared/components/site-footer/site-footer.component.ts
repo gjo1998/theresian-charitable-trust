@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { emailLink, mapsLink, phoneLink } from '../../../core/contact-links';
 import { FOOTER, PHILOSOPHY_QUOTE, REGISTRATIONS, SOCIAL_LINKS, TRUST } from '../../../core/data/site-content';
 import { Registrations, SocialLink } from '../../../core/models/content.models';
+import { filledRegistrations } from '../../../core/registrations';
 import { IconComponent } from '../icon/icon.component';
 import { LogoComponent } from '../logo/logo.component';
 
@@ -28,10 +29,7 @@ export class SiteFooterComponent {
   readonly registrations = input<Registrations>(REGISTRATIONS);
 
   /** Only the registration numbers that are filled in, in a fixed order. */
-  readonly registrationRows = computed(() => {
-    const values = this.registrations();
-    return (Object.keys(this.footer.registrationLabels) as (keyof Registrations)[])
-      .filter((key) => !!values[key]?.trim())
-      .map((key) => ({ label: this.footer.registrationLabels[key], value: values[key]! }));
-  });
+  readonly registrationRows = computed(() =>
+    filledRegistrations(this.registrations(), this.footer.registrationLabels),
+  );
 }

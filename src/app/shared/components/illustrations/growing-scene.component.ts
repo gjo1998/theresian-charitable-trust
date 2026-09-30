@@ -3,7 +3,7 @@ import { GrowingScene } from '../../../core/models/content.models';
 import { AdultFigureComponent, BoyFigureComponent } from './figures.component';
 
 /**
- * One small scene for each of the ten things we nurture, drawn in the same
+ * One small scene for each of the nine things we nurture, drawn in the same
  * flat style as the guiding path. Every scene stands on the same patch of
  * grass, with feet at y = 112.
  */
@@ -37,7 +37,7 @@ import { AdultFigureComponent, BoyFigureComponent } from './figures.component';
           </g>
           <g appAdult transform="translate(160 112) scale(0.72)" [left]="[-45, -52]" />
           <g appBoy transform="translate(120 112) scale(0.85)" shirt="#7FB38C" [left]="[-29, -40]" />
-          <g appBoy transform="translate(80 112) scale(0.65)" shirt="#F4A77C" [right]="[26, -52]" />
+          <g appBoy mood="joy" transform="translate(80 112) scale(0.65)" shirt="#F4A77C" [right]="[26, -52]" />
           <ellipse cx="96" cy="78" rx="6.5" ry="5.5" fill="#FBC04B" />
           <path d="M98 73q4-4 7-2-3 3-7 2Z" fill="#4F8A62" />
         }
@@ -55,8 +55,8 @@ import { AdultFigureComponent, BoyFigureComponent } from './figures.component';
             <circle cx="172" cy="34" r="16" fill="#FFF1C9" />
             <circle cx="172" cy="34" r="10" fill="#FBD46B" />
           </g>
-          <g appBoy transform="translate(88 112) scale(0.8)" shirt="#A9D4EA" [right]="[16, -30]" />
-          <g appAdult transform="translate(118 112) scale(0.75)" [left]="[-30, -47]" />
+          <g appBoy mood="sad" transform="translate(88 112) scale(0.8)" shirt="#A9D4EA" [right]="[16, -30]" />
+          <g appAdult mood="calm" transform="translate(118 112) scale(0.75)" [left]="[-30, -47]" />
           <!-- A small speech bubble with a heart: he says how he feels -->
           <path d="M56 44h22a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6h-12l-6 6v-6h-4a6 6 0 0 1-6-6v-8a6 6 0 0 1 6-6Z" fill="#FFFFFF" />
           <path d="M67 60c-7-5-6-11 0-8 6-3 7 3 0 8Z" fill="#F4A77C" />
@@ -107,10 +107,14 @@ import { AdultFigureComponent, BoyFigureComponent } from './figures.component';
             <path d="M166 122l18 19" stroke="#FBD46B" stroke-width="5" stroke-linecap="round" />
             <circle cx="168" cy="102" r="10" fill="#A86E4A" />
             <path d="M158 101a10 10 0 0 1 20 0q-10-5-20 0Z" fill="#2B1F18" />
+            <!-- His face, in profile: eye on the road, a big smile -->
+            <circle cx="172.5" cy="103" r="1.3" fill="#23302A" />
+            <circle cx="174" cy="107" r="1.6" fill="#F4A77C" opacity="0.55" />
+            <path d="M170 107q3 2.4 6-.6" stroke="#23302A" stroke-width="1.1" stroke-linecap="round" fill="none" />
             <path d="M118 112h16M112 124h20M120 136h12" stroke="#F4A77C" stroke-width="2.5" stroke-linecap="round" />
           </g>
           <g class="walk-bob">
-            <g appBoy transform="translate(146 112) scale(0.78)" shirt="#7FB38C" [left]="[-18, -62]" [right]="[18, -62]" />
+            <g appBoy mood="joy" transform="translate(146 112) scale(0.78)" shirt="#7FB38C" [left]="[-18, -62]" [right]="[18, -62]" />
           </g>
           <g transform="translate(174 106)">
             <circle r="7" fill="#FFFFFF" stroke="#23302A" stroke-width="1.5" />
@@ -129,7 +133,7 @@ import { AdultFigureComponent, BoyFigureComponent } from './figures.component';
           </g>
           <rect x="88" y="30" width="8" height="5" rx="1.5" fill="#8A5A3B" />
           <path d="M92 6v-3M78 12l-3-2M106 12l3-2M74 24h-3M110 24h3" stroke="#FBD46B" stroke-width="2" stroke-linecap="round" />
-          <g appBoy transform="translate(92 112) scale(0.85)" shirt="#F4A77C" [left]="[-12, -38]" [right]="[12, -38]" />
+          <g appBoy mood="wonder" transform="translate(92 112) scale(0.85)" shirt="#F4A77C" [left]="[-12, -38]" [right]="[12, -38]" />
           <path d="M76 72q8-4 16 0 8-4 16 0v16q-8-4-16 0-8-4-16 0Z" fill="#FFFFFF" stroke="#2F5D46" stroke-width="2" stroke-linejoin="round" />
           <path d="M92 72v16M80 77h8M80 81h8M96 77h8M96 81h8" stroke="#CFC6B4" stroke-width="1.5" />
           <circle cx="156" cy="72" r="16" fill="#A9D4EA" />
@@ -141,7 +145,7 @@ import { AdultFigureComponent, BoyFigureComponent } from './figures.component';
 
         <!-- Respect: greeting a grandmother with folded hands -->
         @case ('respect') {
-          <g appBoy transform="translate(78 112) scale(0.82)" shirt="#A9D4EA" />
+          <g appBoy mood="calm" transform="translate(78 112) scale(0.82)" shirt="#A9D4EA" />
           <!-- Arms folded in to the chest, palms pressed together -->
           <path d="M71 77l5 6M85 77l-5 6" stroke="#7FB8D6" stroke-width="4.5" stroke-linecap="round" />
           <path d="M78 73c-3 4-4 9-3 15h6c1-6 0-11-3-15Z" fill="#A86E4A" stroke="#7E5238" stroke-width="1" />
@@ -176,25 +180,6 @@ import { AdultFigureComponent, BoyFigureComponent } from './figures.component';
           </g>
         }
 
-        <!-- Money values: saving in a clay pot, keeping some to share -->
-        @case ('money') {
-          <circle cx="66" cy="90" r="20" fill="#B4572A" />
-          <path d="M56 72h20l-2 4h-16Z" fill="#8A5A3B" />
-          <path d="M62 74h8" stroke="#23302A" stroke-width="2.5" stroke-linecap="round" />
-          <path d="M52 92q14 6 28 0" stroke="#E07A4A" stroke-width="2" fill="none" />
-          <g transform="translate(68 62)">
-            <g class="float float-2">
-              <ellipse rx="5" ry="5" fill="#FBD46B" stroke="#E7B54E" stroke-width="1.5" />
-            </g>
-          </g>
-          <g appBoy transform="translate(104 112) scale(0.85)" shirt="#7FB38C" [left]="[-36, -58]" />
-          @for (coin of coins; track $index) {
-            <ellipse [attr.cx]="coin[0]" [attr.cy]="coin[1]" rx="7" ry="2.8" fill="#FBD46B" stroke="#E7B54E" stroke-width="1" />
-          }
-          <rect x="172" y="84" width="20" height="26" rx="5" fill="#FFFFFF" stroke="#8A5A3B" stroke-width="2" />
-          <path d="M182 102c-7-5-6-11 0-8 6-3 7 3 0 8Z" fill="#F4A77C" />
-        }
-
         <!-- Honesty: giving back what was lost -->
         @case ('honesty') {
           <g transform="translate(100 32)">
@@ -203,7 +188,7 @@ import { AdultFigureComponent, BoyFigureComponent } from './figures.component';
           <path class="sun-pulse svg-part" d="M78 42l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5Z" fill="#FBD46B" />
           <path class="sun-pulse svg-part" d="M124 48l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5Z" fill="#F4A77C" />
           <g appBoy transform="translate(78 112) scale(0.82)" shirt="#FBD46B" [right]="[26, -46]" />
-          <g appAdult transform="translate(142 112) scale(0.75)" [left]="[-42, -50]" />
+          <g appAdult mood="joy" transform="translate(142 112) scale(0.75)" [left]="[-42, -50]" />
           <rect x="95" y="67" width="14" height="10" rx="3" fill="#F4A77C" />
           <path d="M98 67q4-5 8 0" stroke="#B4572A" stroke-width="1.5" fill="none" />
           <circle cx="102" cy="72" r="1.5" fill="#FBD46B" />
@@ -220,7 +205,7 @@ import { AdultFigureComponent, BoyFigureComponent } from './figures.component';
           <g transform="translate(100 56)">
             <path class="float float-2" d="M0 6C-9-1-8-10 0-5 8-10 9-1 0 6Z" fill="#F4A77C" />
           </g>
-          <g appBoy transform="translate(76 112) scale(0.85)" shirt="#A9D4EA" [right]="[28, -36]" />
+          <g appBoy mood="sad" transform="translate(76 112) scale(0.85)" shirt="#A9D4EA" [right]="[28, -36]" />
           <g appBoy transform="translate(124 112) scale(0.85)" shirt="#F4A77C" [left]="[-28, -36]" />
         }
       }
@@ -230,10 +215,4 @@ import { AdultFigureComponent, BoyFigureComponent } from './figures.component';
 export class GrowingSceneComponent {
   readonly kind = input.required<GrowingScene>();
   readonly label = input.required<string>();
-
-  /** Two stacks of saved coins, three high and five high. */
-  readonly coins = [
-    ...[0, 1, 2].map((i) => [140, 108 - i * 4]),
-    ...[0, 1, 2, 3, 4].map((i) => [156, 108 - i * 4]),
-  ];
 }
